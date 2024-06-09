@@ -1,0 +1,74 @@
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings ******************************************
+title: Andre Attamimi
+brand: Andre S. Attamimi # alternative site name for animation
+email: your-email@example.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+twitter_username: r007mmxv
+github_username: sionta
+
+# Build settings *****************************************
+theme: dblog
+
+# https://sass-lang.com/documentation/cli/ruby-sass/
+sass:
+  style: compressed
+  style: expanded # for development
+
+# https://jekyllrb.com/docs/configuration/markdown/
+kramdown:
+  input: GFM
+  hard_wrap: false
+  # https://github.com/jekyll/jekyll/pull/4090
+  syntax_highlighter: rouge
+
+  # Rouge Highlighter in Kramdown › http://kramdown.gettalong.org/syntax_highlighter/rouge.html
+  # span, block element options fall back to global
+  syntax_highlighter_opts:
+    # Rouge Options › https://github.com/jneen/rouge#full-options
+    css_class: highlight
+    #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  pages:
+    output: true
+    permalink: "/:name/"
+  posts:
+    output: true
+    permalink: "/blog/:title/"
+
+defaults:
+  - scope:
+      path: _pages
+      type: pages
+    values:
+      layout: page
+  - scope:
+      path: _posts
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - "*.lock"
+  - "/docs"
+  - "/test*"
+  - "/tool*"
+  - "/script*"
+  - "package*.json"
+  - "README.md"

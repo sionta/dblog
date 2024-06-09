@@ -1,0 +1,14 @@
+---
+layout: none
+---
+[
+  {%- for post in site.posts %}
+    {
+      "title"    : "{{- post.title | escape -}}",
+      "category" : "{{- site.baseurl | append: post.category | relative_url -}}",
+      "tags"     : "{{- site.baseurl | append: post.tags | relative_url | join: ', ' -}}",
+      "url"      : "{{- site.baseurl | append: post.url | relative_url -}}",
+      "date"     : "{{- post.date -}}"
+    } {%- unless forloop.last %},{% endunless %}
+  {%- endfor %}
+]

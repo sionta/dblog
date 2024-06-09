@@ -1,0 +1,46 @@
+{% comment %} Change the icon of checkbox {% endcomment %}
+{% if content contains '<input type="checkbox" class="task-list-item-checkbox"' %}
+  {% assign content = content
+    | replace: '<input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />',
+      '<i class="ti ti-checkbox task-list-checked"></i>'
+    | replace: '<input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />',
+      '<i class="ti ti-square task-list-unchecked"></i>'
+  %}
+{% endif %}
+
+{% comment %} Add header for code snippets {% endcomment %}
+{% if content contains '<div class="highlight">' or content contains '<figure class="highlight">' %}
+  {% assign _query_selector = '<div class="highlight">' %}
+  {% assign _code_spippets = content | split: _query_selector %}
+  {% assign _new_content = '' %}
+
+  {% for _snippet in _code_spippets %}
+    {% if forloop.last %}
+      {% assign _new_content = _new_content | append: _snippet %}
+    {% else %}
+      {% assign _lang_code = _snippet | split: 'language-' | last | split: ' ' | first %}
+      {% case _lang_code %}
+        {% when 'css', 'html', 'json', 'scss', 'ssh', 'toml', 'xml', 'yaml' %}
+          {% assign _label_text = _lang_code | upcase %}
+        {% else %}
+          {% assign _label_text = _lang_code | capitalize %}
+      {% endcase %}
+
+      {% capture _code_header %}
+        <div class="code-header">
+          <span data-lang="{{ _label_text | strip }}">
+            <i class="ti ti-code"></i>
+          </span>
+          <button aria-label="copy" data-title-succeed="Copied!">
+            <i class="ti ti-clipboard"></i>
+          </button>
+        </div>
+      {% endcapture %}
+      {% assign _new_content = _new_content | append: _snippet | append: _code_header | append: _query_selector %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign content = _new_content %}
+{% endif %}
+
+{{ content }}

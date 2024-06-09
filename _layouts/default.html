@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en'}}">
+  {%- include head.html -%}
+  <body>
+    <header class="header sticky">
+      {% include navbar.html %}
+    </header>
+    <main class="main-content">
+      <article class="content {% if page.layout != 'post' %}wrapper{% endif %}">
+        {% include selector.html %}
+      </article>
+      {% if page.layout == 'post' %}
+        <aside class="sidebar hide-on-mobile">
+          <div class="toc">
+            <h2 class="toc-title">On this page</h2>
+            <nav id="toc"></nav>
+          </div>
+        </aside>
+      {% endif %}
+    </main>
+    <footer class="footer">
+      <button id="scroll-top__link" aria-label="Go to top">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-chevron-up icon"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 15 12 9 18 15"></polyline>
+        </svg>
+      </button>
+      {% include themeSwitcher.html %}
+      {% comment %} <a href="#" id="scroll-top__link" aria-label="Go to top">↑</a> {% endcomment %}
+      {% comment %} <p>&copy; 2024 My Responsive Site</p> {% endcomment %}
+    </footer>
+    {% include script.html %}
+  </body>
+</html>

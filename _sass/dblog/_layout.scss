@@ -1,0 +1,137 @@
+@use "utilities" as *;
+
+.wrapper {
+  max-width: calc(#{$width-stack} - (#{$spacing-unit}));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: calc($spacing-unit * 0.5);
+  padding-left: calc($spacing-unit * 0.5);
+  @extend %clearfix;
+
+  @media screen and (min-width: $width-stack) {
+    max-width: calc(#{$width-stack} - (#{$spacing-unit} * 2));
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+  }
+}
+
+.wrap-flex {
+  max-width: $width-stack;
+  margin: 0 auto;
+  padding: 0 $spacing-unit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.clearfix,
+%clearfix {
+  @include clearfix;
+}
+
+.header,
+.footer {
+  background: var(--bg-2);
+  color: var(--tx-1);
+  padding: 0 $spacing-unit;
+}
+
+.header {
+  border-bottom: 1px solid var(--bd-1);
+}
+
+.footer {
+  text-align: center;
+  border-top: 1px solid var(--bd-1);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  padding: $spacing-unit 0;
+
+  @include breakpoint($width-stack) {
+    flex-direction: column;
+  }
+}
+
+.content {
+  flex: 3;
+  // background: var(--bg-1);
+  padding: $spacing-unit;
+}
+
+.sidebar {
+  flex: 1;
+  max-width: $width-stack;
+  // background: var(--bg-3);
+  color: var(--tx-1);
+  padding: $spacing-unit;
+  margin-left: calc($spacing-unit / 2);
+
+  @include breakpoint($width-stack) {
+    margin-left: 0;
+    margin-top: $spacing-unit;
+  }
+}
+
+/**
+ * Utilities Classes
+ */
+.sticky {
+  position: -webkit-sticky !important; // Safari
+  position: sticky !important;
+  z-index: 3 !important;
+  top: 0;
+}
+
+/* Hide elements using this class by default */
+.only-on-mobile {
+  display: none !important;
+}
+
+@include breakpoint($width-stack, max) {
+  .center-on-mobile {
+    text-align: center !important;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .only-on-mobile {
+    display: block !important;
+  }
+}
+
+.screen-reader {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.icon-svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+svg.icon,
+svg[class*="icon-tabler"] {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// https://www.joshwcomeau.com/css/center-a-div/#centering-within-the-viewport-3

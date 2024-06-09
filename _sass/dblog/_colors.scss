@@ -1,0 +1,79 @@
+@use "sass:map";
+@use "utilities" as *;
+
+$base00: #1d1f21;
+$base01: #282a2e;
+$base02: #373b41;
+$base03: #969896;
+$base04: #c1cadb;
+$base05: #d8dee9;
+$base06: #e5e9f0;
+$base07: #eceff4;
+
+$red: #cc6666;
+$orange: #de935f;
+$yellow: #f0c674;
+$green: #b5bd68;
+$cyan: #8abeb7;
+$blue: #81a2be;
+$violet: #b294bb;
+$brown: #a3685a;
+$magenta: #d33682;
+
+// Create a map for easier theming
+$themes: (
+  "light": (
+    "bg-1": $base07,
+    "bg-2": $base06,
+    "bg-3": $base05,
+    "tx-1": $base02,
+    "tx-2": $base03,
+    "tx-3": $base04,
+    "bd-1": $base04,
+    "bd-2": $base03,
+    "bd-3": $base02,
+    "ac-1": var(--blue),
+    "ac-2": var(--magenta),
+    "ac-3": var(--violet),
+  ),
+  "dark": (
+    "bg-1": $base00,
+    "bg-2": $base01,
+    "bg-3": $base02,
+    "tx-1": $base04,
+    "tx-2": $base05,
+    "tx-3": $base06,
+    "bd-1": $base02,
+    "bd-2": $base03,
+    "bd-3": $base04,
+  ),
+  "colors": (
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "cyan": $cyan,
+    "blue": $blue,
+    "violet": $violet,
+    "brown": $brown,
+    "magenta": $magenta,
+  ),
+);
+
+@mixin theme($mode: light) {
+  $color-data: map.get($themes, "colors");
+  $theme-data: map.get($themes, $mode);
+  color-scheme: $mode;
+
+  @each $key, $value in $theme-data {
+    --#{$key}: #{$value};
+  }
+
+  @each $key, $value in $color-data {
+    @if $mode == "dark" {
+      --#{$key}: #{$value};
+    } @else {
+      --#{$key}: #{darken($value, 10%)};
+    }
+  }
+}

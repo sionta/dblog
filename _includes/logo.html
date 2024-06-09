@@ -1,0 +1,8 @@
+{% assign site_brand = site.brand | default: site.title | split: ' ' %}
+<a class="nav-logo" href="{{ '/' | relative_url }}">
+  <h1 class="logo">
+    <span class="hide-on-mobile">{{ site_brand[0] }}</span>
+    <span class="anim">{{ site_brand[1] }}</span>
+    <span class="hide-on-mobile">{{ site_brand[2] }}</span>
+  </h1>
+</a>

@@ -1,0 +1,53 @@
+@use "sass:map";
+@use "../utilities" as *;
+
+// Alerts
+$alert_data: (
+  "note": (
+    "color": #6a9fb5,
+    "icon": "\ea05",
+    "emoji": "\1F4DD",
+  ),
+  "tip": (
+    "color": #90a959,
+    "icon": "\ea51",
+    "emoji": "\1F4A1",
+  ),
+  "important": (
+    "color": #aa759f,
+    "icon": "\ec9b",
+    "emoji": "\2139",
+  ),
+  "warning": (
+    "color": #d28445,
+    "icon": "\ea06",
+    "emoji": "\26A0",
+  ),
+  "caution": (
+    "color": #ac4142,
+    "icon": "\f810",
+    "emoji": "\274C",
+  ),
+);
+
+.alert {
+  padding: $spacing-unit;
+  margin: $spacing-unit auto;
+  font: 400 #{$font-size}/#{$line-height} $font-sans;
+  color: var(--tx-1);
+  background: var(--bg-2);
+  border-left: 5px solid var(--bd-1);
+
+  @each $name, $value in $alert_data {
+    $color: map.get($value, "color");
+    $icon: map.get($value, "icon");
+    $emoji: map.get($value, "emoji");
+
+    & &-#{$name},
+    &-#{$name} {
+      background: rgba($color, 0.2);
+      border-left: 5px solid rgba($color, 0.65);
+      color: $color;
+    }
+  }
+}

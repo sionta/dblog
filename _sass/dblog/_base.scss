@@ -1,0 +1,261 @@
+@use "utilities" as *;
+@use "colors";
+
+:root {
+  &,
+  &[data-theme="light"] {
+    @include colors.theme(light);
+  }
+
+  &[data-theme="dark"] {
+    @include colors.theme(dark);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &:not([data-theme]) {
+      @include colors.theme(dark);
+    }
+  }
+}
+
+/**
+ * Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: $font-size;
+}
+
+/**
+ * Basic styling
+ */
+/* prettier-ignore */
+body {
+  font: $font-weight #{$font-size}/#{$line-height} $font-sans;
+  color: var(--tx-1);
+  background: var(--bg-1);
+
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-feature-settings: "kern" 1;
+     -moz-font-feature-settings: "kern" 1;
+       -o-font-feature-settings: "kern" 1;
+          font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  text-rendering: optimizeSpeed;
+
+  touch-action: pan-y;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-wrap: break-word;
+}
+
+/**
+ * Set `margin-bottom` to maintain vertical rhythm
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+ul,
+ol,
+dl,
+figure,
+%vertical-rhythm {
+  margin-bottom: calc($spacing-unit * 0.5);
+}
+
+hr {
+  border: 1px solid var(--bd-1);
+  margin-top: $spacing-unit;
+  margin-bottom: $spacing-unit;
+}
+
+/**
+ * `main` element
+ */
+main {
+  display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */
+}
+
+/**
+ * Improve media defaults
+ */
+img,
+svg picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+ * Remove built-in form typography styles
+ */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/**
+ * Figures
+ */
+figure > img {
+  display: block;
+}
+
+figcaption {
+  font-size: calc($font-size * 0.875);
+}
+
+/**
+ * Lists
+ */
+ul,
+ol {
+  margin-left: $spacing-unit;
+}
+
+li {
+  > ul,
+  > ol {
+    margin-bottom: 0;
+  }
+}
+
+/**
+ * Headings
+ */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-heading;
+  font-weight: $font-weight;
+  overflow-wrap: break-word;
+}
+@each $key, $size in $heading-sizes {
+  #{$key} {
+    font-size: $size;
+
+    @if $key == "h1" {
+      font-weight: 600;
+
+      &:not(:first-child) {
+        font-weight: $font-weight;
+      }
+    }
+  }
+}
+
+/**
+ * Links
+ */
+a {
+  color: var(--tx-1);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ac-1);
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: inherit !important;
+    background: inherit !important;
+  }
+}
+
+/**
+ * Blockquotes
+ */
+blockquote:not(.alert) {
+  color: var(--tx-1);
+  border-left: 4px solid var(--bd-1);
+  padding-left: calc($spacing-unit * 0.5);
+  @include relative-font(1.125);
+  // font-style: italic;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  cite::before {
+    content: "\2014 \0020";
+  }
+
+  &.fs-normal {
+    font-style: normal;
+  }
+
+  &.fs-italic {
+    font-style: italic;
+  }
+
+  i,
+  em {
+    font-style: normal;
+  }
+}
+
+/**
+ * Tables
+ */
+table:not(.rouge-table) {
+  margin-bottom: $spacing-unit;
+  width: 100%;
+  text-align: left;
+  color: var(--tx-1);
+  border-collapse: collapse;
+  // border: 1px solid var(--bd-1);
+
+  th,
+  td {
+    padding: ($spacing-unit * 33.3333333333 * 0.01) ($spacing-unit * 0.5);
+  }
+  th {
+    background: var(--bg-2);
+    border: 1px solid var(--bd-1);
+  }
+  td {
+    border: 1px solid var(--bd-1);
+  }
+  tr:nth-child(even) {
+    background: var(--bg-2);
+  }
+  /* prettier-ignore */
+  @include breakpoint(md, max) {
+    // display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}

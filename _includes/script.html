@@ -1,0 +1,60 @@
+<script src="{{- '/assets/js/main.js' | relative_url -}}"></script>
+
+{% assign vendor_js = '/assets/js/vendor' | relative_url %}
+
+{% if page.collection == 'posts' or page.layout == 'post' %}
+  {% include comments.html %}
+
+  <script type="text/javascript" src="{{- vendor_js -}}/tocbot.min.js"></script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      tocbot.init({
+        tocSelector: '#toc',
+        contentSelector: '.content',
+        ignoreSelector: '.no_toc',
+        headingSelector: 'h2, h3, h4',
+        orderedList: false,
+        scrollSmooth: true,
+        scrollSmoothOffset: -100,
+      });
+      tocbot.refresh();
+    });
+  </script>
+
+  {% if page.mermaid == true or page.diagram == true %}
+    <script type="text/javascript" src="{{- vendor_js -}}/mermaid.min.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', () => {
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: 'default',
+          securityLevel: 'loose',
+        });
+        let mermaidClass = document.getElementsByClassName('language-mermaid');
+        Array.from(mermaidClass).forEach((element) => {
+          element.classList.add('mermaid');
+          mermaid.init(undefined, element);
+        });
+      });
+    </script>
+  {% endif %}
+{% endif %}
+
+<script>
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById('scroll-top__link').classList.add('visible');
+    } else {
+      document.getElementById('scroll-top__link').classList.remove('visible');
+    }
+  }
+
+  document.getElementById('scroll-top__link').addEventListener('click', function () {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For other browsers
+  });
+</script>
