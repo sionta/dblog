@@ -61,6 +61,11 @@ defaults:
       type: posts
     values:
       layout: post
+      # Special configuration for layout "post":
+      toc: false # Enable table of contents
+      anchor: false # Enable anchor headings
+      mermaid: false # Enable mermaid diagrammings
+      comments: false # Enable comments, first set `site.comments.provider`
 
 exclude:
   - "*.gem"

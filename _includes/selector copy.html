@@ -38,43 +38,76 @@
     {% if forloop.last %}
       {% assign _new_content = _new_content | append: _snippet %}
     {% else %}
-      {% comment %} Icon use Tabler https://tabler.io/icons {% endcomment %}
       {% assign _code_lang = _snippet | split: 'language-' | last | split: ' ' | first %}
-      {% assign _label_text = _code_lang | capitalize %}
       {% assign _label_icon = 'code' %}
 
       {% case _code_lang %}
-        {% when 'bash', 'zsh', 'ksh', 'sh', 'ps1', 'bat', 'cmd' %}
-          {% assign _label_icon = 'terminal-2' %}
         {% when 'plain', 'text', 'txt' %}
-          {% assign _label_icon = 'file' %}
+          {% assign _label_text = 'Plain' %}
+          {% assign _label_icon = 'txt' %}
+        {% when 'actionscript', 'as', 'as3' %}
+          {% assign _label_text = 'ActionScript' %}
+        {% when 'applescript' %}
+          {% assign _label_text = 'AppleScript' %}
+        {% when 'brightscript', 'bs', 'brs' %}
+          {% assign _label_text = 'BrightScript' %}
+        {% when 'cfscript', 'cfc' %}
+          {% assign _label_text = 'CFScript' %}
+        {% when 'coffeescript', 'coffee', 'coffee-script' %}
+          {% assign _label_text = 'CoffeeScript' %}
+        {% when 'cs', 'csharp' %}
+          {% assign _label_text = 'C#' %}
+        {% when 'erl' %}
+          {% assign _label_text = 'Erlang' %}
+        {% when 'graphql' %}
+          {% assign _label_text = 'GraphQL' %}
+        {% when 'haskell', 'hs' %}
+          {% assign _label_text = 'Haskell' %}
         {% when 'javascript', 'js' %}
           {% assign _label_text = 'JavaScript' %}
           {% assign _label_icon = 'javascript' %}
-        {% when 'ts', 'typescript' %}
-          {% assign _label_text = 'TypeScript' %}
-          {% assign _label_icon = 'TypeScript' %}
+        {% when 'make', 'mf', 'gnumake', 'bsdmake' %}
+          {% assign _label_text = 'Makefile' %}
+        {% when 'md', 'mkd' %}
+          {% assign _label_text = 'Markdown' %}
+          {% assign _label_icon = 'markdown' %}
+        {% when 'm' %}
+          {% assign _label_text = 'Matlab' %}
+        {% when 'objective_c', 'objc', 'obj-c', 'obj_c', 'objectivec' %}
+          {% assign _label_text = 'Objective-C' %}
+        {% when 'perl', 'pl' %}
+          {% assign _label_text = 'Perl' %}
         {% when 'php', 'php3', 'php4', 'php5' %}
           {% assign _label_text = 'PHP' %}
           {% assign _label_icon = 'php' %}
-        {% when 'py', 'python' %}
+        {% when 'py' %}
           {% assign _label_text = 'Python' %}
-          {% assign _label_icon = 'python' %}
-        {% when 'rb', 'ruby' %}
+          {% assign _label_icon = 'Python' %}
+        {% when 'rb' %}
           {% assign _label_text = 'Ruby' %}
-          {% assign _label_icon = 'diamond' %}
-        {% when 'json' %}
-          {% assign _label_icon = 'braces' %}
-        {% when 'sass', 'scss' %}
+        {% when 'rs', 'no_run', 'ignore', 'should_panic' %}
+          {% assign _label_text = 'Rust' %}
+        {% when 'bash', 'zsh', 'ksh', 'sh' %}
+          {% assign _label_text = 'Shell' %}
+        {% when 'st', 'squeak' %}
+          {% assign _label_text = 'Smalltalk' %}
+        {% when 'tex' %}
+          {% assign _label_text = 'TeX' %}
+        {% when 'latex' %}
+          {% assign _label_text = 'LaTex' %}
+        {% when 'ts', 'typescript' %}
+          {% assign _label_text = 'TypeScript' %}
+        {% when 'vb', 'visualbasic' %}
+          {% assign _label_text = 'Visual Basic' %}
+        {% when 'vue', 'vuejs' %}
+          {% assign _label_text = 'Vue.js' %}
+        {% when 'css', 'scss', 'sass', 'less' %}
           {% assign _label_icon = 'sass' %}
-        {% when 'css', 'css3', 'stylesheet' %}
-          {% assign _label_icon = 'css3' %}
-        {% when 'html' %}
-          {% assign _label_icon = 'html5' %}
         {% when 'css', 'html', 'scss', 'ssh', 'toml', 'xml', 'yaml', 'json' %}
           {% assign _label_text = _code_lang | upcase %}
+        {% else %}
+          {% assign _label_text = _code_lang | capitalize %}
       {% endcase %}
-
       {% capture _code_header %}<div class="code-header"><span data-lang="{{ _label_text | strip }}"><i class="ti ti-{{ _label_icon | downcase }}"></i></span><button aria-label="copy"><i class="ti ti-clipboard"></i></button></div>{% endcapture %}
       {% assign _new_content = _new_content | append: _snippet | append: _code_header | append: _query_selector %}
     {% endif %}

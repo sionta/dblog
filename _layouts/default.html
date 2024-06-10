@@ -1,13 +1,20 @@
+---
+layout: cleaned
+---
 <!doctype html>
 <html lang="{{ page.lang | default: site.lang | default: 'en'}}">
-  {%- include head.html -%}
+  {% include head.html %}
   <body>
     <header class="header sticky">
       {% include navbar.html %}
     </header>
     <main class="main-content">
-      <article class="content {% if page.layout != 'post' %}wrapper{% endif %}">
-        {% include selector.html %}
+      <article class="content {% if page.layout == 'page' %}wrapper{% endif %}">
+        {% if layout.page %}
+          {{ content }}
+        {% else %}
+          {% include selector.html html=content %}
+        {% endif %}
       </article>
       {% if page.layout == 'post' %}
         <aside class="sidebar hide-on-mobile">
@@ -39,6 +46,7 @@
       {% comment %} <a href="#" id="scroll-top__link" aria-label="Go to top">↑</a> {% endcomment %}
       {% comment %} <p>&copy; 2024 My Responsive Site</p> {% endcomment %}
     </footer>
+    <script src="{{- '/assets/js/main.js' | relative_url -}}"></script>
     {% include script.html %}
   </body>
 </html>

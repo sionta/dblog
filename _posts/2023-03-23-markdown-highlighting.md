@@ -5,6 +5,42 @@ categories: test
 ---
 <!-- markdownlint-disable -->
 
+### Plain
+
+```plain
+{
+  "thisSyntax": error
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
+
+### CSS
+
+This is use triple backticks <code>```css</code>
+
+```css
+/* This is a single-line comment */
+
+h1 {
+    color: blue;
+    text-decoration: underline;
+}
+```
+
+{% raw %}This is use `{% highlight css linenos %}`{% endraw %}
+
+{% highlight css linenos %}
+/* This is a single-line comment */
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+{% endhighlight %}
+
 ### Diff
 
 ```diff
@@ -34,38 +70,6 @@ function addTwoNumbers (num1, num2) {
         </script>
     </body>
 </html>
-```
-
-### CSS
-
-{% raw %}This is use `{% highlight css linenos %}`{% endraw %}
-
-{% highlight css linenos %}
-/* This is a single-line comment */
-
-body {
-    font-family: Arial, sans-serif;
-    color: #333;
-}
-
-h1 {
-    color: blue;
-    text-decoration: underline;
-}
-{% endhighlight %}
-
-```css
-/* This is a single-line comment */
-
-body {
-    font-family: Arial, sans-serif;
-    color: #333;
-}
-
-h1 {
-    color: blue;
-    text-decoration: underline;
-}
 ```
 
 ### SCSS

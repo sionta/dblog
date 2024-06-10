@@ -10,12 +10,7 @@ compress_html: false
 {%- assign date_published = page.date -%}
 {%- assign date_modified = page.modified_date | default: page.last_modified_at -%}
 
-<article
-  class="article"
-  itemscope
-  itemtype="https://schema.org/BlogPosting"
-  itemid="{{ page.url | absolute_url }}"
->
+<article class="article" itemscope itemtype="https://schema.org/BlogPosting" itemid="{{ page.url | absolute_url }}">
   <a href="{{ page.url | relative_url }}" hidden></a>
   <meta itemprop="wordCount" content="{{ page.content | strip_html | size }}">
   <header>
@@ -40,7 +35,7 @@ compress_html: false
     {{ content }}
   </section>
   <footer>
-    {% if page.tags != empty %}
+    {% if page.tags %}
       <p>
         Tagged with:
         <span class="tag-link" itemprop="keywords">
@@ -53,14 +48,12 @@ compress_html: false
     {% endif %}
     {% if page.comments == true %}
       <div
-        itemscope
-        itemtype="https://schema.org/Comment"
         {% if site.comments.provider == 'disqus' %}
           id="disqus_thread"
-        {% else %}
-          id="{{ site.comments.provider }}"
         {% endif %}
         class="{{ site.comments.provider }}"
+        itemscope
+        itemtype="https://schema.org/Comment"
       ></div>
     {% endif %}
   </footer>
