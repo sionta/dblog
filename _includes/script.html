@@ -18,6 +18,7 @@
         tocbot.refresh();
       });
     </script>
+{% endif %}
     {%- if page.mermaid == true or page.diagram == true -%}
       <script type="text/javascript" src="{{- vendor_js -}}/mermaid.min.js"></script>
       <script type="text/javascript">
@@ -34,6 +35,5 @@
           });
         });
       </script>
-    {% endif %}
   {%- endif -%}
 {%- endif -%}
