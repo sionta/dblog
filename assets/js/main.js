@@ -54,54 +54,54 @@
   });
 
   // Copy to clipboard
-  document.addEventListener("DOMContentLoaded", function () {
-    const clipboardButtons = document.querySelectorAll(
-      '.code-header button[aria-label="copy"]'
-    );
-    clipboardButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        const codeBlock = button
-          .closest(".code-header")
-          .nextElementSibling.querySelector(".rouge-code");
-        const text = codeBlock.innerText.trim();
+  // document.addEventListener("DOMContentLoaded", function () {
+  //   const clipboardButtons = document.querySelectorAll(
+  //     '.code-header button[aria-label="copy"]'
+  //   );
+  //   clipboardButtons.forEach(function (button) {
+  //     button.addEventListener("click", function () {
+  //       const codeBlock = button
+  //         .closest(".code-header")
+  //         .nextElementSibling.querySelector(".rouge-code");
+  //       const text = codeBlock.innerText.trim();
 
-        navigator.clipboard
-          .writeText(text)
-          .then(function () {
-            button.innerHTML = '<i class="ti ti-check"></i>';
-            showTooltip(button, "Copied!");
-            setTimeout(function () {
-              button.innerHTML = '<i class="ti ti-clipboard"></i>';
-            }, 2000);
-          })
-          .catch(function (err) {
-            console.error("Failed to copy!", err);
-          });
-      });
-    });
+  //       navigator.clipboard
+  //         .writeText(text)
+  //         .then(function () {
+  //           // button.innerHTML = '<i class="ti ti-check"></i>';
+  //           showTooltip(button, "Copied!");
+  //           setTimeout(function () {
+  //             // button.innerHTML = '<i class="ti ti-clipboard"></i>';
+  //           }, 2000);
+  //         })
+  //         .catch(function (err) {
+  //           console.error("Failed to copy!", err);
+  //         });
+  //     });
+  //   });
 
-    function showTooltip(element, message) {
-      const tooltip = document.createElement("div");
-      tooltip.className = "tooltip";
-      tooltip.textContent = message;
-      document.body.appendChild(tooltip);
+  //   function showTooltip(element, message) {
+  //     const tooltip = document.createElement("div");
+  //     tooltip.className = "tooltip";
+  //     tooltip.textContent = message;
+  //     document.body.appendChild(tooltip);
 
-      const rect = element.getBoundingClientRect();
-      tooltip.style.left = `${
-        rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2
-      }px`;
-      tooltip.style.top = `${
-        rect.top + window.scrollY - tooltip.offsetHeight - 5
-      }px`;
+  //     const rect = element.getBoundingClientRect();
+  //     tooltip.style.left = `${
+  //       rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2
+  //     }px`;
+  //     tooltip.style.top = `${
+  //       rect.top + window.scrollY - tooltip.offsetHeight - 5
+  //     }px`;
 
-      tooltip.classList.add("show");
+  //     tooltip.classList.add("show");
 
-      setTimeout(function () {
-        tooltip.classList.remove("show");
-        document.body.removeChild(tooltip);
-      }, 2000);
-    }
-  });
+  //     setTimeout(function () {
+  //       tooltip.classList.remove("show");
+  //       document.body.removeChild(tooltip);
+  //     }, 2000);
+  //   }
+  // });
 
   // Theme switcher
   // Thanks to Aleksandr Hovhannisyan <https://www.aleksandrhovhannisyan.com/blog/the-perfect-theme-switch/>

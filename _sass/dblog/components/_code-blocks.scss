@@ -47,6 +47,7 @@ samp {
 abbr {
   cursor: help;
 }
+
 /* styles.css */
 .tooltip {
   position: absolute;
@@ -69,6 +70,10 @@ abbr {
   align-items: center;
   justify-content: space-between;
   padding: 5px;
+  position: relative;
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   border-top-left-radius: calc($border-radius * 2);
   border-top-right-radius: calc($border-radius * 2);
 
@@ -79,17 +84,13 @@ abbr {
   color: var(--tx-1);
   background: var(--bg-3);
 
-  i {
-    font-family: "tabler-icons", $font-sans;
-    font-size: 20px;
+  svg {
     color: var(--tx-1);
-    vertical-align: middle;
-  }
+    width: 20px;
+    height: 20px;
 
-  [data-lang]::after {
-    content: attr(data-lang);
-    text-align: center;
-    margin-left: 5px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   button[aria-label="copy"] {
@@ -98,8 +99,10 @@ abbr {
     align-items: center;
     background: inherit;
     border: none;
-    padding: 0;
-    margin: 0;
+
+    .copy-succeed {
+      display: none;
+    }
   }
 }
 
@@ -114,8 +117,8 @@ abbr {
   }
 
   .lineno {
-    text-align: right;
     @include reset-spacing;
+    text-align: right;
   }
 }
 
@@ -155,7 +158,7 @@ figure.highlight {
   --syntax-error: var(--red);
   // --syntax-string: #{$base04};
   --syntax-comment: #{$base03};
-  .gl    { color: var(--syntax-string); } // Generic.Lineno
+  .gl    { color: var(--syntax-comment); } // Generic.Lineno
   .w     { color: var(--syntax-string); } // Text.Whitespace
   .bp    { color: var(--blue); } // Name.Builtin.Pseudo
   .c     { color: var(--syntax-comment); font-style: italic; } // Comment

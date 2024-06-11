@@ -1,8 +1,10 @@
 @use "../utilities" as *;
 
 .toc {
-  overflow: hidden;
-  position: fixed;
+  @include breakpoint($width-stack, min) {
+    overflow: hidden;
+    position: fixed;
+  }
   font-family: $font-sans;
 }
 
@@ -11,6 +13,7 @@
   position: relative;
 }
 
+.toc-list li,
 .toc > .toc-list li {
   list-style: none;
 }

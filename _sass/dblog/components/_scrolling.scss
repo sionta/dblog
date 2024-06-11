@@ -32,7 +32,9 @@
 
 /* Custom scrollbar styling for WebKit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-  width: 12px;
+  @include breakpoint($width-stack, min) {
+    width: 12px;
+  }
 
   &-thumb,
   &-track {

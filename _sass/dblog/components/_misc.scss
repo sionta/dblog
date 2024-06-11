@@ -33,29 +33,3 @@
   width: $font-size;
   display: inline-block;
 }
-
-.task-list {
-  @include reset-list;
-
-  .ti,
-  i {
-    font-size: 18px;
-    margin-right: 10px;
-  }
-
-  &-checked {
-    color: var(--tx-1);
-  }
-
-  &-unchecked {
-    color: var(--bd-2);
-    cursor: not-allowed;
-  }
-
-  &-item {
-    &-checkbox {
-      cursor: not-allowed;
-      margin-right: 10px;
-    }
-  }
-}

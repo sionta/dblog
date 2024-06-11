@@ -180,7 +180,7 @@ h6 {
  * Links
  */
 a {
-  color: var(--tx-1);
+  color: var(--ac-1);
   text-decoration: none;
 
   &:hover {
@@ -189,8 +189,8 @@ a {
   }
 
   &:visited {
-    color: inherit !important;
-    background: inherit !important;
+    color: none !important;
+    background: none !important;
   }
 }
 
@@ -199,10 +199,9 @@ a {
  */
 blockquote:not(.alert) {
   color: var(--tx-1);
-  border-left: 4px solid var(--bd-1);
+  // border-left: 4px solid var(--bd-1);
   padding-left: calc($spacing-unit * 0.5);
   @include relative-font(1.125);
-  // font-style: italic;
 
   > :last-child {
     margin-bottom: 0;
@@ -212,11 +211,11 @@ blockquote:not(.alert) {
     content: "\2014 \0020";
   }
 
-  &.fs-normal {
+  &.normal {
     font-style: normal;
   }
 
-  &.fs-italic {
+  &.italic {
     font-style: italic;
   }
 
@@ -237,6 +236,10 @@ table:not(.rouge-table) {
   border-collapse: collapse;
   // border: 1px solid var(--bd-1);
 
+  caption {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
   th,
   td {
     padding: ($spacing-unit * 33.3333333333 * 0.01) ($spacing-unit * 0.5);
@@ -257,5 +260,37 @@ table:not(.rouge-table) {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
             -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+
+/**
+ * Details
+ */
+details {
+  margin: {
+    top: $spacing-unit;
+    bottom: $spacing-unit;
+  }
+
+  padding: 0.6rem 1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--bd-1);
+  border-radius: $border-radius;
+
+  summary {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  &[open] {
+    padding-bottom: 0.75rem;
+
+    summary {
+      margin-bottom: 6px;
+    }
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
   }
 }

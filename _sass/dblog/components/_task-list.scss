@@ -1,0 +1,32 @@
+@use "../utilities" as *;
+@use "../base" as *;
+
+.task-list {
+  margin-left: 0;
+  list-style: none;
+
+  svg {
+    cursor: not-allowed;
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    margin-bottom: 3px;
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
+
+  &-checked {
+    color: var(--green);
+  }
+
+  &-unchecked {
+    color: var(--bd-2);
+  }
+
+  &-item {
+    &-checkbox {
+      cursor: not-allowed;
+      margin-right: 10px;
+    }
+  }
+}

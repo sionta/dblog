@@ -43,8 +43,7 @@ $alert_data: (
     $icon: map.get($value, "icon");
     $emoji: map.get($value, "emoji");
 
-    & &-#{$name},
-    &-#{$name} {
+    &.alert-#{$name} {
       background: rgba($color, 0.2);
       border-left: 5px solid rgba($color, 0.65);
       color: $color;

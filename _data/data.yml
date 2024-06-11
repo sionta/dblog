@@ -1,0 +1,56 @@
+# Icon use Tabler https://tabler.io/icons
+
+code_blocks:
+  - name: Default
+    alias: []
+    icon: code
+  - name: Plain
+    alias: [plain, text, txt]
+    icon: file
+  - name: CSS
+    alias: ["css", "css3", "stylesheet"]
+    icon: brand-css3
+  - name: PHP
+    alias: [php, php3, php4, php5]
+    icon: brand-php
+  - name: HTML
+    alias: [html]
+    icon: brand-html5
+  - name: Ruby
+    alias: [rb, ruby]
+    icon: diamond
+  - name: Python
+    alias: [py, python]
+    icon: brand-python
+  - name: SASS
+    alias: [sass, scss]
+    icon: brand-sass
+  - name: JavaScript
+    alias: [js, javascript]
+    icon: brand-javascript
+  - name: TypeScript
+    alias: [ts, typescript]
+    icon: brand-typescript
+  - name: JSON
+    alias: [json]
+    icon: braces
+  - name: XML
+    alias: [xml]
+    icon: code
+  - name: YAML
+    alias: [yaml]
+    icon: ""
+  - name: TOML
+    alias: [toml]
+    icon: brackets
+  - name: Terminal
+    alias: [shell, bash, zsh, ksh, sh, ps1, bat, cmd]
+    icon: terminal-2
+
+alerts:
+  - { name: Normal, icon: quote }
+  - { name: Tip, icon: bulb }
+  - { name: Note, icon: info-circle }
+  - { name: Important, icon: alert-circle }
+  - { name: Warning, icon: alert-triangle }
+  - { name: Caution, icon: alert-octagon }

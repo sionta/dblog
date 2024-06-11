@@ -20,10 +20,11 @@ theme: dblog
 
 # https://sass-lang.com/documentation/cli/ruby-sass/
 sass:
-  style: compressed
-  #style: expanded # for development
+  # style: compressed
+  style: expanded # for development
 
 # https://jekyllrb.com/docs/configuration/markdown/
+markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false

@@ -1,0 +1,60 @@
+{% if _CONTENT contains '<pre class="highlight">' %}
+  {% comment %} Plain text {% endcomment %}
+  {% comment %}
+    {% assign _CONTENT = _CONTENT
+      | replace: '<pre><code class="language-plain">',
+        '<div class="language-plain highlighter-rouge"><pre class="highlight">'
+    %}
+  {% endcomment %}
+
+  {% comment %} Remove duplicate elements and class 'highlight' {% endcomment %}
+  {% assign _CONTENT = _CONTENT
+    | replace: '<div class="highlight"><pre class="highlight">', '<pre class="highlight">'
+    | replace: '</code></pre></div>', '</code></pre>'
+    | replace: '<figure class="highlight"><pre>',
+      '<div class="language-figure highlighter-rouge"><pre class="highlight">'
+    | replace: '</figure>', '</div>'
+  %}
+
+  {% assign _pre_highlight = '<pre class="highlight">' %}
+  {% assign _code_spippets = _CONTENT | split: _pre_highlight %}
+  {% for _snippet in _code_spippets %}
+    {% if _snippet contains 'data-lang=' %}
+      {% assign _code_class = _snippet | split: '><' | first %}
+      {% assign _data_lang = _code_class | split: 'data-lang=' | last | replace: '"' %}
+      {% assign _new_class = 'language-' | append: _data_lang %}
+      {% assign _CONTENT = _CONTENT | replace: 'language-figure', _new_class | replace: _code_class, '<code' %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign _code_spippets = _CONTENT | split: _pre_highlight %}
+  {% assign _code_blocks = '' %}
+  {% for _snippet in _code_spippets %}
+    {% if forloop.last %}
+      {% assign _code_blocks = _code_blocks | append: _snippet %}
+    {% else %}
+      {% assign _code_lang = _snippet | split: 'language-' | last | split: ' ' | first %}
+      {% assign _label_text = _code_lang | capitalize %}
+      {% assign _label_icon = 'code' %}
+      {% include partials/code-alias.html %}
+      {% capture _code_header %}
+      <div class="code-header" data-lang="{{ _label_text | strip }}">
+        {% include svg_symbol.html id=_label_icon class='code-header-icon' %}
+        <span class="code-header-title">{{ _label_text | strip }}</span>
+        <button aria-label="copy">
+          {% include svg_symbol.html id='clipboard' class='copy-clipboard' %}
+          {% include svg_symbol.html id='check' class='copy-succeed' %}
+        </button>
+      </div>
+      {% endcapture %}
+
+      {% assign _code_blocks = _code_blocks | append: _snippet | append: _code_header | append: _pre_highlight %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign _CONTENT = _code_blocks %}
+  {% assign _CONTENT = _CONTENT
+    | replace: '<td class="gutter gl">', '<td class="rouge-gutter gl">'
+    | replace: '<td class="code">', '<td class="rouge-code">'
+  %}
+{% endif %}

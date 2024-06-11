@@ -2,59 +2,65 @@
 layout: default
 compress_html: false
 ---
-{%- assign toc_title = 'Table of Content' | camelcase -%}
 {%- assign author_name = site.author.name | default: page.author -%}
 {%- assign author_url = site.author.url | default: '/' -%}
-
 {%- assign date_format = site.date_format | default: '%B %d, %Y' -%}
-{%- assign date_published = page.date -%}
 {%- assign date_modified = page.modified_date | default: page.last_modified_at -%}
+{%- assign date_published = page.date -%}
 
 <article class="article" itemscope itemtype="https://schema.org/BlogPosting" itemid="{{ page.url | absolute_url }}">
-  <a href="{{ page.url | relative_url }}" hidden></a>
-  <meta itemprop="wordCount" content="{{ page.content | strip_html | size }}">
   <header>
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
     <p>
-      Posted by
-      <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-        <span itemprop="name">
-          <a itemprop="url" href="{{ author_url | relative_url }}">{{ author_name }}</a>
+      {%- if author_name -%}
+        Posted by
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+          <span itemprop="name">
+            <a itemprop="url" href="{{ author_url | relative_url }}">{{ author_name }}</a>
+          </span>
         </span>
-      </span>
-      on
-      <time itemprop="datePublished" datetime="{{ date_published | date_to_xmlschema }}">
-        {{- date_published | date: date_format -}}</time
-      >, and updated on
-      <time itemprop="dateModified" datetime="{{ date_modified | date_to_xmlschema }}">
-        {{- date_modified | date: date_format -}}</time
-      >.
+      {%- endif -%}
+      {%- if date_published -%}
+        on
+        <time itemprop="datePublished" datetime="{{ date_published | date_to_xmlschema }}">
+          {{- date_published | date: date_format -}}
+        </time>
+      {%- endif -%}
+      {%- if date_modified and date_modified != date_published -%}
+        , and updated on
+        <time itemprop="dateModified" datetime="{{ date_modified | date_to_xmlschema }}">
+          {{- date_modified | date: date_format -}}
+        </time>
+      {%- endif -%}
+      .
     </p>
   </header>
   <section itemprop="articleBody">
     {{ content }}
   </section>
   <footer>
-    {% if page.tags %}
+    {%- if page.tags -%}
       <p>
         Tagged with:
         <span class="tag-link" itemprop="keywords">
-          {% for tag in page.tags %}
+          {%- for tag in page.tags -%}
             <a href="{{ '/tags/' | append: tag | relative_url }}">{{- tag -}}</a>
             {%- unless forloop.last %}&#44; {% endunless -%}
-          {% endfor -%}
+          {%- endfor -%}
         </span>
       </p>
-    {% endif %}
-    {% if page.comments == true %}
+    {%- endif -%}
+    {%- if page.comments == true -%}
       <div
-        {% if site.comments.provider == 'disqus' %}
+        {%- if site.comments.provider == 'disqus' -%}
           id="disqus_thread"
-        {% endif %}
+        {%- endif -%}
         class="{{ site.comments.provider }}"
         itemscope
         itemtype="https://schema.org/Comment"
       ></div>
-    {% endif %}
+    {%- endif -%}
   </footer>
+
+  <a href="{{ page.url | relative_url }}" hidden></a>
 </article>
