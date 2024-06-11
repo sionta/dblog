@@ -80,6 +80,6 @@ exclude:
   - "README.md"
 
 # https://github.com/digitalsparky/jekyll-minifier
-jekyll-minifier:
-  uglifier_args:
-    harmony: true
+#jekyll-minifier:
+#  uglifier_args:
+#    harmony: true
