@@ -1,14 +1,14 @@
-{% comment %} Change the icon of checkbox {% endcomment %}
-{% if _CONTENT contains '<input type="checkbox" class="task-list-item-checkbox"' %}
-  {% capture _icon_checkbox %}
-    {% include svg_symbol.html id="checkbox" class="task-list-checked" %}
-  {% endcapture %}
-  {% capture _icon_uncheck %}
-    {% include svg_symbol.html id="square" class="task-list-unchecked" %}
-  {% endcapture %}
-  {% assign _CONTENT = _CONTENT
+{%- comment %} Change the icon of checkbox {%- endcomment %}
+{%- if _CONTENT contains '<input type="checkbox" class="task-list-item-checkbox"' %}
+  {%- capture _icon_checkbox %}
+    {%- include svg_symbol.html id="checkbox" class="task-list-checked" %}
+  {%- endcapture %}
+  {%- capture _icon_uncheck %}
+    {%- include svg_symbol.html id="square" class="task-list-unchecked" %}
+  {%- endcapture %}
+  {%- assign _CONTENT = _CONTENT
     | replace: '<input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />',
       _icon_checkbox
     | replace: '<input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />', _icon_uncheck
   %}
-{% endif %}
+{%- endif %}

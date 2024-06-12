@@ -1,9 +1,9 @@
 @use "../utilities" as *;
+@use "../base" as *;
 
 /**
  * Code formating
  */
-
 .key,
 kbd,
 code {
@@ -48,7 +48,6 @@ abbr {
   cursor: help;
 }
 
-/* styles.css */
 .tooltip {
   position: absolute;
   background: var(--bg-3);
@@ -59,6 +58,11 @@ abbr {
   opacity: 0;
   transition: opacity 0.2s ease;
   z-index: 2;
+  top: -40px; /* Adjust as needed */
+  left: -5px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
 }
 
 .tooltip.show {
@@ -69,13 +73,14 @@ abbr {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px;
-  position: relative;
+  padding: 3px 5px;
+  // position: relative;
 
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-left-radius: calc($border-radius * 2);
-  border-top-right-radius: calc($border-radius * 2);
+  border-radius: calc($border-radius * 2) calc($border-radius * 2) 0 0;
+
+  + .highlight {
+    border-radius: 0 0 $border-radius $border-radius;
+  }
 
   font-size: 14px;
   font-weight: 600;
@@ -93,60 +98,74 @@ abbr {
     vertical-align: middle;
   }
 
-  button[aria-label="copy"] {
+  button {
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    background: inherit;
     border: none;
+    color: inherit;
+    background: inherit;
+    position: relative; /* Ensure tooltip is positioned relative to button */
+
+    .copy-clipboard {
+      opacity: 0;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      transition: opacity 0.1s ease;
+    }
 
     .copy-succeed {
-      display: none;
+      color: var(--green);
     }
-  }
-}
-
-.rouge-table {
-  .gutter,
-  .rouge-gutter {
-    @include reset-spacing;
-
-    &.gl {
-      padding-right: $spacing-unit;
-    }
-  }
-
-  .lineno {
-    @include reset-spacing;
-    text-align: right;
   }
 }
 
 div.highlight,
 figure.highlight {
   margin: 0;
-  margin-bottom: $spacing-unit;
+  @extend %vertical-rhythm;
+  // margin-bottom: $spacing-unit;
 }
 
 .highlight {
-  margin-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
-
   pre code {
-    border: initial;
+    border: none;
+    white-space: nowrap;
   }
 
   code {
-    color: inherit;
-    background: inherit;
+    color: unset;
+    background: unset;
   }
 
   table pre,
   table td {
     @include reset-spacing;
+  }
+
+  // Rouge table
+  table.rouge-table {
+    td.gutter,
+    td.rouge-gutter {
+      @include reset-spacing;
+
+      &.gl {
+        padding-right: $spacing-unit;
+      }
+
+      pre.lineno {
+        @include reset-spacing;
+        text-align: right;
+      }
+    }
+
+    td.code,
+    td.rouge-code {
+      pre {
+        @include reset-spacing;
+      }
+    }
   }
 }
 
@@ -158,7 +177,7 @@ figure.highlight {
   --syntax-error: var(--red);
   // --syntax-string: #{$base04};
   --syntax-comment: #{$base03};
-  .gl    { color: var(--syntax-comment); } // Generic.Lineno
+  .gl    { color: var(--syntax-string); } // Generic.Lineno
   .w     { color: var(--syntax-string); } // Text.Whitespace
   .bp    { color: var(--blue); } // Name.Builtin.Pseudo
   .c     { color: var(--syntax-comment); font-style: italic; } // Comment

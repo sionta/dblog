@@ -2,8 +2,9 @@
 {%- assign svg_attributes = 'xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"' -%}
 {%- assign symbol_id = include.icon | default: include.name | default: include.entry | default: include.id -%}
 {%- capture svg_class %}{% if include.class %}class="{{ include.class }}"{% endif %}{% endcapture -%}
-{%- if symbol_id -%}
-  <svg {{ svg_attributes }} {{ svg_class }}>
+{%- capture svg_style %}{% if include.style %}style="{{ include.style }}"{% endif %}{% endcapture -%}
+{% if symbol_id %}
+  <svg {{ svg_attributes }} {{ svg_class }} {{ svg_style }}>
     <use xlink:href="{{- '/assets/tabler-icons.svg' | relative_url -}}#{{- symbol_id | downcase -}}"></use>
   </svg>
-{%- endif -%}
+{% endif %}

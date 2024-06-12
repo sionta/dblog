@@ -1,12 +1,12 @@
 # Icon use Tabler https://tabler.io/icons
 
+# https://github.com/rouge-ruby/rouge/blob/master/docs/Languages.md
 code_blocks:
-  - name: Default
-    alias: []
-    icon: code
   - name: Plain
     alias: [plain, text, txt]
     icon: file
+  - name: diff
+    alias: [diff]
   - name: CSS
     alias: ["css", "css3", "stylesheet"]
     icon: brand-css3

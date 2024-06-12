@@ -1,4 +1,47 @@
 ---
 layout: default
 ---
-{% include blog.html %}
+<div class="home">
+  {%- if page.title -%}
+    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+  {{- content -}}
+  {%- if site.paginate -%}
+    {%- assign posts = paginator.posts -%}
+  {%- else -%}
+    {%- assign posts = site.posts -%}
+  {%- endif -%}
+  {%- if posts.size > 0 -%}
+    {%- if page.list_title -%}
+      <h2 class="post-list-heading">{{ page.list_title }}</h2>
+    {%- endif -%}
+    {%- include blog.html post=posts -%}
+    {%- if site.paginate -%}
+      <div class="pagination">
+        {%- if paginator.total_pages > 1 -%}
+          {%- if paginator.previous_page -%}
+            <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+          {%- else -%}
+            <span class="previous disabled">Previous</span>
+          {%- endif -%}
+          {%- for page in (1..paginator.total_pages) -%}
+            {%- if page == paginator.page -%}
+              <span class="page-number current">{{ page }}</span>
+            {%- elsif page == 1 -%}
+              <a href="{{ '/' | relative_url }}" class="page-number">{{ page }}</a>
+            {%- else -%}
+              <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="page-number">
+                {{- page -}}
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginator.next_page -%}
+            <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+          {%- else -%}
+            <span class="next disabled">Next</span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>

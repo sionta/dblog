@@ -32,7 +32,7 @@
 
 /* Custom scrollbar styling for WebKit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-  @include breakpoint($width-stack, min) {
+  @include breakpoint($on-desktop, min) {
     width: 12px;
   }
 

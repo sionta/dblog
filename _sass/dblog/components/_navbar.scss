@@ -93,7 +93,7 @@
   .line {
     width: 25px;
     height: 3px;
-    background-color: var(--tx-1);
+    background: var(--tx-1);
     margin: 5px 0;
     border-radius: 3px;
     transition: all 0.3s ease-in-out;
@@ -114,7 +114,7 @@
   }
 }
 
-@include breakpoint($width-stack, max) {
+@include breakpoint($on-mobile, max) {
   .hamburger {
     display: block;
   }

@@ -1,13 +1,11 @@
 ---
 layout: default
-compress_html: false
 ---
 {%- assign author_name = site.author.name | default: page.author -%}
-{%- assign author_url = site.author.url | default: '/' -%}
+{%- assign author_url = site.author.url -%}
 {%- assign date_format = site.date_format | default: '%B %d, %Y' -%}
 {%- assign date_modified = page.modified_date | default: page.last_modified_at -%}
 {%- assign date_published = page.date -%}
-
 <article class="article" itemscope itemtype="https://schema.org/BlogPosting" itemid="{{ page.url | absolute_url }}">
   <header>
     <h1 itemprop="name headline">{{ page.title | escape }}</h1>
@@ -21,13 +19,13 @@ compress_html: false
         </span>
       {%- endif -%}
       {%- if date_published -%}
-        on
+        Published on
         <time itemprop="datePublished" datetime="{{ date_published | date_to_xmlschema }}">
           {{- date_published | date: date_format -}}
         </time>
       {%- endif -%}
       {%- if date_modified and date_modified != date_published -%}
-        , and updated on
+        , Modified on
         <time itemprop="dateModified" datetime="{{ date_modified | date_to_xmlschema }}">
           {{- date_modified | date: date_format -}}
         </time>
@@ -61,6 +59,5 @@ compress_html: false
       ></div>
     {%- endif -%}
   </footer>
-
   <a href="{{ page.url | relative_url }}" hidden></a>
 </article>

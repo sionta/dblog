@@ -15,18 +15,18 @@
         <a class="nav-link" href="{{ '/' | relative_url }}">Home</a>
       </li>
       {%- for item in nav_items -%}
+        {% assign item_name = item.name | default: item.title %}
+        {% assign item_link = item.external_link | default: item.url %}
+        {% assign item_icon = item.external_icon | default: '' %}
+        {% if item_link contains 'http' %}
+          {% assign _blank_url = 'target="_blank" rel="noopener noreferrer"' %}
+        {% endif %}
         <li class="nav-item">
-          <a
-            class="nav-link"
-            {% if item.redirect_to contains 'http' %}
-              target="_blank" rel="noopener noreferrer"
-            {% endif %}
-            href="{{ item.url }}"
-          >
-            {{- item.title }}
-            {% if item.redirect_to and item.external_icon == true %}
-              {% include svg_symbol.html id="external-link" class="external-link" %}
-            {% endif -%}
+          <a class="nav-link" href="{{ item_link }}" {{ _blank_url }}>
+            {{- item.title -}}
+            {% if item_icon == true -%}
+              {%- include svg_symbol.html id="external-link" class="external-link" -%}
+            {%- endif -%}
           </a>
         </li>
       {%- endfor -%}

@@ -11,12 +11,66 @@ description: >- # this means to ignore newlines until "baseurl:"
   Google search results) and in your feed.xml site description.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+google_analytics: G-31WRW155T4
 
-twitter_username: r007mmxv
-github_username: sionta
+timezone: Asia/Tokyo
+lang: en
+
+image: "/assets/img/avatar.svg" # https://github.com/sionta.png?size=100
+twitter:
+  username: R007MMXV
+
+# Generate social links in footer. for available platforms see "includes/social-item".
+social_links:
+  - { platform: github, user_url: "https://github.com/sionta" }
+  - { platform: mastodon, user_url: "https://mastodon.social/@sionta" }
+  - { platform: twitter, user_url: "https://twitter.com/r007mmxv" }
+
+author:
+  picture: "/assets/img/avatar.svg"
+  name: Andre Attamimi
+  twitter: R007MMXV
+  email: info@andreattamimi.com
+  url: https://github.com/sionta
+
+# Set to `true` to show excerpts on the homepage.
+show_excerpts: false
+
+# The default value is "%b %d, %Y" (e.g. Nov 14, 2023)
+# Refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this.
+date_format: "%b %d, %Y"
+
+comments:
+  provider: "giscus" # e.g. "disqus". The provider settings below:
+  disqus:
+    # What is `shortname` refer to https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname: "andreattamimi"
+  giscus:
+    # For more setting refer to https://giscus.app/
+    repo: "sionta/blog" # e.g. "owner/repo"
+    repo_id: "R_kgDOLxRA-w"
+    category: "Q&A"
+    category_id: "DIC_kwDOLxRA-84CfGPN"
+  utterances:
+    # For more setting refer to https://utteranc.es/
+    repo: "sionta/blog" # e.g. "owner/repo"
+    issue_term: "pathname"
 
 # Build settings *****************************************
 theme: dblog
+
+# https://github.com/jekyll/jekyll-paginate
+paginate: 3
+paginate_path: /blog/page:num/
+
+# https://github.com/jekyll/jekyll-feed
+feed:
+  posts_limit: 10
+  excerpt_only: false
+
+# https://github.com/jekyll/jekyll-gist
+gist:
+  noscript: false
 
 # https://sass-lang.com/documentation/cli/ruby-sass/
 sass:
@@ -30,7 +84,6 @@ kramdown:
   hard_wrap: false
   # https://github.com/jekyll/jekyll/pull/4090
   syntax_highlighter: rouge
-
   # Rouge Highlighter in Kramdown › http://kramdown.gettalong.org/syntax_highlighter/rouge.html
   # span, block element options fall back to global
   syntax_highlighter_opts:
@@ -42,6 +95,8 @@ kramdown:
     block:
       line_numbers: true
       start_line: 1
+  math_engine: katex
+  math_engine_opts: {}
 
 collections:
   pages:
@@ -64,7 +119,7 @@ defaults:
       layout: post
       # Special configuration for layout "post":
       toc: true # Enable table of contents
-      anchor: false # Enable anchor headings
+      anchor: true # Enable anchor headings
       mermaid: false # Enable mermaid diagrammings
       comments: false # Enable comments, first set `site.comments.provider`
 

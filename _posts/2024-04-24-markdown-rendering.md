@@ -5,6 +5,9 @@ description: A quick overview of all the Markdown syntax elements
 categories: test
 tags: [markdown, cheatsheet]
 author: Andre Attamimi
+image:
+    url: "/assets/img/hero-markdown-guide.p128.png"
+    alt: "Image by https://culturedcode.com"
 
 # Special configuration for layout "post":
 toc: true       # Enable table of contents
@@ -205,6 +208,9 @@ For more syntax highlighting see: [Code Preview]({% post_url 2023-03-23-markdown
 
 Alerts or Admonitions are frequently used in documentation to call attention to warnings, notes, tips and etc.
 
+{% capture alert_info %}`{% raw %}{% include note.html content="This is my sample note." %}{% endraw %}`{% endcapture %}
+{% include note.html content=alert_info %}
+
 > **Normal:** Default or alternative blockqoute.
 >
 {:.alert}
@@ -276,8 +282,8 @@ bundle install
 bundle exec jekyll serve --livereload # or --watch
 ```
 
-> **TIP:** In most cases, you can simply copy an emoji from a source like [Emojipedia](https://emojipedia.org/) or [EmojiCopy](https://emojicopy.com/) then paste it into your document.
-{:.alert .alert-note}
+In most cases, you can simply copy an emoji from a source like [Emojipedia](https://emojipedia.org/) or [EmojiCopy](https://emojicopy.com/) then paste it into your document.
+{:.alert .alert-tip}
 
 ## Other elements
 

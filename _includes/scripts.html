@@ -1,25 +1,6 @@
 {%- assign vendor_js = '/assets/js/vendor' | relative_url -%}
 {%- if page.collection == 'posts' or page.layout == 'post' -%}
   {%- include comments.html -%}
-  <script type="text/javascript" src="{{- vendor_js -}}/clipboard.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var btns = document.querySelectorAll('button');
-      var clipboard = new ClipboardJS(btns);
-
-      clipboard.on('success', function (e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-      });
-
-      clipboard.on('error', function (e) {
-        console.info('Action:', e.action);
-        console.info('Text:', e.text);
-        console.info('Trigger:', e.trigger);
-      });
-    });
-  </script>
   {%- if page.toc == true or page.table_of_content == true -%}
     <script type="text/javascript" src="{{- vendor_js -}}/tocbot.min.js"></script>
     <script type="text/javascript">
@@ -46,11 +27,8 @@
           theme: 'default',
           securityLevel: 'loose',
         });
-        let mermaidClass = document.getElementsByClassName('language-mermaid');
-        Array.from(mermaidClass).forEach((element) => {
-          element.classList.add('mermaid');
-          mermaid.init(undefined, element);
-        });
+        let mermaidLang = '.language-mermaid';
+        mermaid.init(undefined, mermaidLang);
       });
     </script>
   {%- endif -%}

@@ -1,7 +1,7 @@
 @use "../utilities" as *;
 
 .toc {
-  @include breakpoint($width-stack, min) {
+  @include breakpoint($on-desktop, min) {
     overflow: hidden;
     position: fixed;
   }

@@ -1,22 +1,21 @@
-{% comment %} Alerts {% endcomment %}
-{% if _CONTENT contains '<blockquote class="alert">' %}
-  {% for alert in site.data.data.alerts %}
-    {% assign alert_name = alert.name | downcase %}
-    {% assign alert_icon = alert.icon | downcase %}
-    {% case alert_name %}
-      {% when 'normal', 'default', '' %}
-        {% assign alert_name = '' %}
-        {% assign alert_class = 'alert' %}
-      {% else %}
-        {% assign alert_class = 'alert alert-' | append: alert_name | downcase %}
-    {% endcase %}
-    {% assign _currentElement = '<blockquote class="' | append: alert_class | append: '">' %}
-    {% capture _newElement %}
-      {{ _currentElement }}
-      <div class="alert-title" aria-label="{{ alert_name | default: 'normal' | capitalize }} alert">
-        {% include svg_symbol.html id=alert_icon %} {{ alert_name | capitalize }}
-      </div>
-    {% endcapture %}
-    {% assign _CONTENT = _CONTENT | replace: _currentElement, _newElement %}
-  {% endfor %}
-{% endif %}
+{%- comment %} Alerts {%- endcomment %}
+{%- if _CONTENT contains '<blockquote class="alert">' %}
+  {%- for alert in site.data.data.alerts %}
+    {%- assign alert_name = alert.name | downcase %}
+    {%- assign alert_icon = alert.icon | downcase %}
+    {%- case alert_name %}
+      {%- when 'normal', 'default', '' %}
+        {%- assign alert_name = '' %}
+        {%- assign alert_class = 'alert' %}
+      {%- else %}
+        {%- assign alert_class = 'alert alert-' | append: alert_name | downcase %}
+    {%- endcase %}
+    {%- assign _currentElement = '<blockquote class="' | append: alert_class | append: '">' %}
+    {%- capture _newElement %}
+      {{ _currentElement | replace: '">','" role="alert">'  }}
+      {%- include svg_symbol.html id=alert_icon class="alert-icon" %}
+      {%- comment %} <span class="alert-title">{{ alert_name | default: 'Blockquote' | capitalize }}</span> {%- endcomment %}
+    {%- endcapture %}
+    {%- assign _CONTENT = _CONTENT | replace: _currentElement, _newElement %}
+  {%- endfor %}
+{%- endif %}

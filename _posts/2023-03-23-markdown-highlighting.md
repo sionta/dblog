@@ -2,6 +2,7 @@
 layout: post
 title: Example Code Highlighting
 categories: test
+image: "/assets/img/rouge.png"
 ---
 <!-- markdownlint-disable -->
 

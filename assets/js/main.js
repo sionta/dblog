@@ -1,12 +1,36 @@
 (function () {
-  // Shortcut keys
-  if (window.location.pathname !== "/search/") {
-    document.addEventListener("keydown", function (event) {
-      if (event.ctrlKey && event.shiftKey && event.key === "F") {
-        window.location.href = "/search/";
+  // Theme switcher
+  // Thanks to Aleksandr Hovhannisyan <https://www.aleksandrhovhannisyan.com/blog/the-perfect-theme-switch/>
+  const Theme = { AUTO: "auto", LIGHT: "light", DARK: "dark" };
+  const THEME_STORAGE_KEY = "theme";
+  const THEME_OWNER = document.documentElement;
+
+  const cachedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (cachedTheme) {
+    THEME_OWNER.dataset[THEME_STORAGE_KEY] = cachedTheme;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeSwitcher = document.getElementById("theme-switcher");
+    if (!themeSwitcher) return;
+
+    themeSwitcher.addEventListener("change", (e) => {
+      const theme = e.target.value;
+      if (theme === Theme.AUTO) {
+        delete THEME_OWNER.dataset[THEME_STORAGE_KEY];
+        localStorage.removeItem(THEME_STORAGE_KEY);
+      } else {
+        THEME_OWNER.dataset[THEME_STORAGE_KEY] = theme;
+        localStorage.setItem(THEME_STORAGE_KEY, theme);
       }
     });
-  }
+
+    const initialTheme = cachedTheme ?? Theme.AUTO;
+    themeSwitcher.querySelector("input[checked]").removeAttribute("checked");
+    themeSwitcher
+      .querySelector(`input[value="${initialTheme}"]`)
+      .setAttribute("checked", "");
+  });
 
   // Go to Top
   document.addEventListener("DOMContentLoaded", function () {
@@ -54,85 +78,80 @@
   });
 
   // Copy to clipboard
-  // document.addEventListener("DOMContentLoaded", function () {
-  //   const clipboardButtons = document.querySelectorAll(
-  //     '.code-header button[aria-label="copy"]'
-  //   );
-  //   clipboardButtons.forEach(function (button) {
-  //     button.addEventListener("click", function () {
-  //       const codeBlock = button
-  //         .closest(".code-header")
-  //         .nextElementSibling.querySelector(".rouge-code");
-  //       const text = codeBlock.innerText.trim();
+  document.addEventListener("DOMContentLoaded", function () {
+    const copyButtons = document.querySelectorAll(".copy-button");
 
-  //       navigator.clipboard
-  //         .writeText(text)
-  //         .then(function () {
-  //           // button.innerHTML = '<i class="ti ti-check"></i>';
-  //           showTooltip(button, "Copied!");
-  //           setTimeout(function () {
-  //             // button.innerHTML = '<i class="ti ti-clipboard"></i>';
-  //           }, 2000);
-  //         })
-  //         .catch(function (err) {
-  //           console.error("Failed to copy!", err);
-  //         });
-  //     });
-  //   });
+    copyButtons.forEach(function (copyButton) {
+      copyButton.addEventListener("click", function () {
+        const codeBlock = copyButton
+          .closest("[class^=language-]") // or .highlighter-rouge
+          .querySelector(".rouge-code");
+        const text = codeBlock.innerText;
 
-  //   function showTooltip(element, message) {
-  //     const tooltip = document.createElement("div");
-  //     tooltip.className = "tooltip";
-  //     tooltip.textContent = message;
-  //     document.body.appendChild(tooltip);
+        navigator.clipboard
+          .writeText(text)
+          .then(function () {
+            showTooltip(
+              copyButton.querySelector(".tooltip"),
+              copyButton.getAttribute("success-label")
+            );
+            toggleIcons(copyButton, true);
+          })
+          .catch(function (err) {
+            console.error("Failed to copy text: ", err);
+            showTooltip(
+              copyButton.querySelector(".tooltip"),
+              copyButton.getAttribute("error-label")
+            );
+          });
+      });
 
-  //     const rect = element.getBoundingClientRect();
-  //     tooltip.style.left = `${
-  //       rect.left + window.scrollX + rect.width / 2 - tooltip.offsetWidth / 2
-  //     }px`;
-  //     tooltip.style.top = `${
-  //       rect.top + window.scrollY - tooltip.offsetHeight - 5
-  //     }px`;
+      // Menampilkan pesan dari atribut saat mouse masuk ke tombol
+      copyButton.addEventListener("mouseenter", function () {
+        const tooltipText = copyButton.getAttribute("copy-label");
+        showTooltip(copyButton.querySelector(".tooltip"), tooltipText);
+      });
 
-  //     tooltip.classList.add("show");
-
-  //     setTimeout(function () {
-  //       tooltip.classList.remove("show");
-  //       document.body.removeChild(tooltip);
-  //     }, 2000);
-  //   }
-  // });
-
-  // Theme switcher
-  // Thanks to Aleksandr Hovhannisyan <https://www.aleksandrhovhannisyan.com/blog/the-perfect-theme-switch/>
-  const Theme = { AUTO: "auto", LIGHT: "light", DARK: "dark" };
-  const THEME_STORAGE_KEY = "theme";
-  const THEME_OWNER = document.documentElement;
-
-  const cachedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-  if (cachedTheme) {
-    THEME_OWNER.dataset[THEME_STORAGE_KEY] = cachedTheme;
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const themeSwitcher = document.getElementById("theme-switcher");
-    if (!themeSwitcher) return;
-
-    themeSwitcher.addEventListener("change", (e) => {
-      const theme = e.target.value;
-      if (theme === Theme.AUTO) {
-        delete THEME_OWNER.dataset[THEME_STORAGE_KEY];
-        localStorage.removeItem(THEME_STORAGE_KEY);
-      } else {
-        THEME_OWNER.dataset[THEME_STORAGE_KEY] = theme;
-        localStorage.setItem(THEME_STORAGE_KEY, theme);
-      }
+      // Menghapus pesan saat mouse meninggalkan tombol
+      copyButton.addEventListener("mouseleave", function () {
+        copyButton.querySelector(".tooltip").classList.remove("show");
+      });
     });
 
-    const initialTheme = cachedTheme ?? Theme.AUTO;
-    themeSwitcher.querySelector("input[checked]").removeAttribute("checked");
-    themeSwitcher
-      .querySelector(`input[value="${initialTheme}"]`)
-      .setAttribute("checked", "");
+    function toggleIcons(button, isSuccess) {
+      const clipboardIcon = button.querySelector(".copy-clipboard");
+      const checkIcon = button.querySelector(".copy-succeed");
+
+      if (isSuccess) {
+        clipboardIcon.style.display = "none";
+        checkIcon.style.display = "inline";
+
+        setTimeout(() => {
+          checkIcon.style.display = "none";
+          clipboardIcon.style.display = "inline";
+        }, 1000);
+      } else {
+        clipboardIcon.style.display = "inline";
+        checkIcon.style.display = "none";
+      }
+    }
+
+    function showTooltip(tooltip, message) {
+      tooltip.textContent = message;
+      tooltip.classList.add("show");
+
+      setTimeout(() => {
+        tooltip.classList.remove("show");
+      }, 1000);
+    }
   });
+
+  // Shortcut keys
+  if (window.location.pathname !== "/search/") {
+    document.addEventListener("keydown", function (event) {
+      if (event.ctrlKey && event.shiftKey && event.key === "F") {
+        window.location.href = "/search/";
+      }
+    });
+  }
 })();

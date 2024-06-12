@@ -1,4 +1,4 @@
-{%- if page.toc == true -%}
+{%- if page.toc == true and page.content contains 'h2' -%}
   <div class="toc hide-on-mobile">
     <h2 class="toc-title">{{ 'On this page' | upcase }}</h2>
     <nav id="toc"></nav>

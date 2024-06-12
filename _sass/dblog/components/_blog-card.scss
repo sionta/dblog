@@ -1,240 +1,64 @@
 @use "../utilities" as *;
 
-.blog-card {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem auto;
-  margin-bottom: 1.6%;
+.blog-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: $spacing-unit;
+}
 
-  background: var(--bg-3);
-  border-radius: $border-radius;
-  box-shadow: 0 3px 7px -1px rgba(#000, 0.1);
+.blog-link {
+  text-decoration: none;
+  color: inherit;
 
-  line-height: 1;
-  font-family: $font-sans;
-
-  overflow: hidden;
-  z-index: 0;
-
-  a {
-    color: inherit;
+  &:hover {
     text-decoration: none;
+  }
+}
 
-    &:hover {
-      color: var(--ac-1);
-      text-decoration: none;
-    }
+.blog-card {
+  background: var(--bg-2);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: $spacing-unit;
+  transition: transform 0.3s ease;
+  margin-bottom: $spacing-unit;
+
+  @media screen and (max-width: 768px) {
+    flex: 1 1 100%; // Tata letak satu kolom pada perangkat seluler
   }
 
   &:hover {
-    .image {
-      transform: scale(1.3) rotate(3deg);
-    }
+    transform: translateY(-5px);
   }
 
-  .meta {
-    position: relative;
-    z-index: 0;
-    height: 200px;
-  }
-
-  .image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+  .blog-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
     background-size: cover;
     background-position: center;
-    transition: transform 0.2s;
   }
 
-  .details,
-  .details ul {
-    margin: auto;
-    padding: 0;
-    list-style: none;
+  .blog-title {
+    font-size: $spacing-unit;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
-  .details {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -100%;
-    transition: left 0.3s ease-in-out;
-    background: rgba($base00, 0.6);
-    color: $base05;
-    padding: $spacing-unit;
-    width: 100%;
-    font-size: 0.9rem;
-
-    a {
-      text-decoration: dotted underline;
-    }
-
-    li {
-      margin-bottom: 5px;
-    }
-
-    ul li {
-      display: inline-block;
-    }
-
-    .author:before,
-    .date:before,
-    .tags ul:before {
-      font-family: "tabler-icons";
-      margin-right: 10px;
-    }
-
-    .author:before {
-      content: "\eb4d";
-    }
-
-    .date:before {
-      content: "\ea53";
-    }
-
-    .tags:has(li a) {
-      ul:before {
-        content: "\eb34";
-      }
-
-      li {
-        margin-right: 2px;
-
-        &:first-child {
-          margin-left: -4px;
-        }
-      }
-    }
+  .blog-description {
+    font-size: 16px;
+    color: var(--bd-2);
+    margin-bottom: 10px;
   }
 
-  .description {
-    padding: 1rem;
-    background: var(--bg-3);
-    position: relative;
-    // z-index: 1;
+  .blog-read-more {
+    color: var(--ac-1);
+    text-decoration: none;
+    font-weight: bold;
 
-    h1,
-    h2 {
-      font-family: $font-sans;
-    }
-
-    h1 {
-      margin: 0;
-      line-height: 1;
-      font-size: 1.7rem;
-    }
-
-    h2 {
-      font-size: 1rem;
-      font-weight: 300;
-      text-transform: uppercase;
-      color: var(--tx-1);
-      margin-top: 5px;
-    }
-
-    .read-more {
-      text-align: right;
-
-      a {
-        display: inline-block;
-        position: relative;
-        padding: 8px;
-        background: var(--ac-1);
-        border-radius: $border-radius;
-        // border: 1px solid var(--ac-1);
-        color: $base00;
-
-        &,
-        &:hover {
-          text-decoration: none;
-        }
-
-        &:after {
-          content: "\ea1c";
-          font-family: "tabler-icons";
-          vertical-align: middle;
-          opacity: 0;
-          margin-left: -10px;
-          transition: margin 0.3s, opacity 0.3s;
-        }
-
-        &:hover:after {
-          opacity: 1;
-          margin-left: 5px;
-        }
-      }
-    }
-  }
-
-  p {
-    position: relative;
-    margin: 1rem 0 0;
-
-    &:first-of-type {
-      padding-top: 10px;
-      margin-top: 23px;
-
-      // lines
-      &:before {
-        content: "";
-        top: -0.75rem;
-        width: 15%;
-        height: 4px;
-        position: absolute;
-        background: var(--ac-1);
-        border-radius: $border-radius;
-      }
-    }
-  }
-
-  &:hover {
-    .details {
-      left: 0%;
-    }
-  }
-
-  @include breakpoint(md, min) {
-    flex-direction: row;
-    max-width: $width-stack;
-
-    .meta {
-      flex-basis: 40%;
-      height: auto;
-    }
-
-    .description {
-      flex-basis: 60%;
-
-      &:before {
-        content: "";
-        top: 0;
-        left: -10px;
-        bottom: 0;
-        width: 30px;
-        z-index: -1;
-        position: absolute;
-        transform: skewX(-3deg);
-        background: var(--bg-2);
-      }
-    }
-
-    &.alt {
-      flex-direction: row-reverse;
-
-      .description {
-        &:before {
-          left: inherit;
-          right: -10px;
-          transform: skew(3deg);
-        }
-      }
-
-      .details {
-        padding-left: 25px;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

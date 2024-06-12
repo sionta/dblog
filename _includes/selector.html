@@ -1,7 +1,5 @@
-{% capture _CONTENT %}{{ content }}{% endcapture %}
-
-{% include partials/alerts.html %}
-{% include partials/task-list.html %}
-{% include partials/code-blocks.html %}
-
-{{ _CONTENT }}
+{%- capture _CONTENT -%}{{ content }}{%- endcapture -%}
+{%- include partials/alerts.html -%}
+{%- include partials/task-list.html -%}
+{%- include partials/code-blocks.html -%}
+{{- _CONTENT -}}

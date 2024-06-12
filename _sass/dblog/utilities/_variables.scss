@@ -56,3 +56,5 @@ $spacing-unit: 20px !default;
 $border-radius: 3px !default;
 
 $width-stack: map.get($breakpoints, "md") !default;
+$on-mobile: map.get($breakpoints, "sm") !default;
+$on-desktop: map.get($breakpoints, "lg") !default;
