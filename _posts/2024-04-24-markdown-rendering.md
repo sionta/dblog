@@ -208,9 +208,6 @@ For more syntax highlighting see: [Code Preview]({% post_url 2023-03-23-markdown
 
 Alerts or Admonitions are frequently used in documentation to call attention to warnings, notes, tips and etc.
 
-{% capture alert_info %}`{% raw %}{% include note.html content="This is my sample note." %}{% endraw %}`{% endcapture %}
-{% include note.html content=alert_info %}
-
 > **Normal:** Default or alternative blockqoute.
 >
 {:.alert}
@@ -283,7 +280,7 @@ bundle exec jekyll serve --livereload # or --watch
 ```
 
 In most cases, you can simply copy an emoji from a source like [Emojipedia](https://emojipedia.org/) or [EmojiCopy](https://emojicopy.com/) then paste it into your document.
-{:.alert .alert-tip}
+{:.alert.alert-tip}
 
 ## Other elements
 

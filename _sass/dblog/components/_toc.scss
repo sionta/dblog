@@ -31,18 +31,18 @@
 }
 
 .toc-link {
+  text-decoration: none;
   color: currentColor;
   height: 100%;
 
   &::before {
-    background: var(--bd-1);
     content: " ";
+    background: var(--bd-1);
     display: inline-block;
-    height: inherit;
-    left: 0;
-    margin-top: -1px;
     position: absolute;
+    left: 0;
     width: 2px;
+    height: inherit;
   }
 }
 

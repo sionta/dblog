@@ -74,13 +74,6 @@ abbr {
   align-items: center;
   justify-content: space-between;
   padding: 3px 5px;
-  // position: relative;
-
-  border-radius: calc($border-radius * 2) calc($border-radius * 2) 0 0;
-
-  + .highlight {
-    border-radius: 0 0 $border-radius $border-radius;
-  }
 
   font-size: 14px;
   font-weight: 600;
@@ -88,6 +81,34 @@ abbr {
 
   color: var(--tx-1);
   background: var(--bg-3);
+
+  border-radius: calc($border-radius * 2) calc($border-radius * 2) 0 0;
+
+  + .highlight {
+    border-radius: 0 0 $border-radius $border-radius;
+  }
+
+  .code-header-title {
+    flex-grow: 1;
+  }
+
+  .code-header-icon {
+    margin-right: 10px;
+  }
+
+  .copy-clipboard {
+    opacity: 0;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    transition: opacity 0.1s ease;
+  }
+
+  .copy-succeed {
+    color: var(--green);
+  }
 
   svg {
     color: var(--tx-1);
@@ -104,20 +125,6 @@ abbr {
     color: inherit;
     background: inherit;
     position: relative; /* Ensure tooltip is positioned relative to button */
-
-    .copy-clipboard {
-      opacity: 0;
-
-      &:hover {
-        opacity: 1;
-      }
-
-      transition: opacity 0.1s ease;
-    }
-
-    .copy-succeed {
-      color: var(--green);
-    }
   }
 }
 

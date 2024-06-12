@@ -2,6 +2,7 @@
 *.md
 
 # Vendor
-**/?normalize.*
-**/?gridism.*
-**/?flexboxgrid.*
+vendor
+?normalize.*
+?gridism.*
+?flexboxgrid.*

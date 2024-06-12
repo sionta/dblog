@@ -1,5 +1,17 @@
 # Icon use Tabler https://tabler.io/icons
 
+alerts:
+  - name: Tip
+    icon: bulb
+  - name: Note
+    icon: info-circle
+  - name: Important
+    icon: alert-circle
+  - name: Warning
+    icon: alert-triangle
+  - name: Caution
+    icon: alert-octagon
+
 # https://github.com/rouge-ruby/rouge/blob/master/docs/Languages.md
 code_blocks:
   - name: Plain
@@ -46,11 +58,3 @@ code_blocks:
   - name: Terminal
     alias: [shell, bash, zsh, ksh, sh, ps1, bat, cmd]
     icon: terminal-2
-
-alerts:
-  - { name: Normal, icon: quote }
-  - { name: Tip, icon: bulb }
-  - { name: Note, icon: info-circle }
-  - { name: Important, icon: alert-circle }
-  - { name: Warning, icon: alert-triangle }
-  - { name: Caution, icon: alert-octagon }
