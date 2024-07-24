@@ -1,0 +1,8 @@
+<div class="mermaid">{{ include.content }}</div>
+<script src="{{ '/assets/js/vendor/mermaid.min.js' | relative_url }}"></script>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', () => {
+    mermaid.initialize({ startOnLoad: true });
+    mermaid.init(undefined, 'mermaid');
+  });
+</script>

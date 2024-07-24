@@ -35,14 +35,16 @@
   color: currentColor;
   height: 100%;
 
-  &::before {
-    content: " ";
-    background: var(--bd-1);
-    display: inline-block;
-    position: absolute;
-    left: 0;
-    width: 2px;
-    height: inherit;
+  @media (min-width: 768px) {
+    &::before {
+      content: "\0020";
+      background: var(--bd-1);
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      width: 2px;
+      height: inherit;
+    }
   }
 }
 

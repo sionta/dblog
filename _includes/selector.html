@@ -17,7 +17,7 @@
 
 {% comment %} Alerts {% endcomment %}
 {% if _CONTENT contains '<blockquote class="alert">' %}
-  {% for alert in site.data.data.alerts %}
+  {% for alert in site.data.metadata.alerts %}
     {% assign alert_name = alert.name %}
     {% assign alert_icon = alert.icon | downcase %}
     {% assign alert_class = 'alert-' | append: alert_name | downcase %}
@@ -66,7 +66,7 @@
       {% assign _code_lang = _snippet | split: 'language-' | last | split: ' ' | first %}
       {% assign _label_text = _code_lang | capitalize %}
       {% assign _label_icon = 'code' %}
-      {% for block in site.data.data.code_blocks %}
+      {% for block in site.data.metadata.code_blocks %}
         {% if block.alias contains _code_lang %}
           {% assign _label_text = block.name | default: _code_lang %}
           {% assign _label_icon = block.icon | default: _label_icon %}

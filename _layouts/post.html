@@ -34,6 +34,10 @@ layout: default
     </p>
   </header>
   <section itemprop="articleBody">
+    <details class="only-on-mobile">
+      <summary>{{ 'On this page' | upcase }}</summary>
+      <nav id="toc-mobile"></nav>
+    </details>
     {{ content }}
   </section>
   <footer>
@@ -52,6 +56,8 @@ layout: default
       <div
         {%- if site.comments.provider == 'disqus' -%}
           id="disqus_thread"
+        {% else %}
+          id="{{ site.comments.provider }}"
         {%- endif -%}
         class="{{ site.comments.provider }}"
         itemscope

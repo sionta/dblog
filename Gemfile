@@ -2,15 +2,14 @@
 
 source "https://rubygems.org"
 gemspec
-# gem "jekyll", "~> 4.3.3"
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
+  gem "jemoji", "~> 0.13.0"
   gem "jekyll-gist", "~> 1.5.0"
+  gem "jekyll-sitemap", "~> 1.4.0"
   gem "jekyll-paginate", "~> 1.1.0"
   gem "jekyll-redirect-from", "~> 0.16.0"
-  gem "jekyll-sitemap", "~> 1.4.0"
-  gem "jemoji", "~> 0.13.0"
   gem "kramdown-math-katex", "~> 1.0.1"
 end
 
@@ -22,7 +21,7 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 # Performance-booster for watching directories on Windows
-gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
+gem "wdm", ">= 0.1.0" if Gem.win_platform?
 
 # Lock `http_parser.rb` gem to `v0.6.x` on JRuby builds since newer versions of the gem
 # do not have a Java counterpart.

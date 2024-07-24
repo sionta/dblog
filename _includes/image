@@ -1,10 +1,11 @@
+{%- assign file = include.s | include.src | default: '' %}
+{%- assign width = include.w | default: include.width | default: '100%' %}
+{%- assign alt = include.a | include.alt | default: '' %}
+{%- assign url = include.u | default: include.url | default: '' %}
+{%- assign caption = include.c | default: include.caption | default: '' %}
 <figure>
-  <a href="{{ include.url }}">
-    <img
-      src="{{ include.file }}"
-      style="max-width: {{ include.max-width }};"
-      alt="{{ include.alt }}"
-    >
+  <a href="{{ url | relative_url }}">
+    <img src="{{ file | relative_url }}" style="max-width:{{ width }};" alt="{{ alt }}">
   </a>
-  <figcaption>{{ include.caption }}</figcaption>
+  <figcaption>{{ caption }}</figcaption>
 </figure>
