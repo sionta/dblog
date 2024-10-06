@@ -1,8 +1,6 @@
 *.min.*
-*.md
-
-# Vendor
-vendor
-?normalize.*
-?gridism.*
-?flexboxgrid.*
+*.svg
+_posts/
+**/lib/
+**/fonts/
+**/vendor/

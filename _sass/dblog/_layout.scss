@@ -1,134 +1,53 @@
-@use "utilities" as *;
-
-// https://www.joshwcomeau.com/css/center-a-div/#centering-within-the-viewport-3
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *;
 
 .wrapper {
-  max-width: calc(#{$width-stack} - (#{$spacing-unit}));
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: calc($spacing-unit * 0.5);
-  padding-left: calc($spacing-unit * 0.5);
-  @extend %clearfix;
-
-  @media screen and (min-width: $width-stack) {
-    max-width: calc(#{$width-stack} - (#{$spacing-unit} * 2));
-    padding-right: $spacing-unit;
-    padding-left: $spacing-unit;
-  }
+  max-width: var(--width-content);
+  margin: 0 auto;
+  padding: 0 var(--space-unit);
 }
 
-.footer,
-.header {
-  background: var(--bg-2);
-  padding: $spacing-unit;
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-unit-xxs) 0;
 }
 
-/**
- * Simple layout
- */
-.row {
-  display: -webkit-flex;
-  display: -ms-flexbox;
+.header__inner {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
 
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+.content__inner {
+  padding: var(--space-unit-xl) 0;
+}
 
-  @include breakpoint($on-mobile, max) {
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
+.site-footer {
+  background-color: var(--color-glare);
+  padding: var(--space-unit-lg) 0;
+}
+
+.footer__inner {
+  padding: 0;
+}
+
+.site-brand {
+  all: unset;
+
+  a {
+    color: currentColor;
+    font-family: var(--font-title);
+    font-size: var(--font-size-xl);
+    font-weight: bolder;
   }
 }
 
-.col {
-  padding: $spacing-unit;
-  -ms-flex-preferred-size: 100%;
-  flex-basis: 100%;
-  max-width: 100%;
-
-  &.side {
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+.site-nav {
+  .nav-list {
+    display: flex;
+    padding: 0;
+    margin: 0;
   }
-
-  &.middle {
-    -webkit-flex: 2;
-    -ms-flex: 2;
-    flex: 2;
-  }
-
-  @for $i from 1 through 12 {
-    &-#{$i} {
-      -ms-flex-preferred-size: calc(calc(100% / 12) * $i);
-      flex-basis: calc(calc(100% / 12) * $i);
-      max-width: calc(calc(100% / 12) * $i);
-    }
-  }
-}
-
-/**
- * Utilities Classes
- */
-.sticky {
-  position: -webkit-sticky !important; // Safari
-  position: sticky !important;
-  z-index: 3 !important;
-  top: 0;
-}
-
-/* Hide elements using this class by default */
-.only-on-mobile {
-  display: none !important;
-}
-
-@include breakpoint($on-mobile, max) {
-  .center-on-mobile {
-    text-align: center !important;
-  }
-
-  .hide-on-mobile {
-    display: none !important;
-  }
-
-  .only-on-mobile {
-    display: block !important;
-  }
-}
-
-.screen-reader {
-  display: none;
-}
-
-.visible {
-  display: inline-block;
-}
-
-.icon-svg {
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-  display: inline-block;
-  vertical-align: text-bottom;
-}
-
-svg.icon,
-svg.icon-tabler {
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.clearfix,
-%clearfix {
-  @include clearfix;
 }

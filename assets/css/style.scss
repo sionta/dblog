@@ -2,4 +2,9 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@use "{{ site.theme }}";
+@use "{{ site.theme }}/variables" as *;
+
+// Prefix for CSS variables
+$css-var-prefix: "{{ site.theme }}-"; // e.g., "dblog-"
+
+@use "{{ site.theme }}/index";

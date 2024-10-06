@@ -1,0 +1,140 @@
+@use "../variables" as *;
+
+/**
+ * Alerts
+ */
+.alert {
+  --alert-color-primary: var(--color-text);
+  --alert-color-secondary: var(--color-glare);
+  background-color: var(--alert-color-secondary);
+  border-radius: 5px;
+  color: inherit;
+  // color: var(--alert-color-primary);
+  font: inherit;
+  position: relative;
+  padding: 1.5rem;
+  margin-block: 1.2rem 2rem;
+  border: 0px solid var(--alert-color-primary);
+
+  // display: block;
+  display: flex;
+  gap: 1rem;
+  flex-flow: column wrap;
+
+  .alert-header {
+    color: var(--alert-color-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .alert-icon {
+    svg {
+      width: 1.25em;
+      height: 1.25em;
+    }
+
+    i {
+      font-size: 1.5em;
+    }
+  }
+
+  &:not([data-type]) {
+    border-top-width: 5px;
+    // margin-inline-end: 5px;
+
+    .alert-header {
+      background-color: var(--color-background);
+      color: var(--alert-color-primary);
+      position: absolute;
+      border-radius: 1rem;
+      padding: 5px;
+      left: -1rem;
+      top: -1rem;
+    }
+
+    .alert-icon {
+      display: block;
+    }
+
+    .alert-name {
+      display: none;
+    }
+  }
+
+  &[data-type="1"] {
+    border-top-width: 5px;
+
+    .alert-header {
+      background-color: var(--alert-color-primary);
+      border-radius: 4px 0px 4px 0px;
+      color: var(--color-background);
+      // padding: 0.13rem 0.75rem; // if with font icon `i`
+      padding: 0.5rem 0.75rem; // if without font icon `i`
+      position: absolute;
+      top: -1rem;
+      left: 0;
+    }
+
+    .alert-icon {
+      display: none;
+    }
+
+    .alert-content {
+      margin-top: 0.5rem;
+    }
+  }
+
+  &[data-type="2"] {
+    border-left-width: 5px;
+    border-radius: 0px 5px 5px 0px;
+    flex-flow: row nowrap;
+    gap: 0.65rem;
+    padding-left: 1rem;
+
+    .alert-header {
+      height: max-content;
+    }
+
+    .alert-name {
+      display: none;
+    }
+  }
+
+  &[data-type="3"] {
+    border-width: 1px;
+    border-left-width: 5px;
+  }
+
+  &[data-type="4"] {
+    border-width: 1px;
+  }
+
+  // &[data-type="5"] {}
+
+  .alert-content {
+    li:last-child p,
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Define custom alert types and colors
+  $alerts: (
+    "caution": #db2929,
+    "important": #6d72c5,
+    "note": #00a1d6,
+    "tip": #00a854,
+    "warning": #f2ca26,
+  );
+
+  // Iterate over each alert type and apply styles
+  @each $name, $value in $alerts {
+    &.alert-#{$name} {
+      --alert-color-primary: #{rgba($value, 1)};
+      --alert-color-secondary: #{rgba($value, 0.3)};
+    }
+  }
+}

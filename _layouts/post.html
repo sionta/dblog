@@ -1,69 +1,42 @@
 ---
-layout: default
+layout: base
 ---
-{%- assign author_name = site.author.name | default: page.author -%}
-{%- assign author_url = site.author.url -%}
-{%- assign date_format = site.date_format | default: '%B %d, %Y' -%}
-{%- assign date_modified = page.modified_date | default: page.last_modified_at -%}
-{%- assign date_published = page.date -%}
-<article class="article" itemscope itemtype="https://schema.org/BlogPosting" itemid="{{ page.url | absolute_url }}">
-  <header>
-    <h1 itemprop="name headline">{{ page.title | escape }}</h1>
-    <p>
-      {%- if author_name -%}
-        Posted by
-        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-          <span itemprop="name">
-            <a itemprop="url" href="{{ author_url | relative_url }}">{{ author_name }}</a>
-          </span>
+{%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
+{%- assign post_author = page.author | default: site.author -%}
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post__header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.description %}
+      <p class="post-summary">{{ page.description }}</p>
+    {% endif %}
+    <p class="post-metadata">
+      {%- if post_author -%}
+        <span class="post-author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+          {%- if post_author.name and post_author.url -%}
+            <a itemprop="url" href="{{ post_author.url | relative_url }}">
+              <span itemprop="name">{{ post_author.name }}</span>
+            </a>
+          {%- else -%}
+            <span itemprop="name">{{ post_author }}</span>
+          {%- endif -%}
         </span>
-      {%- endif -%}
-      {%- if date_published -%}
-        Published on
-        <time itemprop="datePublished" datetime="{{ date_published | date_to_xmlschema }}">
-          {{- date_published | date: date_format -}}
-        </time>
-      {%- endif -%}
-      {%- if date_modified and date_modified != date_published -%}
-        , Modified on
-        <time itemprop="dateModified" datetime="{{ date_modified | date_to_xmlschema }}">
-          {{- date_modified | date: date_format -}}
-        </time>
-      {%- endif -%}
-      .
+        ·
+      {%- endif %}
+      <time class="date-time" itemprop="datePublished" datetime="{{ page.date | date_to_xmlschema }}">
+        {{- page.date | date: date_format -}}
+      </time>
+      ·
+      <span class="read-time">{{ page.content | number_of_words | divided_by: 180 }} min read</span>
     </p>
+    {% if page.image.src or page.image %}
+      {% include image class='post-thumb' %}
+    {% endif %}
   </header>
-  <section itemprop="articleBody">
-    <details class="only-on-mobile">
-      <summary>{{ 'On this page' | upcase }}</summary>
-      <nav id="toc-mobile"></nav>
-    </details>
+  <section class="post__content" itemprop="articleBody">
+    {% include toc.html html=content %}
     {{ content }}
   </section>
-  <footer>
-    {%- if page.tags -%}
-      <p>
-        Tagged with:
-        <span class="tag-link" itemprop="keywords">
-          {%- for tag in page.tags -%}
-            <a href="{{ '/tags/' | append: tag | relative_url }}">{{- tag -}}</a>
-            {%- unless forloop.last %}&#44; {% endunless -%}
-          {%- endfor -%}
-        </span>
-      </p>
-    {%- endif -%}
-    {%- if page.comments == true -%}
-      <div
-        {%- if site.comments.provider == 'disqus' -%}
-          id="disqus_thread"
-        {% else %}
-          id="{{ site.comments.provider }}"
-        {%- endif -%}
-        class="{{ site.comments.provider }}"
-        itemscope
-        itemtype="https://schema.org/Comment"
-      ></div>
-    {%- endif -%}
+  <footer class="post__footer">
+    {%- include pagination.html -%}
   </footer>
-  <a href="{{ page.url | relative_url }}" hidden></a>
 </article>

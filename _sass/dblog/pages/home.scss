@@ -1,0 +1,28 @@
+@use "../variables" as *;
+
+.hero {
+  --hero-background: #334155;
+  --hero-color: #f8fafc;
+  background: var(--hero-background);
+  color: var(--hero-color);
+  display: block;
+  font-family: var(--font-serif);
+  text-align: center;
+  padding: var(--space-unit-enormous);
+  margin-bottom: var(--space-unit-enormous);
+  margin-inline: calc(50% - 50vw);
+
+  @media screen and (max-width: 768px) {
+    text-align: left;
+    padding: var(--space-unit-xl);
+    margin-bottom: var(--space-unit-xxl);
+  }
+
+  .hero__heading {
+    font-size: var(--font-size-huge);
+  }
+
+  .hero__summary {
+    font-size: var(--font-size-lg);
+  }
+}

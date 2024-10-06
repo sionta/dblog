@@ -1,0 +1,10 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[liquid]": {
+    "editor.defaultFormatter": "Shopify.theme-check-vscode"
+  },
+  "files.associations": {
+    "**/_includes/*": "liquid",
+    "*.html": "liquid"
+  }
+}

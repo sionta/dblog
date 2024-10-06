@@ -1,0 +1,56 @@
+@use "../variables" as *;
+
+.post-toc {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  margin-bottom: var(--space-unit);
+
+  &.only-on-mobiles {
+    .toc-title {
+      cursor: pointer;
+      background-color: var(--color-glare);
+      font-weight: bold;
+      list-style: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      width: max-content;
+      transition: background-color 0.3s ease, border-radius 0.3s ease;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .details-marker {
+        font-size: var(--font-size-md);
+        transition: transform 0.3s ease;
+        margin-left: 10px;
+      }
+    }
+
+    &[open] .toc-title {
+      border-radius: 5px 5px 0 0;
+
+      .details-marker {
+        transform: rotate(180deg);
+      }
+    }
+
+    > :not(.toc-title) {
+      background-color: var(--color-glare);
+      border-radius: 0 5px 5px 5px;
+      padding: 5px 20px 20px 20px;
+    }
+
+    .post-nav {
+      // max-width: 80%;
+
+      > :last-of-type {
+        margin-bottom: 0;
+      }
+
+      > .toc-list {
+        margin-left: 1rem;
+      }
+    }
+  }
+}

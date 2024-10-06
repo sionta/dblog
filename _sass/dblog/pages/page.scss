@@ -1,0 +1,6 @@
+@use "../variables" as *;
+
+.page {
+  max-width: var(--width-content);
+  padding-inline: var(--space-unit);
+}

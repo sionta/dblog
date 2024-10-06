@@ -1,22 +1,16 @@
-@charset "UTF-8";
-
-// Utilities
-@forward "utilities/variables";
-@use "utilities/mixins";
-@use "utilities/functions";
-
-// Layouts
+@forward "variables";
+@use "reset";
 @use "base";
 @use "layout";
 
-// Components
-@use "components";
+@use "pages/home";
+@use "pages/post";
+@use "pages/page";
 
-// Icons
-@import url("../fonts/tabler-icons/tabler-icons.min.css");
+@use "partials/alerts";
+@use "partials/tabs";
+@use "partials/accordions";
+@use "partials/codes";
+@use "partials/task-list";
 
-// Fonts
-@import url("../fonts/lato/lato.min.css");
-@import url("../fonts/open-sans/open_sans.min.css");
-@import url("../fonts/fira-code/fira_code.min.css");
-@import url("../fonts/cormorant-garamond/cormorant_garamond.min.css");
+// @use "partials/toc";

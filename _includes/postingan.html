@@ -1,0 +1,25 @@
+{%- assign site_posts = paginator.posts | default: site.posts -%}
+{%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
+{%- assign start_count = include.start | default: 0 -%}
+{%- assign limit_count = include.limit | default: site_posts.size -%}
+{%- for count in (start_count..limit_count) -%}
+  {%- assign post = site_posts[count] -%}
+  <article class="post-list">
+    <h2 itemprop="headline">
+      <a href="{{ post.url | relative_url }}" itemprop="url">{{- post.title | escape -}}</a>
+    </h2>
+    <p>
+      {{-
+        post.excerpt
+        | default: post.description
+        | default: post.content
+        | strip_html
+        | strip_newlines
+        | truncatewords: 52
+      -}}
+    </p>
+    <time itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
+      {{- post.date | date: date_format -}}
+    </time>
+  </article>
+{%- endfor -%}

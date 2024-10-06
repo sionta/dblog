@@ -1,10 +1,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-# Site settings ******************************************
-title: Andre Attamimi
-brand: Andre S. Attamimi # alternative site name for animation
-email: your-email@example.com
+title: dblog
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
@@ -12,69 +9,88 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
-twitter_username: r007mmxv
-github_username: sionta
+brand: dblog # brand name
+hero:
+  heading: Welcome
+  summary: >-
+    A clean and minimalist Jekyll theme tailored for blogger seeking simplicity
 
-# Build settings *****************************************
-theme: dblog
+# Generate social links. Icon use Tabler https://tabler.io/icons
+social_media:
+  - { name: "Subcribe", icon: "rss", url: "feed.xml" }
+  - { name: "Email", icon: "mail", url: "mailto:info@andreattamimi.com" }
+  - { name: "GitHub", url: "https://github.com/sionta" }
+  - { name: "Mastodon", url: "https://mastodon.social/@sionta" }
+  - { name: "Twitter", icon: "brand-x", url: "https://twitter.com/r007mmxv" }
 
-# https://sass-lang.com/documentation/cli/ruby-sass/
-sass:
-  # style: compressed
-  style: expanded # for development
+# IMPORTAND SETTINGS *****************************************
 
-# https://jekyllrb.com/docs/configuration/markdown/
+toc:
+  min_level: 1
+  max_level: 2
+  ordered_list: false
+  no_toc_section_class:
+    - "no_toc"
+    - "no-toc"
+  list_id: "toc-content"
+  list_class: "toc-list"
+  sublist_class: "toc-sublist"
+  item_class: "toc-item"
+  item_prefix: "toc-"
+
 markdown: kramdown
 kramdown:
   input: GFM
   hard_wrap: false
-  # https://github.com/jekyll/jekyll/pull/4090
   syntax_highlighter: rouge
-
-  # Rouge Highlighter in Kramdown › http://kramdown.gettalong.org/syntax_highlighter/rouge.html
-  # span, block element options fall back to global
-  syntax_highlighter_opts:
-    # Rouge Options › https://github.com/jneen/rouge#full-options
-    css_class: highlight
-    #line_numbers: true # bad idea, spans don't need linenos and would inherit this option
+  syntax_highlighter_opts: # https://github.com/rouge-ruby/rouge#full-options
+    css_class: highlight # CSS classes for code blocks
+    #formatter: MyFormatter
+    #line_numbers: true
+    #default_lang: console
+    #guess_lang: unknown
     span:
+      #disable: true
       line_numbers: false
     block:
-      line_numbers: true
-      start_line: 1
+      #disable: false
+      line_numbers: true # Displays the line number in the code block
+      start_line: 1 # Displays the line number in the code block
+      wrap: true # Decides whether the syntax highlighting results will be wrapped in `<pre><code>` tags
+      table_class: rouge-table # - CSS class of table block, default: rouge-table
+      gutter_class: rouge-line # - CSS class of line number, default: rouge-gutter
+      code_class: rouge-code # - CSS class of code content,  default: rouge-code
 
-collections:
-  pages:
-    output: true
-    permalink: "/:name/"
-  posts:
-    output: true
-    permalink: "/blog/:title/"
+paginate: 10
+paginate_path: "/blog/:num/"
 
 defaults:
-  - scope:
-      path: _pages
-      type: pages
-    values:
-      layout: page
   - scope:
       path: _posts
       type: posts
     values:
+      permalink: "/blog/:title/"
       layout: post
-      # Special configuration for layout "post":
-      toc: true # Enable table of contents
-      anchor: false # Enable anchor headings
-      mermaid: false # Enable mermaid diagrammings
+      # Special configuration for this layout
+      toc: false # Enable table of contents
+      math: false # Enable mathematics. vendor by MathJax
+      diagram: false # Enable diagramming. vendor by mermaid.js
       comments: false # Enable comments, first set `site.comments.provider`
 
+theme: dblog
+
+sass:
+  style: compressed
+
+strict_front_matter: true
+
 exclude:
-  - "*.gem"
-  - "*.gemspec"
-  - "*.lock"
-  - "/docs"
-  - "/test*"
-  - "/tool*"
-  - "/script*"
-  - "package*.json"
-  - "README.md"
+  - scripts/
+  - vendor/
+  - tests/
+  - tools/
+  - node_modules/
+  - vercel.json
+  - package*.json
+  - LICENSE
+  - README.md

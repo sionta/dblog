@@ -1,60 +1,87 @@
-# Icon use Tabler https://tabler.io/icons
+block_alerts:
+  default:
+    # type: 0
+    name: Quote
+    icon: <i class="ti ti-quote"></i>
+  note:
+    type: 1
+    name: Info
+    icon: <i class="ti ti-info-circle"></i>
+  tip:
+    type: 2
+    name: Tip
+    icon: <i class="ti ti-bulb"></i>
+  important:
+    type: 3
+    name: Important
+    icon: <i class="ti ti-message-report"></i>
+  warning:
+    type: 4
+    name: Warning
+    icon: <i class="ti ti-alert-triangle"></i>
+  caution:
+    type: 5
+    name: Danger
+    icon: <i class="ti ti-alert-hexagon"></i>
 
-alerts:
-  - name: Tip
-    icon: bulb
-  - name: Note
-    icon: info-circle
-  - name: Important
-    icon: alert-circle
-  - name: Warning
-    icon: alert-triangle
-  - name: Caution
-    icon: alert-octagon
+block_codes:
+  buttons:
+    copy:
+      name: Copy
+      icon: <i class="ti ti-copy"></i>
+    success:
+      name: Copied!
+      icon: <i class="ti ti-check"></i>
+    error:
+      name: Whoops, error!
+      icon: <i class="ti ti-x"></i>
 
-# https://github.com/rouge-ruby/rouge/blob/master/docs/Languages.md
-code_blocks:
-  - name: Plain
-    alias: [plain, text, txt]
-    icon: file
-  - name: diff
-    alias: [diff]
-  - name: CSS
-    alias: ["css", "css3", "stylesheet"]
-    icon: brand-css3
-  - name: PHP
-    alias: [php, php3, php4, php5]
-    icon: brand-php
-  - name: HTML
-    alias: [html]
-    icon: brand-html5
-  - name: Ruby
-    alias: [rb, ruby]
-    icon: diamond
-  - name: Python
-    alias: [py, python]
-    icon: brand-python
-  - name: SASS
-    alias: [sass, scss]
-    icon: brand-sass
-  - name: JavaScript
-    alias: [js, javascript]
-    icon: brand-javascript
-  - name: TypeScript
-    alias: [ts, typescript]
-    icon: brand-typescript
-  - name: JSON
-    alias: [json]
-    icon: braces
-  - name: XML
-    alias: [xml]
-    icon: code
-  - name: YAML
-    alias: [yaml]
-    icon: ""
-  - name: TOML
-    alias: [toml]
-    icon: brackets
-  - name: Terminal
-    alias: [shell, bash, zsh, ksh, sh, ps1, bat, cmd]
-    icon: terminal-2
+  languages:
+    - name: Text
+      icon: <i class="ti ti-file"></i>
+      alias: [txt, text, plain, plaintext]
+    - name: HTML
+      icon: <i class="ti ti-brand-html5"></i>
+      alias: [mhtml, html]
+    - name: SASS
+      icon: <i class="ti ti-brand-sass"></i>
+      alias: [sass, scss]
+    - name: CSS
+      icon: <i class="ti ti-brand-css3"></i>
+      alias: [css, css3, style, stylesheet]
+    - name: Markdown
+      icon: <i class="ti ti-markdown"></i>
+      alias: [md, mdx, markdown, kramdown]
+    - name: JavaScript
+      icon: <i class="ti ti-brand-javascript"></i>
+      alias: [js, javascript]
+    - name: TypeScript
+      icon: <i class="ti ti-brand-typescript"></i>
+      alias: [ts, tsx, typescript]
+    - name: PHP
+      icon: <i class="ti ti-brand-php"></i>
+      alias: [php, php3, php4, php5]
+    - name: Ruby
+      icon: <i class="ti ti-diamond"></i>
+      alias: [rb, ruby]
+    - name: Python
+      icon: <i class="ti ti-brand-python"></i>
+      alias: [py, python]
+    - name: JSON
+      icon: <i class="ti ti-braces"></i>
+      alias: [json]
+    - name: XML
+      icon: <i class="ti ti-code"></i>
+      alias: [xml]
+    - name: YAML
+      icon: <i class="ti ti-file-settings"></i>
+      alias: [yaml, yml]
+    - name: TOML
+      icon: <i class="ti ti-file-settings"></i>
+      alias: [toml]
+    - name: Shell
+      icon: <i class="ti ti-terminal-2"></i>
+      alias: [sh, zsh, ksh, shell, bash]
+    - name: Terminal
+      icon: <i class="ti ti-brand-powershell"></i>
+      alias: [ps1, bat, cmd, batch, command, prompt, pwsh, powershell]

@@ -1,6 +1,7 @@
-{%- if page.toc == true and page.content contains 'h2' -%}
-  <div class="toc hide-on-mobile">
-    <h2 class="toc-title">{{ 'On this page' | upcase }}</h2>
-    <nav id="toc"></nav>
-  </div>
-{%- endif -%}
+{% capture toc_content %}{{ include.html | default: content | toc_only }}{% endcapture %}
+{% if page.toc == true and toc_content %}
+  <details class="post-toc">
+    <summary class="toc-title">Table of content</summary>
+    <nav class="toc-content">{{ toc_content }}</nav>
+  </details>
+{% endif %}

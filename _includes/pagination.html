@@ -1,0 +1,53 @@
+{%- assign pager = paginator | default: page -%}
+{%- assign prev_page = pager.previous_page_path | default: pager.previous -%}
+{%- assign next_page = pager.next_page_path | default: pager.next -%}
+{%- if prev_page -%}
+  {%- assign class = 'previous-page' -%}
+  {%- assign path = prev_page -%}
+{%- else -%}
+  {%- assign class = 'next-page' -%}
+  {%- assign path = next_page -%}
+{%- endif -%}
+{%- if pager.previous or pager.next -%}
+  {%- assign class = class | append: ' only-post' -%}
+{%- endif -%}
+<nav class="pagination" aria-label="Pagination">
+  <ol class="pagination__list">
+    {%- comment -%} Previous Page {%- endcomment -%}
+    <li class="pagination__item item-previous">
+      {%- if prev_page -%}
+        <a class="{{ class }}" href="{{ prev_page | relative_url }}">Previous</a>
+      {%- else -%}
+        <span class="{{ class }} disabled">Previous</span>
+      {%- endif -%}
+      {%- if include.page_title and prev_page.title -%}
+        <span class="item-title">{{ prev_page.title }}</span>
+      {%- endif -%}
+    </li>
+
+    {%- comment -%} Total Page {%- endcomment -%}
+    {%- if pager.total_pages -%}
+      <li class="pagination__item item-numbers">
+        {%- for count in (1..pager.total_pages) -%}
+          {%- if count == pager.page -%}
+            <span class="{{ class }} active" aria-current="page">{{ count }}</span>
+          {%- else -%}
+            <a class="{{ class }}" aria-current="step" href="{{ path | relative_url }}">{{- count -}}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </li>
+    {%- endif -%}
+
+    {%- comment -%} Next Page {%- endcomment -%}
+    <li class="pagination__item item-nexts">
+      {%- if next_page -%}
+        <a class="{{ class }}" href="{{ next_page | relative_url }}">Next</a>
+      {%- else -%}
+        <span class="{{ class }} disabled">Next</span>
+      {%- endif -%}
+      {%- if include.page_title and next_page.title -%}
+        <span class="item-title">{{ next_page.title }}</span>
+      {%- endif -%}
+    </li>
+  </ol>
+</nav>

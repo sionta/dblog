@@ -1,5 +1,0 @@
-<div markdown="span" class="alert alert-note" role="alert">
-  {%- include svg_symbol.html id="note" class="alert-icon" -%}
-  <b class="alert-title">Note</b>
-  {{ include.content | default: include.value }}
-</div>

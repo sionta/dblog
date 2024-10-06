@@ -1,0 +1,59 @@
+@use "../helpers" as util;
+@use "../variables" as *;
+
+.post {
+  max-width: calc(var(--width-content) * 0.635);
+  margin: 0 auto;
+
+  .post__header {
+    font-family: var(--font-sans);
+
+    .post-thumb {
+      background-color: var(--color-glare);
+      border-radius: 5px;
+      padding: var(--space-unit-xs);
+
+      img {
+        vertical-align: middle;
+      }
+
+      figcaption {
+        margin-top: var(--space-unit-xs);
+        text-align: center;
+      }
+    }
+
+    .post-title {
+      font-size: var(--font-size-xxl);
+      font-weight: bolder;
+      line-height: 1.15;
+    }
+
+    .post-summary,
+    .post-metadata {
+      margin-bottom: var(--space-unit-xs);
+    }
+
+    .post-metadata {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .post__content {
+    font-family: var(--font-sans);
+    margin-block: var(--space-unit-lg);
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-title);
+    }
+
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-sans);
+    }
+  }
+}

@@ -1,11 +1,17 @@
-{%- assign file = include.s | include.src | default: '' %}
-{%- assign width = include.w | default: include.width | default: '100%' %}
-{%- assign alt = include.a | include.alt | default: '' %}
-{%- assign url = include.u | default: include.url | default: '' %}
-{%- assign caption = include.c | default: include.caption | default: '' %}
-<figure>
-  <a href="{{ url | relative_url }}">
-    <img src="{{ file | relative_url }}" style="max-width:{{ width }};" alt="{{ alt }}">
-  </a>
-  <figcaption>{{ caption }}</figcaption>
-</figure>
+{% assign img_src = include.src | default: page.image.src | default: page.image | strip %}
+{% assign img_alt = include.alt | default: page.image.alt | default: page.title | strip %}
+{% assign img_txt = include.txt | default: page.description | default: img_alt | strip %}
+{% if img_src %}
+  <figure class="{{ include.class | default: 'thumb' }}">
+    <a class="glightbox" href="{{ img_src | relative_url }}">
+      <img
+        class="image"
+        itemprop="image"
+        src="{{- img_src | relative_url -}}"
+        alt="{{- img_alt -}}"
+        {{ include.attrs }}
+      >
+    </a>
+    <figcaption class="caption">{{- img_txt -}}</figcaption>
+  </figure>
+{% endif %}

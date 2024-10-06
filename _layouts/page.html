@@ -1,9 +1,12 @@
 ---
-layout: default
+layout: base
 ---
-<article class="section">
-  {% if page.title %}
-    <h1>{{ page.title }}</h1>
-  {% endif %}
-  {{ content }}
+{%- assign page_class = 'page ' | append: page.class | strip -%}
+<article class="{{ page_class }}">
+  {%- if page.title -%}
+    <header class="page__header">
+      <h1 class="page__title">{{ page.title }}</h1>
+    </header>
+  {%- endif -%}
+  <section class="page__content">{{ content }}</section>
 </article>

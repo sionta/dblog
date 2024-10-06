@@ -1,0 +1,10 @@
+primary:
+  - index.html
+  - pages/about.md
+  - pages/github.md
+
+secondary:
+  - pages/code-of-conduct.md
+  - pages/privacy-policy.md
+  - pages/terms-of-service.md
+  - pages/contact.html
