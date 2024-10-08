@@ -1,0 +1,81 @@
+<script>
+  const copyToClipboard = () => {
+    const copyButtons = document.querySelectorAll('[data-label-copy]');
+
+    if (copyButtons) {
+      copyButtons.forEach((button) => {
+        const setFeedback = (feedback) => {
+          if (feedback === 'reset') {
+            button.removeAttribute('data-feedback');
+          } else {
+            button.setAttribute('data-feedback', feedback);
+          }
+        };
+
+        button.addEventListener('click', async () => {
+          const codeBlock = button.closest('.code-blocks');
+          const codeContent = (
+            codeBlock.querySelector('.rouge-code') ||
+            codeBlock.querySelector('.code') ||
+            codeBlock.querySelector('code')
+          )?.innerText;
+
+          if (codeBlock && codeContent) {
+            try {
+              await navigator.clipboard.writeText(codeContent);
+              setFeedback('success');
+            } catch (error) {
+              setFeedback('error');
+              console.log('Failed to copy', error);
+            } finally {
+              setTimeout(() => {
+                setFeedback('reset');
+              }, 2000);
+            }
+          }
+        });
+      });
+    }
+  };
+
+  copyToClipboard();
+
+  document.querySelectorAll('.tab-label').forEach((tab, index, tabs) => {
+    tab.addEventListener('click', function () {
+      activateTab(this, tabs);
+    });
+
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        const newIndex = e.key === 'ArrowRight' ? index + 1 : index - 1;
+        const nextTab = tabs[newIndex < 0 ? tabs.length - 1 : newIndex % tabs.length];
+        nextTab.focus();
+        activateTab(nextTab, tabs);
+      }
+    });
+  });
+
+  function activateTab(selectedTab, tabs) {
+    const tabId = selectedTab.getAttribute('aria-controls');
+
+    // Remove active state from all tabs
+    tabs.forEach((tab) => {
+      tab.classList.remove('active');
+      tab.setAttribute('aria-selected', 'false');
+      tab.setAttribute('tabindex', '-1');
+    });
+
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach((content) => {
+      content.classList.remove('active');
+      content.setAttribute('hidden', true);
+    });
+
+    // Activate the clicked tab and show corresponding content
+    selectedTab.classList.add('active');
+    selectedTab.setAttribute('aria-selected', 'true');
+    selectedTab.setAttribute('tabindex', '0');
+    document.getElementById(tabId).classList.add('active');
+    document.getElementById(tabId).removeAttribute('hidden');
+  }
+</script>

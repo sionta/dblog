@@ -1,4 +1,4 @@
-block_alerts:
+alerts:
   default:
     # type: 0
     name: Quote
@@ -24,7 +24,7 @@ block_alerts:
     name: Danger
     icon: <i class="ti ti-alert-hexagon"></i>
 
-block_codes:
+codes:
   buttons:
     copy:
       name: Copy

@@ -15,6 +15,10 @@ toc: true
 
 This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax/) and [extended syntax](https://www.markdownguide.org/extended-syntax/).
 
+{% transclude snippet.html title="Important Note" %}
+This content will be available as `include.content`.
+{% endtransclude %}
+
 > 1. For generated `page.excerpt`, include the first paragraphs and/or avoid using comments after the front matter.
 >
 > 2. If using the inline attribute list `{: ... }` and it doesn't work as expected, see further [Attribute List Definitions](https://kramdown.gettalong.org/syntax.html#attribute-list-definitions).
@@ -306,6 +310,8 @@ c = \pm\sqrt{a^2 + b^2}
 $$
 
 ### Other elements
+
+<!-- **Abbreviation**: *[HTML]: Hyper Text Markup Language The HTML specification is maintained by the W3C. -->
 
 **Marked**: <mark>very important words</mark>.
 

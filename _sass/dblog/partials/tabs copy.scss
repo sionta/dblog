@@ -1,0 +1,35 @@
+.tabs {
+  border: 1px solid #ddd;
+}
+
+.tab-labels {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+
+.tab-label {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  border-right: 1px solid #ddd;
+}
+
+.tab-label.active {
+  background-color: #fff;
+  font-weight: bold;
+}
+
+.tab-contents {
+  padding: 20px;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}

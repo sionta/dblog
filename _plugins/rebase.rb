@@ -6,11 +6,11 @@ module Jekyll
   module PageModified
     def page_modified(input)
       metadata = @context.registers[:site].data['metadata'] || {}
-      document = parse_html(input)
-      document = parse_alerts(document, metadata['block_alerts'])
-      document = parse_codes(document, metadata['block_codes'])
-      document = parse_task_list(document)
-      document.to_html
+      fragment = Nokogiri::HTML::DocumentFragment.parse(input)
+      fragment = parse_alerts(fragment, metadata['alerts'])
+      fragment = parse_codes(fragment, metadata['codes'])
+      fragment = parse_task_list(fragment)
+      fragment.to_html
     end
 
     private

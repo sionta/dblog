@@ -107,9 +107,7 @@ module Jekyll
     # This will replace all <div> tags with <section> tags in the content.
     def replace_elements(input, old_tag, new_tag)
       doc = Nokogiri::HTML::DocumentFragment.parse(input)
-      doc.css(old_tag).each do |element|
-        element.name = new_tag
-      end
+      doc.css(old_tag).each { |elem| elem.name = new_tag }
       doc.to_html
     end
 

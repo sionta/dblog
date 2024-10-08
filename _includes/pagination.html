@@ -2,19 +2,19 @@
 {%- assign prev_page = pager.previous_page_path | default: pager.previous -%}
 {%- assign next_page = pager.next_page_path | default: pager.next -%}
 {%- if prev_page -%}
-  {%- assign class = 'previous-page' -%}
+  {%- assign class = 'page-previous' -%}
   {%- assign path = prev_page -%}
 {%- else -%}
-  {%- assign class = 'next-page' -%}
+  {%- assign class = 'page-next' -%}
   {%- assign path = next_page -%}
 {%- endif -%}
 {%- if pager.previous or pager.next -%}
-  {%- assign class = class | append: ' only-post' -%}
+  {%- assign class = class | append: ' next-prev' -%}
 {%- endif -%}
 <nav class="pagination" aria-label="Pagination">
   <ol class="pagination__list">
     {%- comment -%} Previous Page {%- endcomment -%}
-    <li class="pagination__item item-previous">
+    <li class="pagination__item item-prev">
       {%- if prev_page -%}
         <a class="{{ class }}" href="{{ prev_page | relative_url }}">Previous</a>
       {%- else -%}
@@ -27,7 +27,7 @@
 
     {%- comment -%} Total Page {%- endcomment -%}
     {%- if pager.total_pages -%}
-      <li class="pagination__item item-numbers">
+      <li class="pagination__item item-total">
         {%- for count in (1..pager.total_pages) -%}
           {%- if count == pager.page -%}
             <span class="{{ class }} active" aria-current="page">{{ count }}</span>
@@ -39,7 +39,7 @@
     {%- endif -%}
 
     {%- comment -%} Next Page {%- endcomment -%}
-    <li class="pagination__item item-nexts">
+    <li class="pagination__item item-next">
       {%- if next_page -%}
         <a class="{{ class }}" href="{{ next_page | relative_url }}">Next</a>
       {%- else -%}

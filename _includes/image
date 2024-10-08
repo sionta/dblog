@@ -12,6 +12,6 @@
         {{ include.attrs }}
       >
     </a>
-    <figcaption class="caption">{{- img_txt -}}</figcaption>
+    <figcaption class="image-caption">{{- img_txt -}}</figcaption>
   </figure>
 {% endif %}

@@ -14,8 +14,6 @@
 #     Content for Tab 2.
 #     {% endtab %}
 #   {% endtabs %}
-#
-require 'securerandom'
 
 module Jekyll
   module Tags
@@ -24,11 +22,11 @@ module Jekyll
         super
         @tabs = []
         @content_blocks = []
-        @uuid = SecureRandom.uuid # Generate a unique identifier for this instance of tabs
       end
 
       def render(context)
         context.registers[:tabs_parent] = self # Register the TabsBlock instance
+
         content = super
         render_output(content)
       end
@@ -42,8 +40,6 @@ module Jekyll
         @content_blocks << content
       end
 
-      private
-
       # Renders the tabs and content blocks
       #
       # @param content [String] The content to include within the tabs
@@ -53,7 +49,7 @@ module Jekyll
         tab_contents = render_contents
 
         <<~HTML
-          <div class="tabs" role="tablist">
+          <div class="tabs" role="tablist" aria-label="Tabbed content">
             <ul class="tab-labels">
               #{tab_labels}
             </ul>
@@ -69,11 +65,9 @@ module Jekyll
       # @return [String] The generated HTML for the tab labels
       def render_labels
         @tabs.map.with_index do |label, index|
-          active_class = index.zero? ? ' active' : ''
-          aria_selected = index.zero? ? 'true' : 'false'
-          tabindex = index.zero? ? '0' : '-1'
-          "<li class=\"tab-label#{active_class}\" role=\"tab\" id=\"tab-label-#{@uuid}-#{index}\" aria-controls=\"tab-#{@uuid}-#{index}\" aria-selected=\"#{aria_selected}\" tabindex=\"#{tabindex}\">#{label}</li>"
-        end.join
+          active_class = index.zero? ? 'active' : ''
+          "<li class=\"tab-label #{active_class}\" data-tab=\"tab-#{index}\" role=\"tab\" aria-selected=\"#{active_class}\">#{label}</li>"
+        end.join("\n")
       end
 
       # Render the HTML for the tab contents
@@ -81,11 +75,11 @@ module Jekyll
       # @return [String] The generated HTML for the tab contents
       def render_contents
         @content_blocks.map.with_index do |content, index|
-          active_class = index.zero? ? ' active' : ''
-          hidden_attr = index.zero? ? '' : 'hidden'
+          active_class = index.zero? ? 'active' : ''
+          # Render Markdown content to HTML
           html_content = render_markdown(content)
-          "<div id=\"tab-#{@uuid}-#{index}\" class=\"tab-content#{active_class}\" role=\"tabpanel\" aria-labelledby=\"tab-label-#{@uuid}-#{index}\" #{hidden_attr}>#{html_content}</div>"
-        end.join
+          "<div id=\"tab-#{index}\" class=\"tab-content #{active_class}\" role=\"tabpanel\">#{html_content}</div>"
+        end.join("\n")
       end
 
       # Renders Markdown content into HTML using Kramdown
@@ -93,15 +87,7 @@ module Jekyll
       # @param content [String] The Markdown content to render
       # @return [String] The rendered HTML
       def render_markdown(content)
-        ## Rendering with Kramdown to avoid issues with code blocks or special elements
-        site = Jekyll.sites.first # Access the site configuration
-        kramdown_options = site.config['kramdown'] || {} # Get kramdown settings from _config.yml
-        # Pass the config to Kramdown for rendering
-        if site.config['markdown'] == 'kramdown'
-          Kramdown::Document.new(content, kramdown_options).to_html
-        else
-          content.to_s
-        end
+        Kramdown::Document.new(content).to_html # Use Kramdown to convert Markdown to HTML
       end
     end
 
