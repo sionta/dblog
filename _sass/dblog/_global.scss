@@ -124,11 +124,8 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
   margin-bottom: var(--space-unit-xs);
 
   &.menu-logo {
-    font-size: var(--font-size-cxl);
-    font-weight: 700;
-    letter-spacing: normal;
+    font-weight: 800;
     margin: 0;
-    padding: 0;
   }
 
   .site-link {

@@ -118,6 +118,7 @@
 .rouge-code {
   overflow-x: auto;
   text-align: left;
+  padding-right: var(--code-space, 1rem);
   width: 100%;
 }
 
