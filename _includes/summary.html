@@ -1,0 +1,13 @@
+{%- assign metadata = include.data | default: page -%}
+{%- assign summary = metadata.description | default: metadata.summary -%}
+{%- if include.excerpt == true -%}
+  {%- assign excerpt = metadata.excerpt | strip_html | strip_newlines -%}
+  {%- assign summary = summary | default: excerpt -%}
+{%- endif -%}
+{%- if include.count.size > 0 -%}
+  {%- assign summary = summary | truncatewords: count, '.' -%}
+{%- endif -%}
+{%- if include.short == true and summary.size > 0 -%}
+  {%- assign summary = summary | split: '. ' | first | append: '.' | replace: '..', '.' | strip -%}
+{%- endif -%}
+{{- summary -}}

@@ -1,0 +1,67 @@
+{%- assign page_type = include.type | default: 'primary' | downcase -%}
+{%- assign page_paths = site.data.navigation[page_type] -%}
+{%- assign nav_class = include.class -%}
+{%- if page_type == 'primary' -%}
+  {%- assign nav_class = nav_class | prepend: 'nav-header ' | strip -%}
+{%- else -%}
+  {%- assign nav_class = nav_class | prepend: 'nav-footer ' | strip -%}
+{%- endif -%}
+
+{%- if page_paths -%}
+  <nav class="site-navbar {{ nav_class }}" aria-label="{{ page_type | capitalize }} navigation">
+    {%- if page_type == 'primary' -%}
+      <input id="menu-toggle" type="checkbox" name="toggle-menu">
+      {%- comment -%} <input id="menu-toggle" type="checkbox" name="toggle-menu" onclick="navOpen(this)"> {%- endcomment -%}
+      <label for="menu-toggle" class="menu-icon hamburger" aria-controls="menu" aria-expanded="false">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </label>
+    {%- endif -%}
+    <ul class="menu-list">
+      {%- for path in page_paths -%}
+        {%- assign nav_item = site.pages | where: 'path', path | first -%}
+        {%- if nav_item.title -%}
+          {%- assign nav_link = nav_item.redirect_to | default: nav_item.url | relative_url -%}
+          {%- assign url_class = 'class="menu-link ' -%}
+          {%- assign url_attrs = 'href="'
+            | append: nav_link
+            | append: '" '
+            | append: 'title="'
+            | append: nav_item.title
+            | append: '" '
+          -%}
+
+          {%- if nav_link == page.url -%}
+            {%- assign url_class = url_class | append: ' current' | strip -%}
+            {%- assign url_attrs = url_attrs | append: ' aria-current="page"' | strip -%}
+          {%- endif -%}
+
+          {%- if nav_link contains '://' -%}
+            {%- assign url_attrs = url_attrs | append: ' target="_blank" rel="noopener noreferrer"' | strip -%}
+          {%- endif -%}
+
+          {%- assign url_attrs = url_class | append: '" ' | append: url_attrs -%}
+
+          <li class="menu-item">
+            <a {{ url_attrs | strip }}>{{- nav_item.title -}}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- comment -%}
+        {%- if page_type != 'primary' -%}
+          <li class="menu-item">
+            <a class="menu-link rss" rel="me" href="{{ 'feed.xml' | absolute_url }}" title="Subcribe">RSS</a>
+          </li>
+        {%- endif -%}
+      {%- endcomment -%}
+    </ul>
+    {%- comment -%}
+      <script>
+        function navOpen(e) {
+          e.classList.toggle('checked');
+        }
+      </script>
+    {%- endcomment -%}
+  </nav>
+{%- endif -%}

@@ -82,6 +82,36 @@ By default, line numbers are not shown. To include line numbers, add the attribu
 
 This will enable line numbering in the highlighted code block.
 
+### Mark Lines
+
+By default mark lines the class `.hll`
+
+**Sample:**
+
+````markdown
+```json
+{
+  "thisSyntax": error
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
+{:data-mark-lines='2 4'} <!-- like this -->
+````
+
+**Output:**
+
+```json
+{
+  "thisSyntax": error
+  "firstName": "John",
+  "lastName": "Smith",
+  "age": 25
+}
+```
+{: data-mark-lines='2 4' }
+
 ### Liquid Tags
 
 {% raw %}

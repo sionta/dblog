@@ -1,0 +1,44 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+/**
+ * Theme Toggle
+ */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  input,
+  label {
+    cursor: pointer;
+  }
+
+  label input {
+    margin-right: 5px;
+  }
+
+  #mode-theme {
+    display: none;
+
+    ~ [for="mode-theme"] {
+      [data-theme-value="light"] {
+        display: inline;
+      }
+
+      [data-theme-value="dark"] {
+        display: none;
+      }
+    }
+
+    &:checked ~ [for="mode-theme"] {
+      [data-theme-value="light"] {
+        display: none;
+      }
+
+      [data-theme-value="dark"] {
+        display: inline;
+      }
+    }
+  }
+}

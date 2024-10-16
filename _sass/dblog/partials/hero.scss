@@ -1,0 +1,69 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+/**
+ * Hero
+ */
+.hero {
+  background-color: var(--color-dark-glare);
+  color: var(--color-light);
+
+  .hero-inner {
+    padding: var(--space-unit-cxxl);
+    text-align: center;
+
+    .heading {
+      font-family: var(--font-title);
+      font-size: var(--font-size-chuge);
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: var(--space-unit-cmd);
+
+      .text-bolder {
+        font-style: normal;
+        display: inline;
+        font-weight: 700;
+        background: linear-gradient(
+          0deg,
+          transparent 0%,
+          var(--color-light-primary) 0%,
+          var(--color-light-primary) 35%,
+          transparent 35%
+        );
+      }
+    }
+
+    .summary {
+      font-size: var(--font-size-clg);
+      margin-bottom: var(--space-unit-c);
+    }
+  }
+
+  &.hero-fluid {
+    margin-bottom: var(--space-unit-cxl);
+    margin-inline: calc(50% - 50vw);
+
+    .hero-inner {
+      margin-inline: auto;
+      padding-inline: 0;
+    }
+  }
+
+  @include media-query("md", "max") {
+    .hero-inner {
+      text-align: left;
+
+      .heading {
+        font-size: var(--font-size-cxxxl);
+      }
+    }
+
+    &.hero-fluid {
+      .hero-inner {
+        text-align: center;
+        // padding: var(--space-unit) var(--space-unit-lg);
+      }
+    }
+  }
+}

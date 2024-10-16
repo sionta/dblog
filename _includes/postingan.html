@@ -1,25 +1,55 @@
-{%- assign site_posts = paginator.posts | default: site.posts -%}
 {%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
-{%- assign start_count = include.start | default: 0 -%}
-{%- assign limit_count = include.limit | default: site_posts.size -%}
-{%- for count in (start_count..limit_count) -%}
-  {%- assign post = site_posts[count] -%}
-  <article class="post-list">
-    <h2 itemprop="headline">
-      <a href="{{ post.url | relative_url }}" itemprop="url">{{- post.title | escape -}}</a>
-    </h2>
-    <p>
-      {{-
-        post.excerpt
-        | default: post.description
-        | default: post.content
-        | strip_html
-        | strip_newlines
-        | truncatewords: 52
-      -}}
-    </p>
-    <time itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
-      {{- post.date | date: date_format -}}
-    </time>
-  </article>
-{%- endfor -%}
+{%- assign site_posts = paginator.posts | default: site.posts -%}
+{%- assign post_limit = include.limit | default: site_posts.size -%}
+{% if include.random == true %}
+  {%- assign site_posts = site_posts | sample: post_limit -%}
+{% endif %}
+<div id="post-list" class="post-list">
+  {%- for post in site_posts limit: post_limit -%}
+    {%- assign item_class = 'post-item' -%}
+    {%- assign post_img = post.image.src | default: post.image -%}
+    {%- assign post_alt = post_img.alt | default: post.title -%}
+    {%- if post_img -%}
+      {%- assign item_class = item_class | append: ' item-card' | strip -%}
+    {%- endif -%}
+    <article class="{{ item_class }}">
+      {%- if post_img -%}
+        <figure class="post-item__head">
+          <img class="post-item__thumb" src="{{ post_img | relative_url }}" alt="{{ post_alt }}">
+          <figcaption>{{ post_alt }}</figcaption>
+        </figure>
+      {%- endif -%}
+
+      <section class="post-item__body">
+        <h2 class="post-item__title" itemprop="headline">
+          <a href="{{ post.url | relative_url }}" itemprop="url">{{- post.title | escape -}}</a>
+        </h2>
+        <p class="post-item__summary">
+          {%- if include.summary == 'short' or post_img -%}
+            {%- include summary.html data=post excerpt=true short=true -%}
+          {%- else -%}
+            {%- include summary.html data=post excerpt=true -%}
+          {%- endif -%}
+        </p>
+        <div class="post-item__metadata">
+          {%- if post.author -%}
+            <span class="author">
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                {%- if post.author.name and post.author.url -%}
+                  <a itemprop="url" href="{{ post.author.url | relative_url }}">
+                    <span itemprop="name">{{ post.author.name }}</span>
+                  </a>
+                {%- else -%}
+                  <span itemprop="name">{{ post.author }}</span>
+                {%- endif -%}
+              </span>
+            </span>
+          {%- endif -%}
+          <time class="date" itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
+            {{- post.date | date: date_format -}}
+          </time>
+        </div>
+      </section>
+    </article>
+  {%- endfor -%}
+</div>

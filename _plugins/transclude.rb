@@ -130,7 +130,17 @@ module Jekyll
       # @param content [String] The Markdown content to render
       # @return [String] The rendered HTML
       def render_markdown(content)
-        Kramdown::Document.new(content).to_html # Use Kramdown to convert Markdown to HTML
+        site = Jekyll.sites.first # Access the site configuration
+        # Get kramdown settings from _config.yml
+        kramdown_options = site.config['kramdown'] || { input: 'GFM', highlighter: 'rouge' }
+        # Pass the config to Kramdown for rendering
+        if site.config['markdown'] == 'kramdown'
+          require 'kramdown'
+          # Use Kramdown to convert Markdown to HTML
+          Kramdown::Document.new(content, kramdown_options).to_html
+        else
+          content.to_s
+        end
       end
     end
   end

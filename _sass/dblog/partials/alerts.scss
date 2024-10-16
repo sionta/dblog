@@ -3,41 +3,46 @@
 /**
  * Alerts
  */
+p.alert {
+  display: inherit;
+}
+
 .alert {
   --alert-color-primary: var(--color-text);
   --alert-color-secondary: var(--color-glare);
   background-color: var(--alert-color-secondary);
   border-radius: 5px;
   color: inherit;
-  // color: var(--alert-color-primary);
   font: inherit;
   position: relative;
-  padding: 1.5rem;
-  margin-block: 1.2rem 2rem;
+  padding: var(--space-unit);
+  margin-block: var(--space-unit);
   border: 0px solid var(--alert-color-primary);
 
-  // display: block;
   display: flex;
-  gap: 1rem;
   flex-flow: column wrap;
+  gap: 0.875rem;
 
   .alert-header {
     color: var(--alert-color-primary);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
+    font-weight: bold;
     line-height: 1;
   }
 
   .alert-icon {
+    display: inline-flex;
+
     svg {
       width: 1.25em;
       height: 1.25em;
     }
 
     i {
-      font-size: 1.5em;
+      font-weight: normal;
+      font-size: 1.25em;
     }
   }
 
@@ -49,9 +54,9 @@
       background-color: var(--color-background);
       color: var(--alert-color-primary);
       position: absolute;
-      border-radius: 1rem;
+      border-radius: 50%;
       padding: 5px;
-      left: -1rem;
+      left: -0.5rem;
       top: -1rem;
     }
 
@@ -69,12 +74,12 @@
 
     .alert-header {
       background-color: var(--alert-color-primary);
-      border-radius: 4px 0px 4px 0px;
-      color: var(--color-background);
-      // padding: 0.13rem 0.75rem; // if with font icon `i`
-      padding: 0.5rem 0.75rem; // if without font icon `i`
+      border-radius: 5px 0px 5px 0px;
+      color: var(--color-light);
+      font-size: 1rem;
+      padding: 0.3rem 0.5rem;
       position: absolute;
-      top: -1rem;
+      top: -0.8rem;
       left: 0;
     }
 
@@ -90,12 +95,14 @@
   &[data-type="2"] {
     border-left-width: 5px;
     border-radius: 0px 5px 5px 0px;
+    align-items: first baseline;
     flex-flow: row nowrap;
-    gap: 0.65rem;
-    padding-left: 1rem;
+    gap: 0.5rem;
 
     .alert-header {
-      height: max-content;
+      display: block;
+      line-height: 1;
+      // height: max-content;
     }
 
     .alert-name {

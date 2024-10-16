@@ -1,0 +1,139 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+/**
+ * Navigation
+ */
+.menu-icon,
+.menu-logo {
+  position: relative;
+  z-index: 3;
+  transition: color 0.6s;
+}
+
+.site-navbar {
+  .menu-list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .menu-list {
+    position: relative;
+    gap: var(--space-unit-xl);
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu-item {
+    color: var(--color-primary);
+    display: list-item;
+    list-style-type: square;
+
+    &:not(:has(.current)) {
+      list-style-type: none;
+    }
+  }
+
+  .menu-link {
+    &:not(:hover) {
+      text-decoration: none;
+    }
+
+    &.current {
+      color: var(--color-primary);
+    }
+  }
+
+  #menu-toggle,
+  .menu-icon {
+    display: none;
+  }
+
+  .menu-icon {
+    .line {
+      display: block;
+      background-color: var(--color-text);
+      border-radius: 6px;
+      width: 30px;
+      height: 3px;
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+  }
+
+  &.nav-footer {
+    margin-bottom: var(--space);
+
+    &,
+    .menu-list {
+      display: block;
+    }
+
+    .menu-item {
+      list-style: none;
+      margin-bottom: var(--space-unit-xs);
+    }
+  }
+}
+
+@include media-query("md", "max") {
+  .site-navbar.nav-header {
+    .menu-icon {
+      display: block;
+    }
+
+    .menu-item {
+      font-size: var(--font-size-xl);
+    }
+
+    .menu-link {
+      color: var(--color-light);
+    }
+
+    .menu-list {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      padding: var(--space-unit);
+      overflow: hidden;
+      box-sizing: border-box;
+      transition: right 0.5s ease;
+      background-color: rgba($base09, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px); // Safari support
+    }
+
+    #menu-toggle:checked {
+      ~ .menu-list {
+        right: 0;
+      }
+
+      @at-root .menu-logo:has(~ &) {
+        color: var(--color-light);
+      }
+
+      ~ .menu-icon .line {
+        background-color: var(--color-light);
+
+        &:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
+        }
+      }
+    }
+  }
+}

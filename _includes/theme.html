@@ -1,0 +1,25 @@
+{%- assign theme_type = include.type | default: 'button' -%}
+{%- case theme_type -%}
+  {%- when 'checkbox' -%}
+    <div class="theme-toggle" id="theme-checkboxs">
+      <input id="mode-theme" type="checkbox" name="theme">
+      <label for="mode-theme">
+        <span data-theme-value="light">{%- include icons/sun.svg -%}</span>
+        <span data-theme-value="dark">{%- include icons/moon.svg -%}</span>
+      </label>
+    </div>
+  {%- when 'radio' -%}
+    <div class="theme-toggle" id="theme-radios">
+      <label for="mode-auto"><input id="mode-auto" type="radio" value="auto" name="theme" checked>System</label>
+      <label for="mode-light"><input id="mode-light" type="radio" value="light" name="theme">Light</label>
+      <label for="mode-dark"><input id="mode-dark" type="radio" value="dark" name="theme">Dark</label>
+    </div>
+  {%- else -%}
+    <div class="theme-toggle" id="theme-buttons">
+      <button data-theme-value="auto" aria-label="System mode" type="button">
+        {%- include icons/brightness-auto.svg -%}
+      </button>
+      <button data-theme-value="light" aria-label="Light mode" type="button">{%- include icons/sun.svg -%}</button>
+      <button data-theme-value="dark" aria-label="Dark mode" type="button">{%- include icons/moon.svg -%}</button>
+    </div>
+{%- endcase -%}

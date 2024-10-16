@@ -1,7 +1,14 @@
 {% capture toc_content %}{{ include.html | default: content | toc_only }}{% endcapture %}
 {% if page.toc == true and toc_content %}
-  <details class="post-toc">
-    <summary class="toc-title">Table of content</summary>
-    <nav class="toc-content">{{ toc_content }}</nav>
-  </details>
+  {% if include.type == 'side' %}
+    <section class="post-toc hide-on-mb">
+      <h3 class="toc-title">Table of content</h3>
+      <nav class="toc-content">{{ toc_content }}</nav>
+    </section>
+  {% else %}
+    <details class="post-toc only-on-mb">
+      <summary class="toc-title">Table of content</summary>
+      <nav class="toc-content">{{ toc_content }}</nav>
+    </details>
+  {% endif %}
 {% endif %}

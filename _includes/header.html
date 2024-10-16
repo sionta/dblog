@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="wrapper">
+    <div class="header__inner">
+      <div class="site-social">
+        <a href="{{ 'feed.xml' | absolute_url }}">{% include icons/rss.svg %}</a>
+        {% include theme.html type='checkbox' %}
+      </div>
+      {% include brand.html type='header' %}
+      {% include navigation.html type='primary' %}
+    </div>
+  </div>
+</header>

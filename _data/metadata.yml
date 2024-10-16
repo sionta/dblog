@@ -1,6 +1,5 @@
 alerts:
   default:
-    # type: 0
     name: Quote
     icon: <i class="ti ti-quote"></i>
   note:

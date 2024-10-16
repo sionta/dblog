@@ -2,9 +2,23 @@
 layout: base
 ---
 <section class="home">
-  <div class="hero">
-    <h2 class="hero__heading">{{ site.hero.heading | default: site.title }}</h2>
-    <p class="hero__summary">{{ site.hero.summary | default: site.description }}</p>
-  </div>
-  {%- include postingan.html -%}
+  {%- if site.hero -%}
+    <div class="hero">
+      <div class="hero-inner">
+        {%- assign heading = site.hero.heading | default: site.title -%}
+        {%- assign text_last = heading | split: ' ' | last | strip -%}
+        <h2 class="heading">
+          {%- if text_last.size > 1 -%}
+            {{- heading | replace: text_last, '' -}}
+            <span class="text-bolder">{{- text_last -}}</span>
+          {%- else -%}
+            {{- heading -}}
+          {%- endif -%}
+        </h2>
+        <p class="summary">{{ site.hero.summary | default: site.description }}</p>
+      </div>
+    </div>
+    <hr>
+  {%- endif -%}
+  {%- include postingan.html random=true limit=3 summary='short' -%}
 </section>

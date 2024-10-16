@@ -1,0 +1,27 @@
+---
+layout: page
+title: Contact Us
+permalink: /contact/
+---
+{% assign author = site.author %}
+{% if author %}
+  <section class="contact">
+    <ul>
+      <li>
+        <span>Author:</span>
+        <a href="{{ author.url }}">{{ author.name }}</a>
+      </li>
+      <li>
+        <span>Twitter:</span>
+        <a href="https://twitter.com/{{- author.twitter -}}">@{{ author.twitter }}</a>
+      </li>
+      <li>
+        <span>Email:</span>
+        <a href="mailto:{{- author.email -}}">{{ author.email }}</a>
+      </li>
+    </ul>
+  </section>
+{% endif %}
+<p>
+  Update: <time datetime="{{ page.last_modified_at }}">{{ page.last_modified_at | date: '%Y/%m/%d' }}</time>
+</p>

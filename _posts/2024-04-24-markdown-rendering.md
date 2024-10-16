@@ -15,10 +15,6 @@ toc: true
 
 This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax/) and [extended syntax](https://www.markdownguide.org/extended-syntax/).
 
-{% transclude snippet.html title="Important Note" %}
-This content will be available as `include.content`.
-{% endtransclude %}
-
 > 1. For generated `page.excerpt`, include the first paragraphs and/or avoid using comments after the front matter.
 >
 > 2. If using the inline attribute list `{: ... }` and it doesn't work as expected, see further [Attribute List Definitions](https://kramdown.gettalong.org/syntax.html#attribute-list-definitions).
@@ -31,22 +27,22 @@ This content will be available as `include.content`.
 
 ### Headings
 
-# H1
+# Heading 1
 {:.no_toc .no_anchor}
 
-## H2
+## Heading 2
 {:.no_toc .no_anchor}
 
-### H3
+### Heading 3
 {:.no_toc .no_anchor}
 
-#### H4
+#### Heading 4
 {:.no_toc .no_anchor}
 
-##### H5
+##### Heading 5
 {:.no_toc .no_anchor}
 
-###### H6
+###### Heading 6
 {:.no_toc .no_anchor}
 
 ### Paragraphs

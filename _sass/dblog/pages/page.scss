@@ -1,6 +1,13 @@
 @use "../variables" as *;
 
 .page {
-  max-width: var(--width-content);
-  padding-inline: var(--space-unit);
+  max-width: calc(var(--width-content) * 0.75 - var(--space-unit));
+  margin: 0 auto;
+
+  .page__header {
+    .page__title.heading {
+      font-weight: 700;
+      font-style: normal;
+    }
+  }
 }

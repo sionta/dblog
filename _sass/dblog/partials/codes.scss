@@ -1,117 +1,146 @@
 @use "../variables" as *;
 
+/**
+ * Codes Block
+ */
+.highlighter-rouge {
+  --code-space: 1rem;
+}
+
 .code-blocks {
   background-color: var(--color-glare);
-  border-radius: 5px;
+  border: 1px solid var(--color-shade);
+  border-radius: 4px;
   font-family: var(--font-mono);
   margin-bottom: var(--space-unit);
   overflow: hidden;
   position: relative;
+}
 
-  .code-header {
-    display: flex;
-    align-items: center;
-    background-color: var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    font-size: var(--font-size-xs);
-    justify-content: space-between;
-    padding: var(--space-unit-xxs) var(--space-unit-xs);
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-shade);
+  border-bottom: 1px solid var(--color-glare);
+  font-size: 0.875rem;
+  padding: calc(var(--code-space, 1rem) * 0.5) var(--code-space, 1rem);
 
-    i,
-    svg {
-      margin-right: 0.5rem;
+  i,
+  svg {
+    margin-right: 0.5rem;
+  }
+
+  i {
+    font-size: 1rem;
+  }
+
+  svg {
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  .code-header__title {
+    display: inline;
+
+    &::after {
+      content: attr(data-name);
     }
+  }
 
-    i {
-      font-size: 1rem;
-    }
+  .code-header__button {
+    cursor: pointer;
+    font: inherit;
 
-    svg {
-      height: 0.25rem;
-      width: 0.25rem;
-    }
-
-    .code-header__title {
-      display: inline;
-
-      &::after {
-        content: attr(data-name);
-      }
-    }
-
-    .code-header__button {
-      background: none;
+    &,
+    &:hover,
+    &:focus {
+      background: none !important;
+      border-radius: 0;
       border: none;
-      cursor: pointer;
-      font: inherit;
+      color: inherit;
       padding: 0;
+    }
 
-      .code-success {
+    .code-success {
+      display: none;
+    }
+
+    &::after {
+      content: attr(data-label-copy);
+    }
+
+    &[data-feedback="success"] {
+      &::after {
+        content: attr(data-label-success);
+      }
+
+      .code-copy {
         display: none;
       }
 
-      &::after {
-        content: attr(data-label-copy);
-      }
-
-      &[data-feedback="success"] {
-        &::after {
-          content: attr(data-label-success);
-        }
-
-        .code-copy {
-          display: none;
-        }
-
-        .code-success {
-          display: inline;
-        }
+      .code-success {
+        display: inline;
       }
     }
   }
+}
 
-  .code-section {
-    display: flex;
-    flex-flow: row nowrap;
-    white-space: pre;
-  }
+.rouge-block {
+  display: flex;
+  padding: 0;
+}
 
-  .gutter,
-  .rouge-line,
-  .code,
-  .rouge-code {
-    padding: var(--space-unit-xs);
-    margin: 0;
-  }
+.rouge-table {
+  width: inherit;
 
-  .gutter,
-  .rouge-line {
-    border-right: 1px solid var(--color-border);
-    overflow-x: hidden;
-    padding-inline: 1rem;
-    pointer-events: none;
-    text-align: right;
-    user-select: none;
-    width: max-content;
-  }
-
-  .rouge-code {
-    scrollbar-width: thin;
-    width: 100%;
+  > tr {
+    @extend .rouge-block;
   }
 }
 
-/**
-  1. Only use for triple backticks not for {% highlight %} tag.
-  2. By default "lineos" is disable, to enable use {:.lineno}.
-*/
-// .rouge-line {
-//   display: none; /* 1 */
+.rouge-gutter,
+.rouge-line,
+.rouge-code {
+  padding: var(--code-space, 1rem);
+  margin: 0;
+}
 
-//   @at-root .lineno & {
-//     display: block; /* 2 */
-//   }
-// }
+.rouge-gutter,
+.rouge-line {
+  border-right: 1px solid var(--color-shade);
+  overflow-x: hidden;
+  text-align: right;
+  user-select: none;
+  width: max-content;
+}
+
+.rouge-code {
+  overflow-x: auto;
+  text-align: left;
+  width: 100%;
+}
+
+/**
+  1. Use only for triple backticks, not for the {% highlight %} tag.
+  2. By default, "lineos" is disabled.
+  3. To enable it, use the attribute inline class name {:.lineno}.
+     See https://kramdown.gettalong.org/syntax.html#attribute-list-definitions
+*/
+.rouge-gutter,
+.rouge-line {
+  display: none; /* 2 */
+
+  @at-root {
+    // .no-lineno & {
+    //   display: none;
+    // }
+
+    .lineno & {
+      display: block; /* 3 */
+    }
+  }
+}
 
 // Some colors come from Material Theme Darker:
 // https://github.com/material-theme/vsc-material-theme/blob/master/scripts/generator/settings/specific/darker-hc.ts
@@ -124,7 +153,7 @@
 
 // prettier-ignore
 .highlight {
-  overflow-x: auto;
+  .hll   { color: #000; background-color: rgba(254, 255, 170, 0.5) }
   .bp    { color: #999 } // Name.Builtin.Pseudo
   .c     { color: #998; font-style: italic } // Comment
   .c1    { color: #998; font-style: italic } // Comment.Single
@@ -188,6 +217,7 @@
 
 // prettier-ignore
 [data-theme=dark] .highlight {
+  .hll   { color: #000; background-color: rgb(243, 245, 136) }
   .bp    { color: #999 } // Name.Builtin.Pseudo
   .c     { color: #545454; font-style: italic } // Comment
   .c1    { color: #545454; font-style: italic } // Comment.Single

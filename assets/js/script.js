@@ -1,7 +1,52 @@
 (() => {
   "use strict";
 
-  const search = function () {
+  const tabBlock = function () {
+    const tabLabel = document.querySelectorAll(".tab-label");
+    if (!tabLabel) return;
+
+    tabLabel.forEach((tab, index, tabs) => {
+      tab.addEventListener("click", function () {
+        activateTab(this, tabs);
+      });
+
+      tab.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          const newIndex = e.key === "ArrowRight" ? index + 1 : index - 1;
+          const nextTab =
+            tabs[newIndex < 0 ? tabs.length - 1 : newIndex % tabs.length];
+          nextTab.focus();
+          activateTab(nextTab, tabs);
+        }
+      });
+    });
+
+    function activateTab(selectedTab, tabs) {
+      const tabId = selectedTab.getAttribute("aria-controls");
+
+      // Remove active state from all tabs
+      tabs.forEach((tab) => {
+        tab.classList.remove("active");
+        tab.setAttribute("aria-selected", "false");
+        tab.setAttribute("tabindex", "-1");
+      });
+
+      // Hide all tab contents
+      document.querySelectorAll(".tab-content").forEach((content) => {
+        content.classList.remove("active");
+        content.setAttribute("hidden", true);
+      });
+
+      // Activate the clicked tab and show corresponding content
+      selectedTab.classList.add("active");
+      selectedTab.setAttribute("aria-selected", "true");
+      selectedTab.setAttribute("tabindex", "0");
+      document.getElementById(tabId)?.classList.add("active");
+      document.getElementById(tabId)?.removeAttribute("hidden");
+    }
+  };
+
+  const searchPost = function () {
     if (typeof Fuse !== "undefined") {
       const searchData = document
         .querySelector("[data-search]")
@@ -55,44 +100,36 @@
     }
   };
 
-  const copy = function () {
-    const copyButtons = document.querySelectorAll(".copy-button");
+  const copyClipboard = function () {
+    const copyButtons = document.querySelectorAll("[data-label-copy]");
+    const copyContent = document.querySelectorAll("[data-block-copy]");
 
-    if (copyButtons) {
+    if (copyButtons && copyContent) {
+      let count = 0;
+
       copyButtons.forEach((button) => {
-        let copyFeedback = button.querySelector(".copy-feedback");
+        const setFeedback = (feedback) => {
+          if (feedback === "reset") {
+            button.removeAttribute("data-feedback");
+          } else {
+            button.setAttribute("data-feedback", feedback);
+          }
+        };
 
-        if (!copyFeedback) {
-          copyFeedback = document.createElement("span");
-          copyFeedback.className = "copy-feedback";
-          copyFeedback.textContent = "Copy";
-          button.appendChild(copyFeedback);
-        }
-
-        const successMessage = button.getAttribute("data-success") || "Copied";
-        const originalText = copyFeedback.textContent;
+        const textContent = copyContent.item(count).textContent;
+        count = count + 1;
 
         button.addEventListener("click", async () => {
-          const codeBlock = button.closest(".highlighter-rouge");
-          if (!codeBlock) return;
-
-          const codeElement =
-            codeBlock.querySelector(".rouge-code") ||
-            codeBlock.querySelector(".code") ||
-            codeBlock.querySelector("code");
-          if (!codeElement) return;
-
           try {
-            await navigator.clipboard.writeText(codeElement.innerText);
-            button.setAttribute("data-feedback", "success");
-            copyFeedback.textContent = successMessage;
+            await navigator.clipboard.writeText(textContent);
+            setFeedback("success");
+            // console.log(textContent);
           } catch (error) {
-            button.setAttribute("data-feedback", "error");
-            copyFeedback.textContent = "Failed to copy";
+            setFeedback("error");
+            console.log("Failed to copy", error);
           } finally {
             setTimeout(() => {
-              button.removeAttribute("data-feedback");
-              copyFeedback.textContent = originalText;
+              setFeedback("reset");
             }, 2000);
           }
         });
@@ -100,49 +137,9 @@
     }
   };
 
-  const toc = function () {
-    if (typeof tocbot !== "undefined") {
-      const setupToc = () => {
-        const tocTag = window.innerWidth >= 768 ? "#toc" : "#toc-mobile";
-        if (!tocTag) return;
-
-        const tocCfg = {
-          tocSelector: tocTag,
-          contentSelector: ".post-content",
-          ignoreSelector: ".no_toc, .no-toc",
-          headingSelector: "h2, h3",
-          orderedList: false,
-          collapseDepth: 0,
-          hasInnerContainers: true,
-          listClass: "toc-list",
-          listItemClass: "toc-item",
-          activeListItemClass: "toc-item-actived",
-          linkClass: "toc-link",
-          activeLinkClass: "toc-link-actived",
-          isCollapsedClass: "toc-collapsed",
-          collapsibleClass: "toc-collapsible",
-          positionFixedClass: "toc-fixed",
-          fixedSidebarOffset: "auto",
-        };
-
-        if (tocTag == "#toc-mobile") {
-          tocCfg.orderedList = true;
-          tocCfg.headingSelector = "h2";
-        }
-
-        tocbot.destroy();
-        tocbot.init(tocCfg);
-        tocbot.refresh();
-      };
-
-      setupToc();
-      window.addEventListener("resize", setupToc);
-    }
-  };
-
-  window.addEventListener("DOMContentLoaded", () => {
-    search();
-    copy();
-    toc();
+  addEventListener("DOMContentLoaded", () => {
+    copyClipboard();
+    searchPost();
+    // tabBlock();
   });
 })();

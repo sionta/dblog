@@ -1,0 +1,41 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+/**
+ * Images
+ */
+p:has(.img) {
+  display: inline-block;
+
+  &::after {
+    clear: both;
+  }
+}
+
+.img {
+  max-width: clamp(50%, 50vw, 100%);
+  display: inline-block;
+  vertical-align: inherit;
+
+  &.center,
+  &.left,
+  &.right {
+    margin-block: var(--space-unit-xxs);
+  }
+
+  &.center {
+    margin-inline: auto;
+  }
+
+  &.left {
+    float: left;
+    margin-left: auto;
+    margin-right: var(--space-unit);
+  }
+
+  &.right {
+    float: right;
+    margin-left: var(--space-unit-xs);
+    margin-right: auto;
+  }
+}

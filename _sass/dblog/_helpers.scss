@@ -13,7 +13,7 @@
     @error 'Breakpoint "#{$breakpoint}" not defined. (available: sm,md,lg).';
   }
 
-  @media #{$query} {
+  @media screen and #{$query} {
     @content;
   }
 }

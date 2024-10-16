@@ -2,14 +2,14 @@
 {%- assign prev_page = pager.previous_page_path | default: pager.previous -%}
 {%- assign next_page = pager.next_page_path | default: pager.next -%}
 {%- if prev_page -%}
-  {%- assign class = 'page-previous' -%}
+  {%- assign class = 'page-prev' -%}
   {%- assign path = prev_page -%}
 {%- else -%}
   {%- assign class = 'page-next' -%}
   {%- assign path = next_page -%}
 {%- endif -%}
 {%- if pager.previous or pager.next -%}
-  {%- assign class = class | append: ' next-prev' -%}
+  {%- assign class = class | append: ' prev-next' -%}
 {%- endif -%}
 <nav class="pagination" aria-label="Pagination">
   <ol class="pagination__list">
@@ -27,10 +27,10 @@
 
     {%- comment -%} Total Page {%- endcomment -%}
     {%- if pager.total_pages -%}
-      <li class="pagination__item item-total">
+      <li class="pagination__item item-totals">
         {%- for count in (1..pager.total_pages) -%}
           {%- if count == pager.page -%}
-            <span class="{{ class }} active" aria-current="page">{{ count }}</span>
+            <span class="{{ class }} current" aria-current="page">{{ count }}</span>
           {%- else -%}
             <a class="{{ class }}" aria-current="step" href="{{ path | relative_url }}">{{- count -}}</a>
           {%- endif -%}
