@@ -1,10 +1,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="JEKYLL_ENV" content="{{ jekyll.environment }}">
   {%- seo -%}
   {%- feed_meta -%}
-  {% include_cached origin.html %}
+  {%- include origin.html -%}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 </head>

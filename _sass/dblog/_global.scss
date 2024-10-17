@@ -54,7 +54,7 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
   z-index: 4;
 }
 
-.header__inner {
+.site-header__inner {
   justify-content: space-between;
 
   &,
@@ -135,7 +135,7 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 }
 
 .post,
-.page__content {
+.page-content {
   max-width: calc(var(--width-content) * 0.625);
   margin: 0 auto;
 }

@@ -1,0 +1,40 @@
+<div class="theme-toggle">
+  {% if include.type == 'checkbox' %}
+    <input
+      id="mode-theme"
+      type="checkbox"
+      name="theme"
+      aria-label="Toggle dark/light theme"
+      aria-checked="false"
+    >
+    <label for="mode-theme">
+      <span data-theme-value="light">{% include icons/sun.svg %}</span>
+      <span data-theme-value="dark">{% include icons/moon.svg %}</span>
+    </label>
+  {% else %}
+    <button
+      data-theme-value="auto"
+      aria-label="System mode"
+      type="button"
+      aria-pressed="false"
+    >
+      {% include icons/brightness-auto.svg %}
+    </button>
+    <button
+      data-theme-value="light"
+      aria-label="Light mode"
+      type="button"
+      aria-pressed="false"
+    >
+      {% include icons/sun.svg %}
+    </button>
+    <button
+      data-theme-value="dark"
+      aria-label="Dark mode"
+      type="button"
+      aria-pressed="false"
+    >
+      {% include icons/moon.svg %}
+    </button>
+  {% endif %}
+</div>

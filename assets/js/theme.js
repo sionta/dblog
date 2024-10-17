@@ -1,137 +1,114 @@
 (() => {
   "use strict";
 
+  const themeConfig = {
+    checkbox: ".theme-toggle #mode-theme", // Checkbox selector
+    buttons: ".theme-toggle button", // Button selector
+  };
+
   const getStoredTheme = () => localStorage.getItem("theme");
   const setStoredTheme = (theme) => localStorage.setItem("theme", theme);
 
+  // Fallback to "light" if no theme found in localStorage or system preferences
   const getPreferredTheme = () => {
-    return (
-      getStoredTheme() ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches
+    const storedTheme = getStoredTheme();
+    if (storedTheme) {
+      return storedTheme;
+    } else {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
-        : "light")
-    );
+        : "light"; // Fallback theme
+    }
   };
 
-  const setTheme = (theme) => {
-    if (theme === "auto" || theme === "system") {
-      theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const isPreferredTheme = (mode) => {
+    if (["auto", "system"].includes(mode)) {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     }
-
-    document.documentElement.setAttribute("data-theme", theme);
-
-    /**
-     * Send message to another that the theme has been changed
-     * e.g for mermaid, disqus, giscus, and utterances theme.
-     *
-     * Example usage:
-     *
-     *   window.addEventListener('message', (event) => {
-     *     const theme = event.data.themeChange;
-     *     const frame = document.querySelector('.giscus-frame');
-     *     if (theme && frame.contentWindow) {
-     *       frame.contentWindow.postMessage(
-     *         { giscus: { setConfig: { theme: theme } } },
-     *         'https://giscus.app'
-     *       );
-     *     }
-     *   });
-     */
-    window.postMessage({ themeChange: theme }, "*");
+    return mode;
   };
 
-  setTheme(getPreferredTheme());
+  const setTheme = (theme) => {
+    theme = isPreferredTheme(theme);
+    document.documentElement.setAttribute("data-theme", theme);
+    window.postMessage({ themeChange: theme }, window.location.origin);
+  };
+
+  const setActiveTheme = (theme) => {
+    const themeCheckbox = document.querySelector(themeConfig.checkbox);
+    const themeButtons = document.querySelectorAll(themeConfig.buttons);
+
+    // Set the checkbox state based on the theme
+    if (themeCheckbox) {
+      theme = isPreferredTheme(theme);
+      themeCheckbox.checked = theme === "dark";
+      themeCheckbox.setAttribute(
+        "aria-checked",
+        theme === "dark" ? "true" : "false"
+      );
+    }
+
+    // Set the active class for the buttons
+    if (themeButtons) {
+      themeButtons.forEach((button) => {
+        const isActive = button.getAttribute("data-theme-value") === theme;
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        button.classList.toggle("active", isActive);
+      });
+    }
+  };
+
+  // Debounce utility to avoid executing function too often
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, wait);
+    };
+  };
+
+  // Listen for system dark mode changes if theme is "auto"
+  const handleSystemThemeChange = debounce(() => {
+    const storedTheme = getStoredTheme();
+    if (!["light", "dark"].includes(storedTheme)) {
+      setTheme(getPreferredTheme());
+      setActiveTheme(getPreferredTheme());
+    }
+  }, 200); // Debounced with 200ms delay
 
   window
     .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
-      const storedTheme = getStoredTheme();
-      if (storedTheme !== "light" && storedTheme !== "dark") {
-        setTheme(getPreferredTheme());
-      }
-    });
+    .addEventListener("change", handleSystemThemeChange);
 
-  const themeConfig = {
-    checkbox: "#theme-checkboxs",
-    radio: "#theme-radios",
-    button: "#theme-buttons",
-  };
+  // Set initial theme and prevent FOUC (Flash of Unstyled Content)
+  setTheme(getPreferredTheme());
 
-  const setActiveTheme = (theme, type) => {
-    const themeToggle = document.querySelector(themeConfig[type]);
-
-    if (!themeToggle) return;
-
-    if (type === "button") {
-      themeToggle.querySelectorAll("button").forEach((button) => {
-        button.classList.toggle(
-          "active",
-          button.getAttribute("data-theme-value") === theme
-        );
-      });
-    }
-
-    if (type === "checkbox") {
-      if (theme === "dark") {
-        themeToggle
-          .querySelector('[type="checkbox"]')
-          .setAttribute("checked", "");
-      } else {
-        themeToggle
-          .querySelector('[type="checkbox"]')
-          .removeAttribute("checked");
-      }
-    }
-
-    if (type === "radio") {
-      themeToggle.querySelectorAll("input[type=radio]").forEach((radio) => {
-        radio.removeAttribute("checked");
-      });
-      themeToggle
-        .querySelector(`input[value=${theme}]`)
-        .setAttribute("checked", "");
-    }
-  };
-
+  // On page load
   window.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelector(themeConfig.button);
-    if (buttons) {
-      setActiveTheme(getPreferredTheme(), "button");
+    setActiveTheme(getPreferredTheme());
+    const themeCheckbox = document.querySelector(themeConfig.checkbox);
+    const themeButtons = document.querySelectorAll(themeConfig.buttons);
 
-      buttons.querySelectorAll("[data-theme-value]").forEach((button) => {
+    if (themeCheckbox) {
+      themeCheckbox.addEventListener("change", (event) => {
+        const theme = event.target.checked ? "dark" : "light";
+        setStoredTheme(theme);
+        setTheme(theme);
+        setActiveTheme(theme);
+      });
+    }
+
+    if (themeButtons) {
+      themeButtons.forEach((button) => {
         button.addEventListener("click", () => {
           const theme = button.getAttribute("data-theme-value");
-          setTheme(theme);
           setStoredTheme(theme);
-          setActiveTheme(theme, "button");
-        });
-      });
-    }
-
-    const checkboxs = document.querySelector(themeConfig.checkbox);
-    if (checkboxs) {
-      setActiveTheme(getPreferredTheme(), "checkbox");
-
-      checkboxs.addEventListener("change", (e) => {
-        const theme = e.target.checked ? "dark" : "light";
-        setTheme(theme);
-        setStoredTheme(theme);
-        setActiveTheme(theme, "checkbox");
-      });
-    }
-
-    const radios = document.querySelector(themeConfig.radio);
-    if (radios) {
-      setActiveTheme(getPreferredTheme(), "radio");
-
-      radios.querySelectorAll("input[type=radio]").forEach((radio) => {
-        radio.addEventListener("click", () => {
-          const theme = radio.getAttribute("value");
           setTheme(theme);
-          setStoredTheme(theme);
-          setActiveTheme(theme, "radio");
+          setActiveTheme(theme);
         });
       });
     }

@@ -1,69 +1,59 @@
-@use "../helpers" as *;
-@use "../variables" as *;
-
-/**
- * Hero
- */
+/* Hero Section */
 .hero {
-  background-color: var(--color-dark-glare);
-  color: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  // background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/assets/img/hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  color: white;
+}
 
-  .hero-inner {
-    padding: var(--space-unit-cxxl);
-    text-align: center;
+.hero-content {
+  max-width: 800px;
+  padding: 20px;
+}
 
-    .heading {
-      font-family: var(--font-title);
-      font-size: var(--font-size-chuge);
-      font-style: italic;
-      font-weight: 500;
-      line-height: 1.15;
-      margin-bottom: var(--space-unit-cmd);
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
 
-      .text-bolder {
-        font-style: normal;
-        display: inline;
-        font-weight: 700;
-        background: linear-gradient(
-          0deg,
-          transparent 0%,
-          var(--color-light-primary) 0%,
-          var(--color-light-primary) 35%,
-          transparent 35%
-        );
-      }
-    }
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+}
 
-    .summary {
-      font-size: var(--font-size-clg);
-      margin-bottom: var(--space-unit-c);
-    }
+.hero-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #f39c12;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: #e67e22;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
   }
 
-  &.hero-fluid {
-    margin-bottom: var(--space-unit-cxl);
-    margin-inline: calc(50% - 50vw);
-
-    .hero-inner {
-      margin-inline: auto;
-      padding-inline: 0;
-    }
+  .hero p {
+    font-size: 1.25rem;
   }
 
-  @include media-query("md", "max") {
-    .hero-inner {
-      text-align: left;
-
-      .heading {
-        font-size: var(--font-size-cxxxl);
-      }
-    }
-
-    &.hero-fluid {
-      .hero-inner {
-        text-align: center;
-        padding-inline: var(--space-unit-md);
-      }
-    }
+  .hero-button {
+    padding: 10px 20px;
   }
 }

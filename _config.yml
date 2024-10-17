@@ -8,16 +8,15 @@ description: >-
   in _config.yml. It will appear in your document head meta (for Google search
   results) and in your feed.xml site description.
 
-# This copyright in footer
-copyright: >-
-  &copy; :year: :title:. All Rights Reserved. Designed with love by
-  <a href="https://github.com/sionta">Andre Attamimi</a>
-
-url: "" # The full base URL of your site (e.g., https://example.com). Required for generating absolute links.
+url: "https://sionta-dblog.vercel.app" # The full base URL of your site (e.g., https://example.com). Required for generating absolute links.
 baseurl: "" # If your site is hosted in a subfolder (e.g., /blog), define the subpath here. Otherwise, leave it empty.
 
 brand: sionta
 logo: /assets/img/dblog.svg
+
+# copyright: >-
+#   &copy; :year: :title:. All Rights Reserved. Designed with love by
+#   <a href="https://github.com/sionta">Andre Attamimi</a>
 
 # Configuration for the hero section, often the main banner on the homepage.
 hero:

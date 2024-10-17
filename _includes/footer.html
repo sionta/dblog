@@ -1,15 +1,12 @@
 <footer class="site-footer">
   <div class="wrapper">
-    <div class="footer__inner d-flex column">
+    <div class="site-footer__inner d-flex column">
       <div class="d-flex column-mb">
-        {% comment %}
-          <div class="flex-1 pad-xs">
-            <h3 class="uppercase font-bold font-size disabled">Schemes</h3>
-            {% include theme.html type='checkbox' %}
-            {% include theme.html type='radio' %}
-            {% include theme.html type='button' %}
-          </div>
-        {% endcomment %}
+        <div class="flex-1 pad-xs">
+          <h3 class="uppercase font-bold font-size disabled">Schemes</h3>
+          {% comment %} {% include theme-toggle.html type='checkbox' %} {% endcomment %}
+          {% include theme-toggle.html type='button' %}
+        </div>
         <div class="flex-1 pad-xs">
           <h3 class="uppercase font-bold font-size disabled">Supports</h3>
           {%- include navigation.html type='secondary' -%}

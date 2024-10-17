@@ -7,7 +7,7 @@ layout: base
 {%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
 {%- assign date_modified = page.modified_at | default: page.last_modified_at %}
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header class="post__header">
+  <header class="post-header">
     <p class="post-metadata">
       <time class="date-time" itemprop="datePublished" datetime="{{ page.date | date_to_xmlschema }}">
         {{- page.date | date: date_format -}}
@@ -46,11 +46,11 @@ layout: base
       {%- include image class='post-thumb' -%}
     {%- endif -%}
   </header>
-  <section class="post__content" itemprop="articleBody">
+  <section class="post-content" itemprop="articleBody">
     {%- include toc.html html=content -%}
     {{- content -}}
   </section>
-  <footer class="post__footer">
+  <footer class="post-footer">
     {%- include pagination.html -%}
   </footer>
 </article>

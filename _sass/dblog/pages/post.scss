@@ -14,9 +14,9 @@
   // max-width: calc(var(--width-content) * 0.7);
   // margin: 0 auto;
 
-  .post__header,
-  .post__footer,
-  .post__content {
+  .post-header,
+  .post-footer,
+  .post-content {
     padding: var(--space-unit);
 
     @include media-query("md", "max") {
@@ -24,7 +24,7 @@
     }
   }
 
-  .post__header {
+  .post-header {
     font-family: var(--font-sans);
 
     .post-thumb {
@@ -62,7 +62,7 @@
     }
   }
 
-  .post__content {
+  .post-content {
     font-family: var(--font-sans);
     font-size: var(--font-size-c);
     line-height: 1.6;

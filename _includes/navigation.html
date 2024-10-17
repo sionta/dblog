@@ -6,19 +6,23 @@
 {%- else -%}
   {%- assign nav_class = nav_class | prepend: 'nav-footer ' | strip -%}
 {%- endif -%}
-
 {%- if page_paths -%}
-  <nav class="site-navbar {{ nav_class }}" aria-label="{{ page_type | capitalize }} navigation">
+  <nav class="site-navbar {{ nav_class }}" aria-label="{{ page_type | capitalize }} Navigation">
     {%- if page_type == 'primary' -%}
       <input id="menu-toggle" type="checkbox" name="toggle-menu">
       {%- comment -%} <input id="menu-toggle" type="checkbox" name="toggle-menu" onclick="navOpen(this)"> {%- endcomment -%}
-      <label for="menu-toggle" class="menu-icon hamburger" aria-controls="menu" aria-expanded="false">
+      <label for="menu-toggle" class="menu-icon" aria-controls="menu" aria-expanded="false">
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
       </label>
     {%- endif -%}
-    <ul class="menu-list">
+    <ul
+      class="menu-list"
+      {% if page_type == 'primary' %}
+        id="menu"
+      {% endif %}
+    >
       {%- for path in page_paths -%}
         {%- assign nav_item = site.pages | where: 'path', path | first -%}
         {%- if nav_item.title -%}

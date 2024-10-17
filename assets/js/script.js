@@ -1,6 +1,15 @@
 (() => {
   "use strict";
 
+  const menuToggle = function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menuIcon = document.querySelector(".menu-icon");
+
+    menuToggle.addEventListener("change", () => {
+      menuIcon.setAttribute("aria-expanded", menuToggle.checked);
+    });
+  };
+
   const tabBlock = function () {
     const tabLabel = document.querySelectorAll(".tab-label");
     if (!tabLabel) return;
@@ -138,6 +147,7 @@
   };
 
   addEventListener("DOMContentLoaded", () => {
+    menuToggle();
     copyClipboard();
     searchPost();
     // tabBlock();
