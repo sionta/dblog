@@ -3,27 +3,13 @@
 
 .post:has(~ .side) {
   flex: 3;
-}
 
-.side {
-  flex: 1;
-  // order: -1;
+  .side {
+    flex: 1;
+  }
 }
 
 .post {
-  // max-width: calc(var(--width-content) * 0.7);
-  // margin: 0 auto;
-
-  .post-header,
-  .post-footer,
-  .post-content {
-    padding: var(--space-unit);
-
-    @include media-query("md", "max") {
-      margin-inline: calc(var(--space-unit) * -1);
-    }
-  }
-
   .post-header {
     font-family: var(--font-sans);
 
@@ -70,7 +56,17 @@
     h1,
     h2,
     h3 {
+      position: relative;
       font-family: var(--font-title);
+
+      // &::after {
+      //   content: "";
+      //   display: block;
+      //   background-color: var(--color-accent);
+      //   width: 80px;
+      //   height: 5px;
+      //   margin-top: 5px;
+      // }
     }
 
     h4,

@@ -2,12 +2,37 @@
 @use "../variables" as *;
 
 .home {
-  padding: var(--space-unit) 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-unit-cxxl);
+
+  .hero {
+    max-width: var(--width-medium);
+  }
+
+  .section-title {
+    h2 {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    span {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.44);
+      display: inline-block;
+      margin-bottom: -1px;
+      padding-bottom: 20px;
+    }
+  }
 
   .post-list {
+    margin-top: var(--space-unit-cxxl);
+
     .post-item {
-      flex: 1;
-      height: max-content;
+      flex: auto;
+      height: inherit;
     }
   }
 }

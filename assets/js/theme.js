@@ -90,6 +90,7 @@
   // On page load
   window.addEventListener("DOMContentLoaded", () => {
     setActiveTheme(getPreferredTheme());
+
     const themeCheckbox = document.querySelector(themeConfig.checkbox);
     const themeButtons = document.querySelectorAll(themeConfig.buttons);
 

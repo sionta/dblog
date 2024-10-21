@@ -1,7 +1,6 @@
 @forward "variables";
-@use "custom";
-@use "base";
 @use "global";
+@use "layout";
 
 @use "pages/blog";
 @use "pages/home";
@@ -11,11 +10,10 @@
 @use "partials/accordions";
 @use "partials/alerts";
 @use "partials/codes";
-@use "partials/hero";
 @use "partials/images";
 @use "partials/navigation";
 @use "partials/pagination";
-@use "partials/post-list";
+// @use "partials/post-list";
 @use "partials/tabs";
 @use "partials/task-list";
 @use "partials/theme-toggle";

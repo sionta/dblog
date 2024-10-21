@@ -5,6 +5,7 @@ categories: test
 tags: [jekyll, rouge, highlight]
 image: /assets/img/posts/rouge-thumb.png
 toc: true
+featured: true
 ---
 
 [Rouge](http://rouge.jneen.net/) is a syntax highlighter written in Ruby that supports over 200 programming languages. It can generate both HTML and ANSI 256-color text output. The HTML output produced by Rouge is compatible with stylesheets designed for [Pygments](http://pygments.org), another popular syntax highlighter.

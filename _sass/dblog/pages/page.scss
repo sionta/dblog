@@ -1,13 +1,15 @@
+@use "../helpers" as *;
 @use "../variables" as *;
 
 .page {
-  max-width: calc(var(--width-content) * 0.75 - var(--space-unit));
-  margin: 0 auto;
+  margin-top: calc(var(--gutter-unit) * -1);
+  .hero-fluid {
+    text-align: center;
+  }
 
-  .page__header {
-    .page__title.heading {
-      font-weight: 700;
-      font-style: normal;
+  @include media-query("md", "max") {
+    .hero.hero-fluid {
+      max-height: 50vh;
     }
   }
 }

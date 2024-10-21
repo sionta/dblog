@@ -1,27 +1,12 @@
 <footer class="site-footer">
   <div class="wrapper">
-    <div class="site-footer__inner d-flex column">
-      <div class="d-flex column-mb">
-        <div class="flex-1 pad-xs">
-          <h3 class="uppercase font-bold font-size disabled">Schemes</h3>
-          {% comment %} {% include theme-toggle.html type='checkbox' %} {% endcomment %}
-          {% include theme-toggle.html type='button' %}
-        </div>
-        <div class="flex-1 pad-xs">
-          <h3 class="uppercase font-bold font-size disabled">Supports</h3>
-          {%- include navigation.html type='secondary' -%}
-        </div>
-        <div class="flex-1 pad-xs order-1-mb">
-          {%- include brand.html type='footer' -%}
-          <p class="site-description">{{- site.description -}}</p>
-        </div>
-      </div>
-      {% capture copyright %}&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.{% endcapture %}
-      {% if site.copyright %}
-        {% assign year = site.time | date: '%Y' %}
-        {% assign name = site.brand | default: site.title %}
-        {% assign copyright = site.copyright | replace: ':year:', year | replace: ':title:', name %}
-      {% endif %}
+    <div class="site-footer__inner">
+      {%- capture copyright -%}&copy; {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.{%- endcapture -%}
+      {%- if site.copyright -%}
+        {%- assign year = site.time | date: '%Y' -%}
+        {%- assign name = site.brand | default: site.title -%}
+        {%- assign copyright = site.copyright | replace: ':year:', year | replace: ':title:', name -%}
+      {%- endif -%}
       <p class="site-copyright">{{- copyright | strip | strip_newlines -}}</p>
     </div>
   </div>

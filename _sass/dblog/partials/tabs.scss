@@ -6,7 +6,7 @@
  */
 .tabs {
   --tabs-radius: 5px;
-  --tabs-color-primary: var(--color-primary);
+  --tabs-color-accent: var(--color-accent);
   --tabs-color-secondary: var(--color-secondary);
   --tabs-color-text: var(--color-light);
   --tabs-space: 1.5rem;
@@ -22,7 +22,7 @@
   display: none;
 
   &:checked + .tab-label {
-    background-color: var(--color-primary);
+    background-color: var(--color-accent);
 
     + .tab-panel {
       display: block;
@@ -31,7 +31,7 @@
 }
 
 .tab-label {
-  background-color: var(--color-primary-shade);
+  background-color: var(--color-secondary);
   color: var(--color-light);
   cursor: pointer;
   padding: 10px 15px;
@@ -49,7 +49,7 @@
   }
 
   &:hover {
-    background-color: var(--color-primary-glare);
+    background-color: var(--color-primary);
   }
 }
 

@@ -1,12 +1,11 @@
 # If you want to link only specific pages in navigation, use this and add the path to the pages
 # in order as they should show up. (NB: use the actual path not permalink path)
-primary:
-  - blog/index.html
-  - pages/about.md
-  # - pages/github.md
-
-secondary:
-  - pages/code-of-conduct.md
-  - pages/privacy-policy.md
-  - pages/terms-of-service.md
-  - pages/contact.html
+- index.html
+- blog/index.html
+- title: "Mores"
+  sub_menu:
+    - pages/about.md
+    - pages/code-of-conduct.md
+    - pages/privacy-policy.md
+    - pages/terms-of-service.md
+    - pages/contact.html

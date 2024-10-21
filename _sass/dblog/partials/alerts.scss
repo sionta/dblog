@@ -8,23 +8,23 @@ p.alert {
 }
 
 .alert {
-  --alert-color-primary: var(--color-text);
-  --alert-color-secondary: var(--color-glare);
-  background-color: var(--alert-color-secondary);
+  --alert-primary: var(--color-text);
+  --alert-secondary: var(--color-glare);
+  background-color: var(--alert-secondary);
   border-radius: 5px;
   color: inherit;
   font: inherit;
   position: relative;
   padding: var(--space-unit);
   margin-block: var(--space-unit);
-  border: 0px solid var(--alert-color-primary);
+  border: 0px solid var(--alert-primary);
 
   display: flex;
   flex-flow: column wrap;
   gap: 0.875rem;
 
   .alert-header {
-    color: var(--alert-color-primary);
+    color: var(--alert-primary);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -52,7 +52,7 @@ p.alert {
 
     .alert-header {
       background-color: var(--color-background);
-      color: var(--alert-color-primary);
+      color: var(--alert-primary);
       position: absolute;
       border-radius: 50%;
       padding: 5px;
@@ -73,7 +73,7 @@ p.alert {
     border-top-width: 5px;
 
     .alert-header {
-      background-color: var(--alert-color-primary);
+      background-color: var(--alert-primary);
       border-radius: 5px 0px 5px 0px;
       color: var(--color-light);
       font-size: 1rem;
@@ -130,18 +130,19 @@ p.alert {
 
   // Define custom alert types and colors
   $alerts: (
-    "caution": #db2929,
-    "important": #6d72c5,
-    "note": #00a1d6,
-    "tip": #00a854,
-    "warning": #f2ca26,
+    "caution": #f44336,
+    "important": #6c71c4,
+    "note": #03a9f4,
+    "tip": #4caf50,
+    "warning": #ff9800,
   );
 
   // Iterate over each alert type and apply styles
   @each $name, $value in $alerts {
     &.alert-#{$name} {
-      --alert-color-primary: #{rgba($value, 1)};
-      --alert-color-secondary: #{rgba($value, 0.3)};
+      --alert-primary: #{rgba($value, 1)};
+      --alert-secondary: #{rgba($value, 0.5)};
+      --alert-tertiary: #{rgba($value, 0.5)};
     }
   }
 }

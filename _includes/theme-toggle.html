@@ -1,40 +1,19 @@
 <div class="theme-toggle">
-  {% if include.type == 'checkbox' %}
-    <input
-      id="mode-theme"
-      type="checkbox"
-      name="theme"
-      aria-label="Toggle dark/light theme"
-      aria-checked="false"
-    >
+  {%- if include.type == 'checkbox' -%}
+    <input id="mode-theme" type="checkbox" name="theme" aria-label="Toggle dark/light theme" aria-checked="false">
     <label for="mode-theme">
-      <span data-theme-value="light">{% include icons/sun.svg %}</span>
-      <span data-theme-value="dark">{% include icons/moon.svg %}</span>
+      <span data-theme-value="light">{%- include svg_symbol.html id='sun' -%}</span>
+      <span data-theme-value="dark">{%- include svg_symbol.html id='moon' -%}</span>
     </label>
-  {% else %}
-    <button
-      data-theme-value="auto"
-      aria-label="System mode"
-      type="button"
-      aria-pressed="false"
-    >
-      {% include icons/brightness-auto.svg %}
+  {%- else -%}
+    <button data-theme-value="auto" aria-label="System mode" type="button" aria-pressed="true" class="active">
+      {%- include svg_symbol.html id='brightness-auto' -%}
     </button>
-    <button
-      data-theme-value="light"
-      aria-label="Light mode"
-      type="button"
-      aria-pressed="false"
-    >
-      {% include icons/sun.svg %}
+    <button data-theme-value="light" aria-label="Light mode" type="button" aria-pressed="false">
+      {%- include svg_symbol.html id='sun' -%}
     </button>
-    <button
-      data-theme-value="dark"
-      aria-label="Dark mode"
-      type="button"
-      aria-pressed="false"
-    >
-      {% include icons/moon.svg %}
+    <button data-theme-value="dark" aria-label="Dark mode" type="button" aria-pressed="false">
+      {%- include svg_symbol.html id='moon' -%}
     </button>
-  {% endif %}
+  {%- endif -%}
 </div>

@@ -1,16 +1,24 @@
 ---
 layout: base
 ---
-<section class="home">
-  {%- if site.hero -%}
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Welcome to My Awesome Blog</h1>
-        <p>Sharing thoughts, ideas, and experiences.</p>
-        <a href="/blog/" class="hero-button">Explore Blog</a>
-      </div>
-    </section>
-    <hr>
-  {%- endif -%}
-  {%- include postingan.html random=true limit=3 summary='short' -%}
+<section class="heropage">
+  <h1 class="site-title">{{- site.title -}}</h1>
+  <p class="site-desctiption">{{ site.description }}</p>
+</section>
+<section class="featured-posts">
+  <div class="section-title">
+    <h2><span>Featured</span></h2>
+  </div>
+  <div class="section-block d-grid grid-col-2">
+    {%- include post-list.html grid='row' featured=true -%}
+  </div>
+</section>
+<section class="random-posts">
+  <div class="section-title">
+    <h2><span>Random</span></h2>
+    <a href="{{ '/blog/' | relative_url }}">All posts</a>
+  </div>
+  <div class="section-block d-grid grid-col-3">
+    {%- include post-list.html grid='col' limit=3 random=true -%}
+  </div>
 </section>

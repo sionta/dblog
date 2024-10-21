@@ -3,9 +3,9 @@ layout: base
 ---
 {%- assign post_image = page.image.src | default: page.image -%}
 {%- assign post_author = page.author | default: site.author -%}
-{%- assign read_time = page.content | number_of_words | divided_by: 180 %}
 {%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
 {%- assign date_modified = page.modified_at | default: page.last_modified_at %}
+{%- capture read_time -%}{%- include read-time.html -%}{%- endcapture -%}
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <p class="post-metadata">
@@ -20,15 +20,15 @@ layout: base
           </time>
         {%- endif -%}
       {%- endcomment -%}
-      {%- if read_time > 0 -%}
+      {%- if read_time.size > 0 -%}
         {{- '·' -}}
         <span class="read-time">{{ read_time }} min read</span>
       {%- endif -%}
     </p>
     <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.description %}
+    {%- if page.description -%}
       <p class="post-summary">{{ page.description }}</p>
-    {% endif %}
+    {%- endif -%}
     {%- if post_author -%}
       <p class="post-author">
         <span itemprop="author" itemscope itemtype="https://schema.org/Person">

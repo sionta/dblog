@@ -1,99 +1,208 @@
 @use "sass:map";
 @use "sass:math";
+@use "helpers" as *;
 
-// Prefix for CSS variables
-$css-var-prefix: "" !default; // e.g., "dblog-"
+$font-sizes: () !default;
+$font-sizes: map.deep-merge(
+  (
+    "base": (
+      "relative": 1rem,
+      "responsive": clamp(1rem, 2vw, 1.125rem),
+      "heading": clamp(2rem, 6vw, 3rem),
+    ),
+    "xs": (
+      "relative": 0.875rem,
+      "responsive": clamp(0.875rem, 2vw, 1rem),
+      "heading": clamp(1rem, 1.75vw, 1.25rem),
+    ),
+    "sm": (
+      "relative": 1rem,
+      "responsive": clamp(1rem, 3vw, 1.125rem),
+      "heading": clamp(1.125rem, 2vw, 1.5rem),
+    ),
+    "md": (
+      "relative": 1.125rem,
+      "responsive": clamp(1.125rem, 4vw, 1.25rem),
+      "heading": clamp(1.25rem, 2.5vw, 1.75rem),
+    ),
+    "lg": (
+      "relative": 1.25rem,
+      "responsive": clamp(1.25rem, 5vw, 1.5rem),
+      "heading": clamp(1.5rem, 3vw, 2rem),
+    ),
+    "xl": (
+      "relative": 1.5rem,
+      "responsive": clamp(1.5rem, 6vw, 2rem),
+      "heading": clamp(1.75rem, 3.5vw, 2.25rem),
+    ),
+    "xxl": (
+      "relative": 2rem,
+      "responsive": clamp(2rem, 7vw, 3rem),
+      "heading": clamp(2rem, 4vw, 2.5rem),
+    ),
+  ),
+  $font-sizes
+);
 
 // Color neutrals
-$base00: #ffffff !default;
-$base01: #f5f7fa !default;
-$base02: #e4e8f1 !default;
-$base03: #ccd5e0 !default;
-$base04: #9faec5 !default;
-$base05: #738295 !default;
-$base06: #4d596b !default;
-$base07: #2f3b50 !default;
-$base08: #1c2433 !default;
-$base09: #111827 !default;
-$base10: mix(#0a0f1b, #010411) !default;
-// $base10: #020617 !default;
+$color-base00: #ffffff !default;
+$color-base01: #f5f7fa !default;
+$color-base02: #e4e8f1 !default;
+$color-base03: #ccd5e0 !default;
+$color-base04: #9faec5 !default;
+$color-base05: #738295 !default;
+$color-base06: #4d596b !default;
+$color-base07: #2f3b50 !default;
+$color-base08: #1c2433 !default;
+$color-base09: #111827 !default;
+$color-base10: mix(#0a0f1b, #010411) !default;
 
-// $base00: #f8fafc !default;
-// $base01: #f1f5f9 !default;
-// $base02: #e2e8f0 !default;
-// $base03: #cbd5e1 !default;
-// $base04: #94a3b8 !default;
-// $base05: #64748b !default;
-// $base06: #475569 !default;
-// $base07: #334155 !default;
-// $base08: #0f172a !default;
+$color-blue: #0d6efd !default;
+$color-indigo: #6610f2 !default;
+$color-purple: #6f42c1 !default;
+$color-pink: #d63384 !default;
+$color-red: #dc3545 !default;
+$color-orange: #fd7e14 !default;
+$color-yellow: #ffc107 !default;
+$color-green: #198754 !default;
+$color-teal: #20c997 !default;
+$color-cyan: #0dcaf0 !default;
+$color-black: #000 !default;
+$color-white: #fff !default;
+$color-gray: #6c757d !default;
+$color-gray-dark: #343a40 !default;
+$color-gray-100: #f8f9fa !default;
+$color-gray-200: #e9ecef !default;
+$color-gray-300: #dee2e6 !default;
+$color-gray-400: #ced4da !default;
+$color-gray-500: #adb5bd !default;
+$color-gray-600: #6c757d !default;
+$color-gray-700: #495057 !default;
+$color-gray-800: #343a40 !default;
+$color-gray-900: #212529 !default;
+$color-dark: #000 !default;
+$color-light: #ffff !default;
 
-// Color palettes
-$dark-red: #dc322f !default;
-$dark-orange: #cb4b16 !default;
-$dark-yellow: #b58900 !default;
-$dark-green: #859900 !default;
-$dark-cyan: #2aa198 !default;
-$dark-blue: #268bd2 !default;
-$dark-violet: #6c71c4 !default;
-$dark-magenta: #d33682 !default;
-$light-red: #cc6666 !default;
-$light-orange: #de935f !default;
-$light-yellow: #f0c674 !default;
-$light-green: #b5bd68 !default;
-$light-cyan: #8abeb7 !default;
-$light-blue: #81a2be !default;
-$light-violet: #b294bb !default;
-$light-magenta: #eb5ea2 !default;
+$color-dark-background: $color-dark !default;
+$color-dark-text: $color-light !default;
+$color-dark-border: #2a2a2a !default;
+$color-dark-glare: #1e1e1e !default;
+$color-dark-shade: #181818 !default;
+$color-dark-accent: #6c71c4 !default;
+$color-dark-primary: #565a9c !default;
+$color-dark-secondary: #404375 !default;
+$color-dark-disabled: $color-gray-900 !default;
+$color-dark-muted: $color-gray-600 !default;
 
-// Breakpoints, viewports and root font size
-$breakpoints: () !default;
-$breakpoints: map.deep-merge(
+$color-light-muted: $color-gray-500 !default;
+$color-light-disabled: $color-gray-200 !default;
+$color-light-background: $color-light !default;
+$color-light-text: $color-dark !default;
+
+$color-light-border: #d1d5db !default;
+$color-light-glare: #f8f9fa !default;
+$color-light-shade: #e9ecef !default;
+
+$color-light-accent: mix(#2196f3, #03a9f4) !default;
+$color-light-primary: #2196f3 !default;
+$color-light-secondary: #1976d2 !default;
+
+$color-schemes: () !default;
+$color-schemes: map.deep-merge(
   (
-    // Small (landscape phones)
-    // Font size: 17px
-    sm:
-      (
-        breakpoint: 576px,
-        viewport: 510px,
-        root-font-size: 106.25%,
-      ),
+    "base": (
+      "color-base00": $color-base00,
+      "color-base01": $color-base01,
+      "color-base02": $color-base02,
+      "color-base03": $color-base03,
+      "color-base04": $color-base04,
+      "color-base05": $color-base05,
+      "color-base06": $color-base06,
+      "color-base07": $color-base07,
+      "color-base08": $color-base08,
+      "color-base09": $color-base09,
+      "color-base10": $color-base10,
+      "color-gray-100": $color-gray-100,
+      "color-gray-200": $color-gray-200,
+      "color-gray-300": $color-gray-300,
+      "color-gray-400": $color-gray-400,
+      "color-gray-500": $color-gray-500,
+      "color-gray-600": $color-gray-600,
+      "color-gray-700": $color-gray-700,
+      "color-gray-800": $color-gray-800,
+      "color-gray-900": $color-gray-900,
+      "color-gray-dark": $color-gray-dark,
+      "color-gray": $color-gray,
+      "color-dark": $color-dark,
+      "color-light": $color-light,
+      "color-dark-rgb": rgb-value($color-dark),
+      "color-light-rgb": rgb-value($color-light),
+      "color-black": $color-black,
+      "color-white": $color-white,
+      "color-red": $color-red,
+      "color-pink": $color-pink,
+      "color-green": $color-green,
+      "color-teal": $color-teal,
+      "color-blue": $color-blue,
+      "color-cyan": $color-cyan,
+      "color-indigo": $color-indigo,
+      "color-purple": $color-purple,
+      "color-orange": $color-orange,
+      "color-yellow": $color-yellow,
+    ),
+    "light": (
+      // Brighter
+      // Slightly
+      "color-muted": $color-light-muted,
+      "color-disabled": $color-light-disabled,
+      "color-translucent": rgba($color-light-background, 0.75),
+      "color-background": $color-light-background,
+      "color-border": $color-light-border,
+      "color-glare": $color-light-glare,
+      "color-shade": $color-light-shade,
+      "color-text": $color-light-text,
+      "color-accent": $color-light-accent,
+      "color-primary": $color-light-primary,
+      "color-secondary": $color-light-secondary,
+      "color-errorBg": #ffebee,
+      "color-errorBd": #ef5350,
+      "color-error": #f44336,
+      "color-infoBg": #e1f5fe,
+      "color-infoBd": #4fc3f7,
+      "color-info": #03a9f4,
+      "color-successBg": #e8f5e9,
+      "color-successBd": #66bb6a,
+      "color-success": #4caf50,
+      "color-warningBg": #fff3e0,
+      "color-warningBd": #ffb74d,
+      "color-warning": #ff9800,
+    ),
+    "dark": (
+      "color-muted": $color-dark-muted,
+      "color-disabled": $color-dark-disabled,
+      "color-translucent": rgba($color-dark-background, 0.75),
+      "color-background": $color-dark-background,
+      "color-border": $color-dark-border,
+      "color-glare": $color-dark-glare,
+      "color-shade": $color-dark-shade,
+      "color-text": $color-dark-text,
+      "color-accent": $color-dark-accent,
+      "color-primary": $color-dark-primary,
+      "color-secondary": $color-dark-secondary,
 
-    // Medium (tablets)
-    // Font size: 18px
-    md:
-      (
-        breakpoint: 768px,
-        viewport: 700px,
-        root-font-size: 112.5%,
-      ),
-
-    // Large
-    // Font size: 19px
-    lg:
-      (
-        breakpoint: 1024px,
-        viewport: 950px,
-        root-font-size: 118.75%,
-      ),
-
-    // Extra large
-    // Font size: 20px
-    xl:
-      (
-        breakpoint: 1280px,
-        viewport: 1200px,
-        root-font-size: 125%,
-      ),
-
-    // Extra extra large
-    // Font size: 21px
-    xxl:
-      (
-        breakpoint: 1536px,
-        viewport: 1450px,
-        root-font-size: 131.25%,
-      )
+      "color-errorBg": #d32f2f,
+      "color-errorBd": #ef9a9a,
+      "color-error": #e57373,
+      "color-infoBg": #0288d1,
+      "color-infoBd": #4fc3f7,
+      "color-info": #29b6f6,
+      "color-successBg": #2e7d32,
+      "color-successBd": #81c784,
+      "color-success": #66bb6a,
+      "color-warningBg": #ff6f00,
+      "color-warningBd": #ffb74d,
+      "color-warning": #ffa726,
+    ),
   ),
-  $breakpoints
+  $color-schemes
 );

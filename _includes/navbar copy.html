@@ -1,0 +1,38 @@
+<nav class="main-menu">
+  <ul>
+    {% for item in site.data.navigation.main_menu %}
+      <li>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.sub_menu %}
+          <ul class="sub-menu">
+            {% for sub_item in item.sub_menu %}
+              <li>
+                <a href="{{ sub_item.url }}">{{ sub_item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Dapatkan semua item menu yang memiliki sub-menu
+    var menuItems = document.querySelectorAll('.main-menu li');
+
+    // Iterasi setiap item menu
+    menuItems.forEach(function (item) {
+      // Cek apakah item menu memiliki sub-menu
+      var subMenu = item.querySelector('.sub-menu');
+      if (subMenu) {
+        // Tambahkan event listener untuk klik
+        item.addEventListener('click', function (e) {
+          e.preventDefault(); // Mencegah link dari langsung terbuka
+          // Toggle (tampilkan/sembunyikan) sub-menu
+          subMenu.classList.toggle('open');
+        });
+      }
+    });
+  });
+</script>

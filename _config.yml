@@ -11,18 +11,11 @@ description: >-
 url: "https://sionta-dblog.vercel.app" # The full base URL of your site (e.g., https://example.com). Required for generating absolute links.
 baseurl: "" # If your site is hosted in a subfolder (e.g., /blog), define the subpath here. Otherwise, leave it empty.
 
-brand: sionta
-logo: /assets/img/dblog.svg
+logo: "/assets/img/logos/logo.svg"
 
-# copyright: >-
+#copyright: >-
 #   &copy; :year: :title:. All Rights Reserved. Designed with love by
 #   <a href="https://github.com/sionta">Andre Attamimi</a>
-
-# Configuration for the hero section, often the main banner on the homepage.
-hero:
-  heading: Welcome to our Blog. # Main heading text for the hero section.
-  summary: >- # A short summary or description shown below the hero heading.
-    A clean and minimalist Jekyll theme tailored for blogger seeking simplicity.
 
 # For SEO and default post author
 author: &DEFAULT_AUTHOR
@@ -30,7 +23,7 @@ author: &DEFAULT_AUTHOR
   twitter: "r007mmxv"
   email: "rumatua0@gmail.com"
   url: "https://github.com/sionta"
-  picture: "/assets/images/logo.svg"
+  #picture: "/assets/images/logo.svg"
 
 # Social media links and RSS feed subscription button. Icons are from Tabler Icons (https://tabler.io/icons)
 social_media:
@@ -97,6 +90,7 @@ defaults:
       math: false # Disable MathJax for math rendering by default.
       diagram: false # Disable Mermaid.js for diagram rendering by default.
       comments: false # Disable comments by default. To enable, set this to true and configure a comments provider.
+      # featured: false # Disable featured post by default. To enable set to `true`
 
 # Theme settings
 theme: dblog # The theme used for the site.

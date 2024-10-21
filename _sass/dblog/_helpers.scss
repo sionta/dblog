@@ -1,59 +1,49 @@
-@use "sass:map";
+@use "sass:color";
 @use "sass:math";
+@use "sass:map";
 
-@mixin media-query($breakpoint: "md", $viewport: "max") {
-  $query: "screen";
-  @if $breakpoint == "sm" {
-    $query: "(#{$viewport}-width: 576px)";
-  } @else if $breakpoint == "md" {
-    $query: "(#{$viewport}-width: 768px)";
-  } @else if $breakpoint == "lg" {
-    $query: "(#{$viewport}-width: 1024px)";
+@mixin css-vars($map, $key, $prefix: "") {
+  @if map.get($map, $key) {
+    @each $key, $value in map.get($map, $key) {
+      --#{$prefix}#{$key}: #{$value};
+    }
   } @else {
-    @error 'Breakpoint "#{$breakpoint}" not defined. (available: sm,md,lg).';
+    @error "Error map.get($map, $key)";
+  }
+}
+
+@mixin media-query($bp: "md", $vw: "max") {
+  $query: "screen";
+
+  @if $bp == "sm" {
+    $query: "(#{$vw}-width: 576px)";
+  } @else if $bp == "md" {
+    $query: "(#{$vw}-width: 768px)";
+  } @else if $bp == "lg" {
+    $query: "(#{$vw}-width: 1080px)";
   }
 
-  @media screen and #{$query} {
+  @media #{$query} {
     @content;
   }
 }
 
-@function unit-relative($value, $unit: "rem") {
-  $unit-size: if($unit == "rem", 1rem, 1em);
-
+@function unit-relative($value, $root: "rem") {
+  $unit-base: if($root == "rem", 1rem, 1em);
   $unit-name: unit($value);
 
   @if $unit-name == "px" {
-    @return math.div($value, 16px) * $unit-size;
+    @return math.div($value, 16px) * $unit-base;
   } @else if $unit-name == "%" {
-    @return math.div($value, 100) * $unit-size;
+    @return math.div($value, 100) * $unit-base;
   } @else {
     @return $value;
   }
 }
 
-@function hex-to-color($hex, $format: "rgb", $alpha: 1) {
-  // Menghilangkan tanda #
-  $hex: if(str-index($hex, "#") == 1, str-slice($hex, 2), $hex);
-
-  // Mendapatkan nilai RGB
-  $r: red(#{$hex});
-  $g: green(#{$hex});
-  $b: blue(#{$hex});
-
-  // Kondisional berdasarkan format
-  @if $format == "rgb" {
-    @return rgb($r, $g, $b);
-  } @else if $format == "rgba" {
-    @return rgba($r, $g, $b, $alpha);
-  } @else if $format == "hsl" {
-    @return hsl(
-      hue(rgb($r, $g, $b)),
-      saturation(rgb($r, $g, $b)),
-      lightness(rgb($r, $g, $b))
-    );
-  } @else {
-    @return $hex;
-    // @error "Unsupported format: #{$format}. Use 'rgb', 'rgba', or 'hsl'.";
-  }
+@function rgb-value($color) {
+  $red: color.channel($color, "red", $space: rgb);
+  $green: color.channel($color, "green", $space: rgb);
+  $blue: color.channel($color, "blue", $space: rgb);
+  @return #{$red}, #{$green}, #{$blue};
 }

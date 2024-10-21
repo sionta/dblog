@@ -9,7 +9,7 @@
 
 .code-blocks {
   background-color: var(--color-glare);
-  border: 1px solid var(--color-shade);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   font-family: var(--font-mono);
   margin-bottom: var(--space-unit);
@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: var(--color-shade);
-  border-bottom: 1px solid var(--color-glare);
+  border-bottom: 1px solid var(--color-border);
   font-size: 0.875rem;
   padding: calc(var(--code-space, 1rem) * 0.5) var(--code-space, 1rem);
 
@@ -108,7 +108,7 @@
 
 .rouge-gutter,
 .rouge-line {
-  border-right: 1px solid var(--color-shade);
+  border-right: 1px solid var(--color-border);
   overflow-x: hidden;
   text-align: right;
   user-select: none;

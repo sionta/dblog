@@ -1,10 +1,10 @@
 {%- assign date_format = site.date_format | default: '%b %d, %Y' -%}
 {%- assign site_posts = paginator.posts | default: site.posts -%}
 {%- assign post_limit = include.limit | default: site_posts.size -%}
-{% if include.random == true %}
+{%- if include.random == true -%}
   {%- assign site_posts = site_posts | sample: post_limit -%}
-{% endif %}
-<div id="post-list" class="post-list">
+{%- endif -%}
+<div class="post-list">
   {%- for post in site_posts limit: post_limit -%}
     {%- assign item_class = 'post-item' -%}
     {%- assign post_img = post.image.src | default: post.image -%}

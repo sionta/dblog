@@ -16,9 +16,11 @@
     {%- comment -%} Previous Page {%- endcomment -%}
     <li class="pagination__item item-prev">
       {%- if prev_page -%}
-        <a class="{{ class }}" href="{{ prev_page | relative_url }}">Previous</a>
+        <a class="{{ class }}" href="{{ prev_page | relative_url }}">
+          {%- include svg_symbol.html id='chevron-left' %} Prev</a
+        >
       {%- else -%}
-        <span class="{{ class }} disabled">Previous</span>
+        <span class="{{ class }} disabled">Prev</span>
       {%- endif -%}
       {%- if include.page_title and prev_page.title -%}
         <span class="item-title">{{ prev_page.title }}</span>
@@ -41,7 +43,10 @@
     {%- comment -%} Next Page {%- endcomment -%}
     <li class="pagination__item item-next">
       {%- if next_page -%}
-        <a class="{{ class }}" href="{{ next_page | relative_url }}">Next</a>
+        <a class="{{ class }}" href="{{ next_page | relative_url }}"
+          >Next
+          {% include svg_symbol.html id='chevron-right' -%}
+        </a>
       {%- else -%}
         <span class="{{ class }} disabled">Next</span>
       {%- endif -%}

@@ -1,4 +1,14 @@
 @use "../helpers" as *;
 @use "../variables" as *;
 
-// .blog {}
+.blog {
+  display: flex;
+  gap: var(--space-unit);
+  flex-direction: column;
+
+  @include media-query("md", "min") {
+    .post-card {
+      margin-bottom: var(--space-unit);
+    }
+  }
+}

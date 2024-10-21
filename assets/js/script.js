@@ -1,13 +1,25 @@
 (() => {
   "use strict";
 
-  const menuToggle = function () {
-    const menuToggle = document.getElementById("menu-toggle");
-    const menuIcon = document.querySelector(".menu-icon");
+  const activeNavbar = function () {
+    const menuToggle = document.querySelector("#menu-toggle");
+    const menuBurger = document.querySelector(".menu-burger");
+    const menuSubInput = document.querySelector(".menu-sublist input");
+    const menuSubLabel = document.querySelector(".menu-sublist label");
 
-    menuToggle.addEventListener("change", () => {
-      menuIcon.setAttribute("aria-expanded", menuToggle.checked);
-    });
+    if (menuToggle && menuBurger) {
+      menuToggle.addEventListener("change", (event) => {
+        menuToggle.setAttribute("aria-checked", event.target.checked);
+        menuBurger.setAttribute("aria-expanded", event.target.checked);
+      });
+    }
+
+    if (menuSubInput && menuSubLabel) {
+      menuSubInput.addEventListener("change", (event) => {
+        menuSubInput.setAttribute("aria-checked", event.target.checked);
+        menuSubLabel.setAttribute("aria-expanded", event.target.checked);
+      });
+    }
   };
 
   const tabBlock = function () {
@@ -147,7 +159,7 @@
   };
 
   addEventListener("DOMContentLoaded", () => {
-    menuToggle();
+    activeNavbar();
     copyClipboard();
     searchPost();
     // tabBlock();

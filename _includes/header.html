@@ -1,12 +1,13 @@
 <header class="site-header">
   <div class="wrapper">
     <div class="site-header__inner">
-      <div class="site-social">
-        <a href="{{ 'feed.xml' | absolute_url }}">{% include icons/rss.svg %}</a>
-        {% comment %} {% include theme-toggle.html type='checkbox' %} {% endcomment %}
-      </div>
-      {% include brand.html type='header' %}
-      {% include navigation.html type='primary' %}
+      {% include brand.html class='head-title' type='header' %}
+      {% include navbar.html %}
+      {% comment %}
+        <nav class="site-navbar" aria-label="Main Navigation">
+          {% include navigation.html type='primary' %}
+        </nav>
+      {% endcomment %}
     </div>
   </div>
 </header>
