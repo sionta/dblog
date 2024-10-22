@@ -1,38 +1,71 @@
 {% assign page_paths = site.data.navigation %}
-<nav class="site-navbar main-menu" aria-label="Main Navigation">
-  <input id="menu-toggle" type="checkbox" name="toggle-menu" aria-checked="false">
-  <label for="menu-toggle" class="menu-burger" aria-controls="menu" aria-expanded="false">
-    <span class="line"></span>
-    <span class="line"></span>
-    <span class="line"></span>
-  </label>
-  <ul class="menu-list" id="menu">
-    {% for item in page_paths %}
-      <li class="menu-item{% if item.sub_menu %} menu-sublist{% endif %}">
-        {% if item.sub_menu %}
-          <input id="submenu-toggle-{{ forloop.index }}" type="checkbox" name="toggle-submenu" aria-checked="false">
-          <label for="submenu-toggle-{{ forloop.index }}" aria-controls="sub-menu" aria-expanded="false">
-            {{- item.title -}}
-          </label>
-          <ul class="sub-menu" id="sub-menu">
-            {% for sub_item in item.sub_menu %}
-              <li class="sub-menu-item">
-                {% assign sub_nav_item = site.pages | where: 'path', sub_item | first %}
-                <a href="{{ sub_nav_item.url }}">{{ sub_nav_item.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        {% else %}
-          {% assign nav_item = site.pages | where: 'path', item | first %}
-          {% if nav_item.title %}
-            <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+{% if page_paths %}
+  <nav class="site-navbar main-menu" aria-label="Main Navigation">
+    <input id="menu-toggle" type="checkbox" name="toggle-menu" aria-checked="false">
+    <label for="menu-toggle" class="menu-burger" aria-controls="menu" aria-expanded="false">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </label>
+    <ul class="menu-list" id="menu">
+      {% for item in page_paths %}
+        <li class="menu-item{% if item.sub_menu %} menu-sublist{% endif %}">
+          {% if item.sub_menu and item.title %}
+            <input id="submenu-toggle-{{ forloop.index }}" type="checkbox" name="toggle-submenu" aria-checked="false">
+            <label for="submenu-toggle-{{ forloop.index }}" aria-controls="sub-menu" aria-expanded="false">
+              {{- item.title -}}
+            </label>
+            <ul class="sub-menu" id="sub-menu">
+              {% for sub_item in item.sub_menu %}
+                <li class="sub-menu-item">
+                  {% assign sub_nav_item = site.pages | where: 'path', sub_item | first %}
+                  {% if sub_nav_item.title %}
+                    {% assign sub_nav_link = sub_nav_item.redirect_to | default: sub_nav_item.url %}
+                    {% assign sub_nav_attrs = '' %}
+                    {% if sub_nav_link contains '://' %}
+                      {% assign sub_nav_attrs = 'target="_blank" rel="noopener noreferrer"' | strip %}
+                    {% endif %}
+                    <a
+                      class="menu-link"
+                      href="{{- sub_nav_link | relative_url -}}"
+                      title="{{- sub_nav_item.title -}}"
+                      {{ sub_nav_attrs | strip }}
+                    >
+                      {{- sub_nav_item.title -}}
+                    </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            {% assign nav_item = site.pages | where: 'path', item | first %}
+            {% if nav_item.title %}
+              {% assign nav_link = nav_item.redirect_to | default: nav_item.url %}
+              {% assign link_class = 'menu-link' %}
+              {% assign link_attrs = '' %}
+              {% if nav_link == page.url %}
+                {% assign link_class = link_class | append: ' current' | strip %}
+                {% assign link_attrs = link_attrs | append: ' aria-current="page"' | strip %}
+              {% endif %}
+              {% if nav_link contains '://' %}
+                {% assign link_attrs = link_attrs | append: ' target="_blank" rel="noopener noreferrer"' | strip %}
+              {% endif %}
+              <a
+                class="{{- link_class | strip -}}"
+                href="{{- nav_link | relative_url -}}"
+                title="{{- nav_item.title -}}"
+                {{ link_attrs | strip }}
+              >
+                {{- nav_item.title -}}
+              </a>
+            {% endif %}
           {% endif %}
-        {% endif %}
+        </li>
+      {% endfor %}
+      <li class="menu-item menu-action">
+        {% include theme-toggle.html type='checkbox' %}
+        <a rel="me" class="feed-rss" href="{{ 'feed.xml' | absolute_url }}">{% include svg_symbol.html id='rss' %}</a>
       </li>
-    {% endfor %}
-    <li class="menu-item menu-action">
-      {% include theme-toggle.html type='checkbox' %}
-      <a rel="me" class="feed-rss" href="{{ 'feed.xml' | absolute_url }}">{% include svg_symbol.html id='rss' %}</a>
-    </li>
-  </ul>
-</nav>
+    </ul>
+  </nav>
+{% endif %}

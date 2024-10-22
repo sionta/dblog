@@ -28,7 +28,9 @@
       <h2 class="post-card__title" itemprop="headline">
         <a href="{{ post_url }}" title="{{ post.title }}">{{- post.title -}}</a>
       </h2>
-      <p class="post-card__description">{%- include summary.html data=post excerpt=true short=true -%}</p>
+      {% if include.summary != false %}
+        <p class="post-card__description">{%- include summary.html data=post excerpt=true short=true -%}</p>
+      {% endif %}
       <div class="post-card__metadata">
         {% if post.author %}
           <span class="author">

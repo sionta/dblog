@@ -8,16 +8,18 @@ p.alert {
 }
 
 .alert {
+  --alert-border-width: 4px;
   --alert-primary: var(--color-text);
   --alert-secondary: var(--color-glare);
   background-color: var(--alert-secondary);
-  border-radius: 5px;
   color: inherit;
   font: inherit;
   position: relative;
   padding: var(--space-unit);
   margin-block: var(--space-unit);
   border: 0px solid var(--alert-primary);
+  border-left-width: var(--alert-border-width);
+  border-radius: 0;
 
   display: flex;
   flex-flow: column wrap;
@@ -28,28 +30,34 @@ p.alert {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+
+    font-family: var(--font-sans);
     font-weight: bold;
     line-height: 1;
+
+    .alert-icon {
+      display: inline-flex;
+
+      svg {
+        width: 1.25em;
+        height: 1.25em;
+      }
+
+      i {
+        font-weight: normal;
+        font-size: 1.25em;
+      }
+    }
   }
 
-  .alert-icon {
-    display: inline-flex;
-
-    svg {
-      width: 1.25em;
-      height: 1.25em;
-    }
-
-    i {
-      font-weight: normal;
-      font-size: 1.25em;
-    }
+  &:not([data-type]),
+  &[data-type="1"] {
+    border-width: 0px;
+    margin-block: calc(var(--space-unit) * 1.5) var(--space-unit);
+    border-top-width: var(--alert-border-width);
   }
 
   &:not([data-type]) {
-    border-top-width: 5px;
-    // margin-inline-end: 5px;
-
     .alert-header {
       background-color: var(--color-background);
       color: var(--alert-primary);
@@ -58,20 +66,18 @@ p.alert {
       padding: 5px;
       left: -0.5rem;
       top: -1rem;
-    }
 
-    .alert-icon {
-      display: block;
-    }
+      .alert-icon {
+        display: block;
+      }
 
-    .alert-name {
-      display: none;
+      .alert-name {
+        display: none;
+      }
     }
   }
 
   &[data-type="1"] {
-    border-top-width: 5px;
-
     .alert-header {
       background-color: var(--alert-primary);
       border-radius: 5px 0px 5px 0px;
@@ -81,21 +87,21 @@ p.alert {
       position: absolute;
       top: -0.8rem;
       left: 0;
-    }
 
-    .alert-icon {
-      display: none;
-    }
+      .alert-icon {
+        display: none;
+      }
 
-    .alert-content {
-      margin-top: 0.5rem;
+      .alert-content {
+        margin-top: 0.5rem;
+      }
     }
   }
 
   &[data-type="2"] {
-    border-left-width: 5px;
+    border-left-width: var(--alert-border-width);
     border-radius: 0px 5px 5px 0px;
-    align-items: first baseline;
+    align-items: baseline;
     flex-flow: row nowrap;
     gap: 0.5rem;
 
@@ -103,23 +109,12 @@ p.alert {
       display: block;
       line-height: 1;
       // height: max-content;
+
+      .alert-name {
+        display: none;
+      }
     }
-
-    .alert-name {
-      display: none;
-    }
   }
-
-  &[data-type="3"] {
-    border-width: 1px;
-    border-left-width: 5px;
-  }
-
-  &[data-type="4"] {
-    border-width: 1px;
-  }
-
-  // &[data-type="5"] {}
 
   .alert-content {
     li:last-child p,
@@ -141,8 +136,7 @@ p.alert {
   @each $name, $value in $alerts {
     &.alert-#{$name} {
       --alert-primary: #{rgba($value, 1)};
-      --alert-secondary: #{rgba($value, 0.5)};
-      --alert-tertiary: #{rgba($value, 0.5)};
+      --alert-secondary: #{rgba($value, 0.3)};
     }
   }
 }

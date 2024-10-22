@@ -1,10 +1,32 @@
 <!doctype html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
   {% include head.html %}
-  <body id="top">
-    {% include header.html %}
-    {% include content.html %}
-    {% include footer.html %}
+  <body>
+    <header class="site-header">
+      <div class="wrapper">
+        <div class="site-header__inner">
+          {% include brand.html class='head-title' type='header' %}
+          {% include navbar.html %}
+        </div>
+      </div>
+    </header>
+
+    <main class="site-content">
+      <div class="wrapper">
+        <div class="site-content__inner">
+          {{ content | page_modified }}
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrapper">
+        <div class="site-footer__inner">
+          {% include copyright.html %}
+        </div>
+      </div>
+    </footer>
+
     {% include scripts.html %}
   </body>
 </html>

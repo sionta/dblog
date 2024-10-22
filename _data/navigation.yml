@@ -5,7 +5,7 @@
 - title: "Mores"
   sub_menu:
     - pages/about.md
+    - pages/contact.html
     - pages/code-of-conduct.md
     - pages/privacy-policy.md
     - pages/terms-of-service.md
-    - pages/contact.html

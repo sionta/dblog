@@ -12,6 +12,70 @@
   transition: color 0.6s;
 }
 
+.main-menu {
+  --space-unit: 20px;
+
+  .menu-list#menu {
+    display: flex;
+    gap: var(--space-unit);
+    align-items: center;
+
+    &,
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      position: relative;
+
+      label {
+        cursor: pointer;
+      }
+
+      ul,
+      input[type="checkbox"] {
+        display: none; /* Hide checkboxes */
+      }
+
+      input:checked + label + ul {
+        display: block; /* Show sub-menu when checkbox is checked */
+      }
+
+      ul {
+        background-color: var(--color-background);
+        border: 1px solid var(--color-border);
+        padding: calc(var(--space-unit) * 0.5);
+        margin: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 5;
+
+        li {
+          width: 200px;
+        }
+      }
+
+      .sub-menu {
+        border-left: 1px solid var(--color-primary);
+
+        .sub-menu {
+          left: 100%; /* Position to the right of the parent */
+          top: 0;
+        }
+      }
+
+      a {
+        color: var(--color-text);
+        display: inline-block;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
 .site-navbar {
   &,
   .menu-list {
@@ -89,9 +153,12 @@
     }
 
     .menu-list {
+      display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      padding: var(--space-unit);
+
       position: fixed;
       z-index: 2;
       top: 0;
@@ -99,7 +166,7 @@
       width: 100vw; /* Full width */
       height: 100vh; /* Full height */
       transform: translateX(-100%); /* Start off-screen */
-      padding: var(--space-unit);
+
       overflow: hidden;
       box-sizing: border-box;
       transition: transform 0.5s ease; /* Use transform for smoother animation */

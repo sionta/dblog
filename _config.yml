@@ -11,7 +11,8 @@ description: >-
 url: "https://sionta-dblog.vercel.app" # The full base URL of your site (e.g., https://example.com). Required for generating absolute links.
 baseurl: "" # If your site is hosted in a subfolder (e.g., /blog), define the subpath here. Otherwise, leave it empty.
 
-logo: "/assets/img/logos/logo.svg"
+#brand: dblog
+#image: "/assets/img/logos/logo.svg"
 
 #copyright: >-
 #   &copy; :year: :title:. All Rights Reserved. Designed with love by
@@ -23,7 +24,7 @@ author: &DEFAULT_AUTHOR
   twitter: "r007mmxv"
   email: "rumatua0@gmail.com"
   url: "https://github.com/sionta"
-  #picture: "/assets/images/logo.svg"
+  picture: "/assets/images/logo.svg"
 
 # Social media links and RSS feed subscription button. Icons are from Tabler Icons (https://tabler.io/icons)
 social_media:
@@ -32,6 +33,22 @@ social_media:
   - { name: "GitHub", url: "https://github.com/sionta" }
   - { name: "Mastodon", url: "https://mastodon.social/@sionta" }
   - { name: "Twitter", icon: "brand-x", url: "https://twitter.com/r007mmxv" }
+
+# Post comments
+# NB: giscus and utterances requirer on public repo.
+comments:
+  provider: "" # (e.g. disqus), The provider settings below:
+  disqus: # What is `shortname` see https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+    shortname: ""
+  giscus: # For more settings see https://giscus.app/
+    repo: ""
+    repo_id: ""
+    category: ""
+    category_id: ""
+  utterances: # For more setting see to https://utteranc.es/
+    repo: ""
+    label: ""
+    issue_term: ""
 
 # PLEASE DONT MODIFY AFTER THIS LINE ********************************
 

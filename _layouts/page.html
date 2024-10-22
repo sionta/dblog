@@ -1,19 +1,14 @@
 ---
 layout: base
 ---
-{%- assign page_class = 'page ' | append: page.class | strip -%}
-<article class="{{ page_class }}">
+{%- assign page_class = 'section-page ' | append: page.class | strip -%}
+<section class="{{ page_class }}">
   {%- if page.title -%}
-    <header class="page-header hero hero-fluid">
-      <div class="hero-wrapper">
-        <h1 class="hero-heading">{{ page.title }}</h1>
-        {%- if page.summary -%}
-          <p class="hero-summary">{{ page.summary }}</p>
-        {%- endif -%}
-      </div>
-    </header>
+    <div class="page-header">
+      <h1 class="page-title">{{ page.title }}</h1>
+    </div>
   {%- endif -%}
-  <section class="page-content">
+  <div class="page-content">
     {{ content }}
-  </section>
-</article>
+  </div>
+</section>

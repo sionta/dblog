@@ -1,15 +1,27 @@
 @use "../helpers" as *;
 @use "../variables" as *;
 
-.page {
-  margin-top: calc(var(--gutter-unit) * -1);
-  .hero-fluid {
+.section-page {
+  .page-header {
     text-align: center;
+    background-color: var(--color-glare);
+    margin-bottom: var(--space-unit-xl);
+    padding: var(--space-unit);
+
+    > * {
+      @extend %wrapper;
+    }
   }
 
-  @include media-query("md", "max") {
-    .hero.hero-fluid {
-      max-height: 50vh;
-    }
+  .page-content {
+    @extend %wrapper;
+    padding-top: var(--space-unit);
+    padding-bottom: var(--space-unit);
+  }
+
+  %wrapper {
+    max-width: var(--width-medium);
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -1,38 +1,37 @@
 @use "../helpers" as *;
 @use "../variables" as *;
 
-.home {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-unit-cxxl);
+.section-home {
+  .heropage {
+    background-color: var(--color-glare);
+    margin-bottom: calc(var(--space-unit) * 2);
+    padding: var(--space-unit);
 
-  .hero {
-    max-width: var(--width-medium);
+    @include media-query("md", "min") {
+      text-align: center;
+    }
+
+    .site-title,
+    .site-desctiption {
+      max-width: var(--width-medium);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .site-title {
+      font-family: var(--font-title);
+      font-size: var(--font-size-cxxxl);
+      font-weight: 900;
+    }
+
+    .site-desctiption {
+      font-family: var(--font-serif);
+      font-weight: 400;
+    }
   }
 
-  .section-title {
-    h2 {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 25px;
-    }
-
-    span {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.44);
-      display: inline-block;
-      margin-bottom: -1px;
-      padding-bottom: 20px;
-    }
-  }
-
-  .post-list {
-    margin-top: var(--space-unit-cxxl);
-
-    .post-item {
-      flex: auto;
-      height: inherit;
-    }
+  .featured-posts,
+  .random-posts {
+    margin-bottom: var(--space-unit-clg);
   }
 }

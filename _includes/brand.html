@@ -1,9 +1,10 @@
 {%- assign brand_type = include.type | default: 'header' -%}
+{%- assign brand_title = site.brand | default: site.title %}
 {%- assign brand_class = 'site-brand ' | append: include.class | strip -%}
 {%- if brand_type == 'footer' -%}
   <h4 class="{{ brand_class }}">{{- site.title -}}</h4>
 {%- else -%}
   <h1 class="{{ brand_class }}">
-    <a class="site-link" href="{{- '/' | absolute_url -}}" title="{{- site.title -}}'s logo">{{- site.title -}}</a>
+    <a class="site-link" href="{{- '/' | absolute_url -}}" title="{{- brand_title -}}'s logo">{{- brand_title -}}</a>
   </h1>
 {%- endif -%}

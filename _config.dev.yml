@@ -1,6 +1,14 @@
 sass:
   style: expanded
 
+comments:
+  provider: "giscus"
+  giscus:
+    repo: "sionta/dblog"
+    repo_id: "R_kgDOMG6U4A"
+    category: "Q&A"
+    category_id: "DIC_kwDOMG6U4M4CjkyH"
+
 markdown: kramdown
 kramdown:
   input: GFM

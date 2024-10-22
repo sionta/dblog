@@ -1,0 +1,121 @@
+{%- assign PROVIDER_NAME = site.comments.provider | downcase -%}
+{%- assign PROVIDER_DATA = site.comments[PROVIDER_NAME] -%}
+{%- if PROVIDER_NAME == 'disqus' -%}
+  {%- assign PROVIDER_ID = 'disqus_thread' -%}
+{%- else -%}
+  {%- assign PROVIDER_ID = 'post-comments' -%}
+{%- endif -%}
+{%- if page.comments == true and PROVIDER_NAME.size > 0 -%}
+  <div
+    id="{{ PROVIDER_ID }}"
+    class="{{ PROVIDER_NAME }} post-comments"
+    itemprop="comment"
+    itemscope
+    itemtype="https://schema.org/Comment"
+  ></div>
+  {%- case PROVIDER_NAME -%}
+    {%- when 'disqus' -%}
+      <script>
+        var disqus_config = function () {
+          this.page.url = '{{ page.url | absolute_url }}';
+          this.page.identifier = '{{ page.id }}';
+        };
+
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '{{ PROVIDER_DATA.shortname }}' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+
+        // Event listener for theme changes
+        window.addEventListener('message', (event) => {
+          if (event.data.themeChange && typeof DISQUS !== 'undefined') {
+            // Reset Disqus comments to reflect theme change
+            DISQUS.reset({ reload: true, config: disqus_config });
+          }
+        });
+      </script>
+      <noscript
+        >Please enable JavaScript to view the
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
+      >
+    {%- when 'giscus' -%}
+      <script>
+        (() => {
+          let giscusTheme =
+            localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+          if (giscusTheme === 'dark') {
+            giscusTheme = giscusTheme + '_dimmed';
+          }
+
+          const giscusAttributes = {
+            src: 'https://giscus.app/client.js',
+            'data-repo': '{{ PROVIDER_DATA.repo }}',
+            'data-repo-id': '{{ PROVIDER_DATA.repo_id }}',
+            'data-category': '{{ PROVIDER_DATA.category }}',
+            'data-category-id': '{{ PROVIDER_DATA.category_id }}',
+            'data-mapping': "{{ PROVIDER_DATA.mapping | default: 'pathname' }}",
+            'data-strict': '{{ PROVIDER_DATA.strict | default: 0 }}',
+            'data-reactions-enabled': '{{ PROVIDER_DATA.reactions_enabled | default: 1 }}',
+            'data-emit-metadata': '{{ PROVIDER_DATA.metadata | default: 0 }}',
+            'data-theme': giscusTheme || 'preferred_color_scheme',
+            'data-lang': "{{ PROVIDER_DATA.lang | default: site.lang | default: 'en' }}",
+            'data-loading': 'lazy',
+            crossorigin: 'anonymous',
+            async: true,
+          };
+
+          const giscusScript = document.createElement('script');
+          Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+          document.getElementById('{{ PROVIDER_ID }}').appendChild(giscusScript);
+        })();
+
+        window.addEventListener('message', (event) => {
+          const theme = event.data.themeChange;
+          const frame = document.querySelector('.giscus-frame');
+          if (theme && frame.contentWindow) {
+            frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+          }
+        });
+      </script>
+    {%- when 'utterances' -%}
+      <script>
+        (() => {
+
+          let utterancesTheme =
+            localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+          if (utterancesTheme) {
+            utterancesTheme = 'github-' + utterancesTheme;
+          }
+
+          const utterancesAttributes = {
+            src: 'https://utteranc.es/client.js',
+            label: '{{ PROVIDER_DATA.label | default: 'Q&A' }}',
+            repo: '{{ PROVIDER_DATA.repo }}',
+            'issue-term': '{{ PROVIDER_DATA.issue_term | default: 'pathname' }}',
+            theme: utterancesTheme || 'preferred-color-scheme',
+            crossorigin: 'anonymous',
+            async: true,
+          };
+
+          const utterancesScript = document.createElement('script');
+          Object.entries(utterancesAttributes).forEach(([key, value]) => utterancesScript.setAttribute(key, value));
+          document.getElementById('{{ PROVIDER_ID }}').appendChild(utterancesScript);
+        })();
+
+        window.addEventListener('message', (event) => {
+          const theme = event.data.themeChange;
+          const frame = document.querySelector('.utterances-frame');
+          if (theme && frame.contentWindow) {
+            frame.contentWindow.postMessage({ type: 'set-theme', theme: `github-${theme}` }, 'https://utteranc.es');
+          }
+        });
+      </script>
+  {%- endcase -%}
+{%- endif -%}
