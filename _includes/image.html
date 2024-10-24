@@ -1,0 +1,25 @@
+{%- assign img_src = include.src | default: page.image.src | default: page.image | relative_url -%}
+{%- assign img_alt = include.alt | default: page.image.alt | default: page.title | escape -%}
+{%- assign img_cap = include.txt | default: page.description | default: img_alt | escape -%}
+{%- assign img_class = 'image ' | append: include.class | strip -%}
+{%- if img_src -%}
+  {%- if include.nofig -%}
+    <img
+      class="{{ img_class }}"
+      itemprop="image"
+      src="{{- img_src | relative_url -}}"
+      alt="{{- img_alt -}}"
+      loading="lazy"
+    >
+  {%- else -%}
+    <figure class="{{ img_class }}">
+      <img
+        itemprop="image"
+        src="{{- img_src  -}}"
+        alt="{{- img_alt -}}"
+        loading="lazy"
+      >
+      <figcaption>{{- img_cap -}}</figcaption>
+    </figure>
+  {%- endif -%}
+{%- endif -%}

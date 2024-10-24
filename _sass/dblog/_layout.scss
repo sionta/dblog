@@ -18,15 +18,10 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 .site-brand {
   color: inherit;
   font-family: var(--font-title);
-  font-size: var(--font-size-cxxl);
-  font-weight: 900;
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
   line-height: 1.15;
-
-  &.head-title {
-    font-size: var(--font-size-xxl);
-    font-weight: 800;
-    margin: 0;
-  }
+  margin: 0;
 
   .site-link {
     color: inherit;
@@ -36,14 +31,8 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 
 .site-copyright {
   text-align: center;
-  margin-top: var(--space-unit);
+  margin-top: var(--space-unit-cxl);
   margin-bottom: var(--space-unit);
-}
-
-.site-action {
-  display: flex;
-  align-items: center;
-  gap: var(--space-unit);
 }
 
 .sr-only,
@@ -166,14 +155,41 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 }
 
 .site-footer {
-  --gutter-unit: var(--space-unit-xs);
+  --gutter-unit: var(--space-unit-clg);
   background-color: var(--color-glare);
   color: var(--color-text);
+
+  .site-footer__inner {
+    .foot-title {
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+    }
+
+    .foot-brand {
+      font-family: var(--font-title);
+      font-size: var(--font-size-cxxl);
+      font-weight: 900;
+    }
+
+    @include media-query("md", "max") {
+      .row {
+        flex-direction: column;
+      }
+
+      .order-1-mb {
+        order: -1;
+      }
+    }
+  }
 }
 
 .section-title {
   --color-border-rgb: var(--color-dark-rgb);
   position: relative;
+
+  @at-root [data-theme="dark"] & {
+    --color-border-rgb: var(--color-light-rgb);
+  }
 
   > h2 {
     font-size: var(--font-size-clg);
@@ -195,9 +211,11 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
   }
 
   > a {
-    background-color: transparent;
+    background-color: var(--color-background);
     border: 1px solid var(--color-text);
+    color: currentColor;
     padding: 2px 8px;
+
     display: inline-block;
     vertical-align: middle;
     text-decoration: none;
@@ -205,15 +223,6 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
     position: absolute;
     top: 0.5rem;
     right: 0;
-
-    &:hover {
-      background-color: var(--color-text);
-      color: var(--color-light);
-    }
-  }
-
-  @at-root [data-theme="dark"] & {
-    --color-border-rgb: var(--color-light-rgb);
   }
 }
 

@@ -1,0 +1,16 @@
+comments:
+  allowedFields: ["name", "email", "comment"]
+  branch: "master"
+  commitMessage: "New comment from {{ fields.name }} on {{ fields.slug }}"
+  path: "_data/comments"
+  filename: "comment-:date"
+  moderation: false
+  requiredFields: ["name", "email", "comment"]
+  generatedFields:
+    date:
+      type: "date"
+      options:
+        format: "iso8601"
+  transforms:
+    email:
+      md5: true

@@ -28,6 +28,12 @@
   }
 }
 
+@mixin bg-translucent($blur: 8px, $alpha: 0.5) {
+  background-color: rgba(var(--color-background-rgb), $alpha);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur); // Safari support
+}
+
 @function unit-relative($value, $root: "rem") {
   $unit-base: if($root == "rem", 1rem, 1em);
   $unit-name: unit($value);

@@ -11,21 +11,22 @@
       text-align: center;
     }
 
-    .site-title,
-    .site-desctiption {
+    .hero-heading,
+    .hero-summary {
       max-width: var(--width-medium);
       margin-left: auto;
       margin-right: auto;
     }
 
-    .site-title {
+    .hero-heading {
       font-family: var(--font-title);
       font-size: var(--font-size-cxxxl);
       font-weight: 900;
     }
 
-    .site-desctiption {
+    .hero-summary {
       font-family: var(--font-serif);
+      font-size: var(--font-size-cmd);
       font-weight: 400;
     }
   }

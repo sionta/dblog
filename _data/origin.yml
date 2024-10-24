@@ -1,0 +1,40 @@
+# Resource Hints
+resources:
+  - url: https://fonts.googleapis.com
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+  - url: https://fonts.gstatic.com
+    links:
+      - rel: preconnect
+        opts: [crossorigin]
+      - rel: dns-prefetch
+  - url: https://cdn.jsdelivr.net
+    links:
+      - rel: preconnect
+      - rel: dns-prefetch
+
+fonts:
+  split:
+    - local: /assets/fonts/fira-code.css?v=22
+      remote: https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap
+    - local: /assets/fonts/lato.css?v=24
+      remote: https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap
+    - local: /assets/fonts/merriweather.css?v=30
+      remote: https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap
+    - local: /assets/fonts/playfair-display.css?v=37
+      remote: https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap
+  # merge:
+  #   - local: /assets/fonts/fonts.css
+  #     remote: https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fira+Code:wght@300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap
+
+scripts:
+  search:
+    local: /assets/lib/fuse.js/fuse.min.js
+    remote: https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js
+  diagram:
+    local: /assets/lib/mermaid/mermaid.min.js
+    remote: https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js
+  math:
+    local: /assets/lib/mathjax/tex-mml-chtml.js
+    remote: https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js

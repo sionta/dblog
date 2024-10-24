@@ -4,118 +4,77 @@
 /**
  * Navigation
  */
-.menu-burger,
-.head-title,
-.site-action {
-  position: relative;
-  z-index: 3;
-  transition: color 0.6s;
-}
-
-.main-menu {
-  --space-unit: 20px;
-
-  .menu-list#menu {
-    display: flex;
-    gap: var(--space-unit);
-    align-items: center;
-
-    &,
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      position: relative;
-
-      label {
-        cursor: pointer;
-      }
-
-      ul,
-      input[type="checkbox"] {
-        display: none; /* Hide checkboxes */
-      }
-
-      input:checked + label + ul {
-        display: block; /* Show sub-menu when checkbox is checked */
-      }
-
-      ul {
-        background-color: var(--color-background);
-        border: 1px solid var(--color-border);
-        padding: calc(var(--space-unit) * 0.5);
-        margin: 0;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 5;
-
-        li {
-          width: 200px;
-        }
-      }
-
-      .sub-menu {
-        border-left: 1px solid var(--color-primary);
-
-        .sub-menu {
-          left: 100%; /* Position to the right of the parent */
-          top: 0;
-        }
-      }
-
-      a {
-        color: var(--color-text);
-        display: inline-block;
-        text-decoration: none;
-      }
-    }
-  }
-}
 
 .site-navbar {
-  &,
-  .menu-list {
+  &.second-menu {
+    .menu-list {
+      display: block;
+    }
+
+    .menu-item:not(:last-child) {
+      margin-bottom: var(--space-unit-xs);
+    }
+  }
+
+  .menu-list,
+  .has-action {
     display: flex;
     align-items: center;
   }
 
   .menu-list {
-    position: relative;
-    gap: var(--space-unit-xl);
+    gap: var(--space-unit);
     padding: 0;
     margin: 0;
   }
 
-  .menu-item {
-    display: list-item;
-
-    &:has(.current) {
-      color: var(--color-accent);
-      list-style-type: square;
-    }
-
-    &:not(:has(.current)) {
-      list-style-type: none;
-    }
-
-    &.menu-action {
-      display: flex;
-      align-items: center;
-      gap: var(--space-unit, 20px);
-    }
+  .has-action {
+    gap: var(--space-unit);
   }
 
   .menu-link {
-    &:not(:hover) {
-      text-decoration: none;
-    }
+    text-decoration: none;
+  }
 
-    &.current {
-      color: var(--color-accent);
+  .menu-item {
+    list-style: none;
+    position: relative;
+
+    &.has-submenu {
+      label {
+        cursor: pointer;
+      }
+
+      .menu-sublist,
+      input[type="checkbox"] {
+        display: none;
+      }
+
+      /* Show sub-menu when checkbox is checked */
+      input:checked + label + .menu-sublist {
+        display: block;
+      }
+
+      .menu-sublist {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        background-color: var(--color-background);
+        border: 1px solid var(--color-border);
+        padding: 10px 15px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 3;
+        width: 200px;
+        height: auto;
+        transform: none;
+
+        .menu-subitem {
+          margin: 0;
+        }
+      }
     }
   }
 
@@ -126,6 +85,10 @@
   }
 
   .menu-burger {
+    position: relative;
+    z-index: 3;
+    transition: color 0.6s;
+
     .line {
       background-color: var(--color-text);
       display: block;
@@ -139,13 +102,26 @@
 }
 
 @include media-query("md", "max") {
-  .site-navbar {
+  .site-navbar.main-menu {
     .menu-burger {
       display: block;
     }
 
     .menu-item {
       font-size: var(--font-size-xl);
+
+      &:first-child {
+        margin-top: auto;
+      }
+
+      &.has-action {
+        background-color: var(--color-glare);
+        border-radius: 2rem;
+        font-size: var(--font-size-xl);
+        margin-right: auto;
+        margin-top: auto;
+        padding: 5px 10px;
+      }
     }
 
     .menu-link {
@@ -162,15 +138,14 @@
       position: fixed;
       z-index: 2;
       top: 0;
-      left: 0;
+      right: 0;
       width: 100vw; /* Full width */
       height: 100vh; /* Full height */
-      transform: translateX(-100%); /* Start off-screen */
-
+      transform: translateX(100%); /* Start off-screen */
       overflow: hidden;
       box-sizing: border-box;
       transition: transform 0.5s ease; /* Use transform for smoother animation */
-      background-color: var(--color-translucent);
+      background-color: rgba(var(--color-background-rgb), 0.5);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px); // Safari support
     }

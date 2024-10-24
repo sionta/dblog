@@ -1,0 +1,9 @@
+{% assign heading = site.hero.heading | default: site.title %}
+{% assign summary = site.hero.summary | default: site.description %}
+<section class="heropage">
+  <h1 class="hero-heading">{{- heading -}}</h1>
+  <p class="hero-summary">{{- summary -}}</p>
+  <p class="hero-lead">
+    <a class="read-more" href="{{ '/blog/' | relative_url }}" role="button">Read More</a>
+  </p>
+</section>

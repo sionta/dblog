@@ -1,0 +1,28 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+/**
+ * Mermaid.js
+ */
+.mermaid {
+  background-color: var(--color-shade);
+  display: block;
+  font: inherit;
+  overflow: auto;
+  padding: var(--space-unit);
+  margin-block: var(--space-unit);
+
+  @include media-query("md", "max") {
+    margin-inline: -1rem;
+  }
+
+  & &-html {
+    display: none;
+  }
+
+  > svg {
+    display: block;
+    width: max-content;
+    margin-inline: auto;
+  }
+}

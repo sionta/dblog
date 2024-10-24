@@ -1,86 +1,103 @@
+# By default, icons use Tabler Icons: https://tabler.io/icons,
+# which are converted to SVG symbols when using an icon name or symbol ID.
+# However, if you want to use a custom icon, you can use an HTML element.
+#
+# Examples:
+#   To use Tabler Icons:
+#     icon: 'info-circle'
+#
+#   To use custom icons (svg and webfonts):
+#     icon: '<svg class="icon" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z"/></svg>'
+#     icon: '<i class="fa fa-info-circle" aria-hidden="true"></i>'
+
 alerts:
   default:
     name: Quote
-    icon: <i class="ti ti-quote"></i>
+    icon: >-
+      <svg aria-hidden="true" class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path stroke="none" d="M0 0h24v24H0z"/>
+        <path d="M10 11H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6q0 4-4 5M19 11h-4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6q0 4-4 5"/>
+      </svg>
+
   note:
     type: 1
     name: Info
-    icon: <i class="ti ti-info-circle"></i>
+    icon: info-circle
   tip:
     type: 2
     name: Tip
-    icon: <i class="ti ti-bulb"></i>
+    icon: bulb
   important:
     type: 3
     name: Important
-    icon: <i class="ti ti-message-report"></i>
+    icon: message-report
   warning:
-    type: 4
+    type: 3
     name: Warning
-    icon: <i class="ti ti-alert-triangle"></i>
+    icon: alert-triangle
   caution:
-    type: 5
+    type: 3
     name: Danger
-    icon: <i class="ti ti-alert-hexagon"></i>
+    icon: alert-hexagon
 
 codes:
   buttons:
     copy:
       name: Copy
-      icon: <i class="ti ti-copy"></i>
+      icon: copy
     success:
       name: Copied!
-      icon: <i class="ti ti-check"></i>
+      icon: check
     error:
       name: Whoops, error!
-      icon: <i class="ti ti-x"></i>
+      icon: x
 
   languages:
     - name: Text
-      icon: <i class="ti ti-file"></i>
+      icon: file
       alias: [txt, text, plain, plaintext]
     - name: HTML
-      icon: <i class="ti ti-brand-html5"></i>
+      icon: brand-html5
       alias: [mhtml, html]
     - name: SASS
-      icon: <i class="ti ti-brand-sass"></i>
+      icon: brand-sass
       alias: [sass, scss]
     - name: CSS
-      icon: <i class="ti ti-brand-css3"></i>
+      icon: brand-css3
       alias: [css, css3, style, stylesheet]
     - name: Markdown
-      icon: <i class="ti ti-markdown"></i>
+      icon: markdown
       alias: [md, mdx, markdown, kramdown]
     - name: JavaScript
-      icon: <i class="ti ti-brand-javascript"></i>
+      icon: brand-javascript
       alias: [js, javascript]
     - name: TypeScript
-      icon: <i class="ti ti-brand-typescript"></i>
+      icon: brand-typescript
       alias: [ts, tsx, typescript]
     - name: PHP
-      icon: <i class="ti ti-brand-php"></i>
+      icon: brand-php
       alias: [php, php3, php4, php5]
     - name: Ruby
-      icon: <i class="ti ti-diamond"></i>
+      icon: diamond
       alias: [rb, ruby]
     - name: Python
-      icon: <i class="ti ti-brand-python"></i>
+      icon: brand-python
       alias: [py, python]
     - name: JSON
-      icon: <i class="ti ti-braces"></i>
+      icon: braces
       alias: [json]
     - name: XML
-      icon: <i class="ti ti-code"></i>
+      icon: code
       alias: [xml]
     - name: YAML
-      icon: <i class="ti ti-file-settings"></i>
+      icon: file-settings
       alias: [yaml, yml]
     - name: TOML
-      icon: <i class="ti ti-file-settings"></i>
+      icon: file-settings
       alias: [toml]
     - name: Shell
-      icon: <i class="ti ti-terminal-2"></i>
+      icon: terminal-2
       alias: [sh, zsh, ksh, shell, bash]
     - name: Terminal
-      icon: <i class="ti ti-brand-powershell"></i>
+      icon: brand-powershell
       alias: [ps1, bat, cmd, batch, command, prompt, pwsh, powershell]

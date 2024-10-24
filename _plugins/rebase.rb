@@ -6,7 +6,7 @@ module Jekyll
   module PageModified
     def page_modified(input)
       metadata = @context.registers[:site].data['metadata'] || {}
-      fragment = Nokogiri::HTML::DocumentFragment.parse(input)
+      fragment = fragment_element(input)
       fragment = parse_alerts(fragment, metadata['alerts'])
       fragment = parse_codes(fragment, metadata['codes'])
       fragment = parse_task_list(fragment)
@@ -14,14 +14,6 @@ module Jekyll
     end
 
     private
-
-    def create_element(tag, doc)
-      Nokogiri::XML::Node.new(tag, doc)
-    end
-
-    def query_selector(doc)
-      Nokogiri::HTML::DocumentFragment.parse(doc)
-    end
 
     def parse_alerts(doc, config)
       doc.css('.alert')&.each do |node|
@@ -31,7 +23,7 @@ module Jekyll
         alert_data = config[type] || config['default'] || {}
         alert_icon = create_element('span', doc)
         alert_icon['class'] = 'alert-icon'
-        alert_icon.add_child(alert_data['icon'])
+        alert_icon.add_child(svg_symbol(alert_data['icon']))
 
         alert_name = create_element('span', doc)
         alert_name['class'] = 'alert-name'
@@ -76,13 +68,13 @@ module Jekyll
         code_table = node.at_css('table:has(td pre)')
         next unless code_table
 
-        code_icon = '<i class="ti ti-code"></i>'
+        code_icon = ''
         code_name = language
 
         config['languages'].each do |lang|
           next unless lang['alias'].include?(language)
 
-          code_icon = lang['icon']
+          code_icon = svg_symbol(lang['icon'])
           code_name = lang['name']
           break
         end
@@ -90,7 +82,7 @@ module Jekyll
         code_title = create_element('span', doc)
         code_title['class'] = 'code-header__title'
         code_title['data-name'] = code_name
-        code_title.add_child(code_icon)
+        code_title.add_child(code_icon) if code_icon
 
         data_button = config['buttons'] || {
           copy: { name: 'Copy', icon: '' },
@@ -100,10 +92,10 @@ module Jekyll
 
         btn_icon_copy = create_element('span', doc)
         btn_icon_copy['class'] = 'code-copy'
-        btn_icon_copy.inner_html = data_button['copy']['icon']
+        btn_icon_copy.inner_html = svg_symbol(data_button['copy']['icon'])
         btn_icon_success = create_element('span', doc)
         btn_icon_success['class'] = 'code-success'
-        btn_icon_success.inner_html = data_button['success']['icon']
+        btn_icon_success.inner_html = svg_symbol(data_button['success']['icon'])
 
         code_action = create_element('button', doc)
         code_action['type'] = 'button'
@@ -208,6 +200,21 @@ module Jekyll
       doc
     end
 
+    def create_element(tag, doc)
+      doc ||= Nokogiri::HTML::Document.new
+      Nokogiri::XML::Node.new(tag, doc)
+    end
+
+    def fragment_element(doc)
+      Nokogiri::HTML::DocumentFragment.parse(doc)
+    end
+
+    def html_element?(text)
+      doc = fragment_element(text)
+      element = doc.children.first
+      element && element.node_type == Nokogiri::XML::Node::ELEMENT_NODE
+    end
+
     # Generates an SVG symbol element for icons.
     #
     # @param icon_name [String, nil] The name of the icon.
@@ -217,14 +224,20 @@ module Jekyll
     #
     # @example
     #   svg_symbol('copy', 'icon-copy', 'aria-label="Copy"')
-    #   # => '<svg class="icon-copy" aria-label="Copy" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/icons.svg#copy"></use></svg>'
+    #   # => '<svg class="icon icon-copy" aria-label="Copy" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/icons.svg#copy"></use></svg>'
     #
     def svg_symbol(icon_name = nil, class_line = nil, attr_lines = nil)
       return unless !icon_name.nil? && !icon_name.empty?
 
+      return icon_name if html_element?(icon_name)
+
       # "baseurl" is required if build from github-pages.
       baseurl = @context.registers[:site].config['baseurl'] || ''
-      svg_path = "#{File.join(baseurl, 'assets', 'icons.svg')}##{icon_name}".downcase
+      svg_path = File.join(baseurl, 'assets', 'icons.svg')
+      raise "File not found '#{svg_path}'" unless svg_path
+
+      svg_path = "#{svg_path}##{icon_name}".downcase
+
       svg_class = class_line ? " #{class_line}" : ''
       svg_attrs = attr_lines ? " #{attr_lines}" : ''
       %(<svg class="icon#{svg_class}"#{svg_attrs} width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><use href="#{svg_path}"></use></svg>)

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Rouge: Code Highlighting with Rouge"
+title: "Code Highlighting with Rouge"
 categories: test
 tags: [jekyll, rouge, highlight]
 image: /assets/img/posts/rouge-thumb.png

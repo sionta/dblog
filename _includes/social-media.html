@@ -1,0 +1,29 @@
+<nav class="social-media" aria-label="Social media">
+  <ul class="social-media__list">
+    {% if site.social_links.size > 0 %}
+      {% for social in site.social_links %}
+        {% assign link = social.link | default: social.path | default: social.url %}
+        {% assign name = social.title | default: social.name | default: social.platform %}
+        {% if social.icon %}
+          {% assign icon = social.icon | downcase %}
+        {% else %}
+          {% assign icon = 'brand-' | append: name | downcase | replace: ' ', '-' %}
+        {% endif %}
+        <li class="social-media__item">
+          <a
+            class="social-media__link tooltip tooltip-top"
+            {% if link contains 'feed.xml' %}
+              href="{{ link | absolute_url }}" rel="me"
+            {% else %}
+              href="{{ link | relative_url }}" target="_blank" rel="noopener noreferrer"
+            {% endif %}
+            data-tooltip="{{ name }}"
+            title="{{ name }}"
+          >
+            {% include svg_symbol.html id=icon %}
+          </a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+</nav>

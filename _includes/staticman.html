@@ -1,0 +1,28 @@
+<div class="post-comments">
+  <h2>Komentar</h2>
+  <ul>
+    {% for comment in site.data.comments %}
+      <li>
+        <strong>{{ comment.name }}</strong> berkata:
+        <p>{{ comment.comment }}</p>
+        <small>Dikirim pada {{ comment.date | date: '%d %B %Y' }}</small>
+      </li>
+    {% endfor %}
+  </ul>
+  <div>
+    <form method="POST" action="https://api.staticman.net/v3/entry/sionta/dblog/master/comments">
+      <label for="name">Nama:</label>
+      <input type="text" name="fields[name]" required>
+
+      <label for="email">Email:</label>
+      <input type="email" name="fields[email]" required>
+
+      <label for="comment">Komentar:</label>
+      <textarea name="fields[comment]" required></textarea>
+
+      <input type="hidden" name="options[slug]" value="{{ page.slug }}">
+      <input type="hidden" name="options[redirect]" value="{{ page.url }}">
+      <button type="submit">Kirim</button>
+    </form>
+  </div>
+</div>

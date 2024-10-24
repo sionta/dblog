@@ -7,27 +7,26 @@ layout: base
 {% assign date_modified = page.modified_at | default: page.last_modified_at %}
 {% capture read_time %}{% include read-time.html %}{% endcapture %}
 
-<aside class="sidebar-post">
-  <nav class="share-buttons">
-    {% assign share_name = page.title | url_encode %}
-    {% assign share_link = page.url | absolute_url | url_encode %}
-    <h3 class="share-title">Share</h3>
-    <!-- prettier-ignore -->
-    <ul class="share-list">
-      <li><a href="https://twitter.com/intent/tweet?url={{ share_link }}&text={{ share_name }}" target="_blank">Twitter</a></li>
-      <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ share_link }}" target="_blank">Facebook</a></li>
-      <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_link }}&title={{ share_name }}" target="_blank">LinkedIn</a></li>
-      <li><a href="https://pinterest.com/pin/create/button/?url={{ share_link }}&description={{ share_name }}" target="_blank">Pinterest</a></li>
-      <li><a href="https://telegram.me/share/url?url={{ share_link }}&text={{ share_name }}" target="_blank">Telegram</a></li>
-      <li><a href="https://api.whatsapp.com/send?text={{ share_name }}%20{{ share_link }}" target="_blank">WhatsApp</a></li>
-      <li><a href="mailto:?subject={{ share_name }}&body=Check out this article: {{ share_link }}" target="_blank">Email</a></li>
-    </ul>
-  </nav>
-</aside>
-
 <article class="article-post" itemscope itemtype="http://schema.org/BlogPosting">
+  {% if post_image %}
+    {% include image.html class='post-image' %}
+  {% endif %}
   <header class="post-header">
     <p class="post-metadata">
+      {% if post_author %}
+        <span class="post-author">
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            {% if post_author.name and post_author.url %}
+              <a itemprop="url" href="{{ post_author.url | relative_url }}">
+                <span itemprop="name">{{ post_author.name }}</span>
+              </a>
+            {% else %}
+              <span itemprop="name">{{ post_author }}</span>
+            {% endif %}
+          </span>
+        </span>
+        {{- '·' -}}
+      {% endif %}
       <time class="date-time" itemprop="datePublished" datetime="{{ page.date | date_to_xmlschema }}">
         {{- page.date | date: date_format -}}
       </time>
@@ -39,40 +38,39 @@ layout: base
           </time>
         {% endif %}
       {% endcomment %}
+
       {% if read_time %}
         {{- '·' -}}
         <span class="read-time">{{ read_time }}</span>
       {% endif %}
     </p>
+
     <h1 class="post-title">{{ page.title }}</h1>
-    {% comment %}
-      {% if page.description %}
-        <p class="post-summary">{{ page.description }}</p>
-      {% endif %}
-    {% endcomment %}
-    {% if post_author %}
-      <p class="post-author">
-        <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-          {% if post_author.name and post_author.url %}
-            <a itemprop="url" href="{{ post_author.url | relative_url }}">
-              <span itemprop="name">{{ post_author.name }}</span>
-            </a>
-          {% else %}
-            <span itemprop="name">{{ post_author }}</span>
-          {% endif %}
-        </span>
+
+    {% if page.tags.size > 0 %}
+      <p class="post-metadata post-tags" itemprop="keywords">
+        {% for tag in page.tags %}
+          <span class="badge">{{- tag -}}</span>
+        {% endfor %}
       </p>
     {% endif %}
-    {% if post_image %}
-      {% include image class='post-thumb' %}
-    {% endif %}
   </header>
+
   <section class="post-content" itemprop="articleBody">
-    {% include toc.html html=content %}
     {{- content -}}
   </section>
+
   <footer class="post-footer">
     {% include pagination.html %}
-    {% include comments.html %}
+    {% comment %} {% include comments.html %} {% endcomment %}
+    {% include staticman.html %}
   </footer>
 </article>
+
+<hr class="sep">
+
+<aside class="releated-post">
+  <div class="section-block column-3">
+    {%- include post-list.html grid='col' limit=3 random=true -%}
+  </div>
+</aside>

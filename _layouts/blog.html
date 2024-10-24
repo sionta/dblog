@@ -2,6 +2,7 @@
 layout: base
 ---
 <section class="section-blog">
-  {%- include post-list.html grid='row' -%}
+  {%- include search.html -%}
+  {%- include post-list.html grid='row' summary=true -%}
   {%- include pagination.html -%}
 </section>

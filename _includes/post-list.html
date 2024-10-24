@@ -17,21 +17,25 @@
 
 {% for post in site_posts limit: post_limit %}
   {% assign post_url = post.url | relative_url %}
-  {% assign post_image = post.image.src | default: post.image | default: '/assets/img/posts/512x512.svg' %}
+  {% assign post_image = post.image.src | default: post.image %}
+  {% assign image_alt = post.image.alt | default: 'Post images' %}
   {% assign image_src = post_image | relative_url %}
-  {% assign image_alt = post_image.alt | default: 'Post images' %}
   <article class="post-card post-{{ grid_type }}">
-    <a href="{{ post_url }}" title="{{ post.title }}">
-      <img class="post-card__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
-    </a>
-    <div class="post-card__block">
+    {% if post_image %}
+      <header>
+        <a href="{{ post_url }}" title="{{ post.title }}">
+          <img class="post-card__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+        </a>
+      </header>
+    {% endif %}
+    <section class="post-card__block">
       <h2 class="post-card__title" itemprop="headline">
         <a href="{{ post_url }}" title="{{ post.title }}">{{- post.title -}}</a>
       </h2>
-      {% if include.summary != false %}
+      {% if include.summary %}
         <p class="post-card__description">{%- include summary.html data=post excerpt=true short=true -%}</p>
       {% endif %}
-      <div class="post-card__metadata">
+      <p class="post-card__metadata">
         {% if post.author %}
           <span class="author">
             <span itemprop="author" itemscope itemtype="https://schema.org/Person">
@@ -48,9 +52,8 @@
         <time class="date" itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
           {{- post.date | date: date_format -}}
         </time>
-        {% assign a = post.content %}
         <span>{% include read-time.html words=post.content %}</span>
-      </div>
-    </div>
+      </p>
+    </section>
   </article>
 {% endfor %}

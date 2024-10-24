@@ -1,57 +1,70 @@
-{%- assign pager = paginator | default: page -%}
-{%- assign prev_page = pager.previous_page_path | default: pager.previous -%}
-{%- assign next_page = pager.next_page_path | default: pager.next -%}
-{%- if prev_page -%}
-  {%- assign class = 'page-prev' -%}
-  {%- assign path = prev_page -%}
-{%- else -%}
-  {%- assign class = 'page-next' -%}
-  {%- assign path = next_page -%}
-{%- endif -%}
-{%- if pager.previous or pager.next -%}
-  {%- assign class = class | append: ' prev-next' -%}
-{%- endif -%}
+{%- assign paginater = paginator | default: page -%}
+{%- assign prev_page_path = paginater.previous_page_path | default: paginater.previous -%}
+{%- assign next_page_path = paginater.next_page_path | default: paginater.next -%}
+
+{%- assign dump_page_path = '/' | append: page.layout | append: '/:num/' -%}
+{%- assign page_path = site.paginate_path | default: dump_page_path -%}
+
+{% capture prev_page_title %}{% include svg_symbol.html id='chevron-left' class='icon-prev' %} {{ ' Prev' }}{% endcapture %}
+{% capture next_page_title %}{{ 'Next ' }}{% include svg_symbol.html id='chevron-right' class='icon-next' %}{% endcapture %}
+
 <nav class="pagination" aria-label="Pagination">
   <ol class="pagination__list">
     {%- comment -%} Previous Page {%- endcomment -%}
     <li class="pagination__item item-prev">
-      {%- if prev_page -%}
-        <a class="{{ class }}" href="{{ prev_page | relative_url }}">
-          {%- include svg_symbol.html id='chevron-left' %} Prev</a
-        >
+      {%- if prev_page_path -%}
+        <a class="pagination__link" aria-current="step" href="{{ prev_page_path | relative_url }}">
+          {{- prev_page_title -}}
+        </a>
       {%- else -%}
-        <span class="{{ class }} disabled">Prev</span>
-      {%- endif -%}
-      {%- if include.page_title and prev_page.title -%}
-        <span class="item-title">{{ prev_page.title }}</span>
+        <a class="pagination__link disabled" href="#">{{ prev_page_title }}</a>
       {%- endif -%}
     </li>
 
-    {%- comment -%} Total Page {%- endcomment -%}
-    {%- if pager.total_pages -%}
-      <li class="pagination__item item-totals">
-        {%- for count in (1..pager.total_pages) -%}
-          {%- if count == pager.page -%}
-            <span class="{{ class }} current" aria-current="page">{{ count }}</span>
-          {%- else -%}
-            <a class="{{ class }}" aria-current="step" href="{{ path | relative_url }}">{{- count -}}</a>
-          {%- endif -%}
+    {%- comment -%} Total Pages {%- endcomment -%}
+    {%- if paginater.total_pages -%}
+      <li class="pagination__item item-nums">
+        {%- for count in (1..paginater.total_pages) -%}
+          {%- if count == paginater.page -%}
+            <a
+              class="pagination__link current"
+              aria-current="page"
+              aria-label="page {{ count }}"
+              href="#"
+            >
+              {{- count -}}
+            </a>
+          {% elsif count == 1 %}
+            <a
+              class="pagination__link"
+              aria-current="step"
+              aria-label="page {{ count }}"
+              href="{{ page_path | replace: 'page:num/', '' | replace: ':num/', '' | relative_url }}"
+            >
+              {{- count -}}
+            </a>
+          {% else %}
+            <a
+              aria-label="page {{ count }}"
+              class="pagination__link"
+              aria-current="step"
+              href="{{ page_path | replace: ':num', count | relative_url }}"
+            >
+              {{- count -}}
+            </a>
+          {% endif %}
         {%- endfor -%}
       </li>
     {%- endif -%}
 
     {%- comment -%} Next Page {%- endcomment -%}
     <li class="pagination__item item-next">
-      {%- if next_page -%}
-        <a class="{{ class }}" href="{{ next_page | relative_url }}"
-          >Next
-          {% include svg_symbol.html id='chevron-right' -%}
+      {%- if next_page_path -%}
+        <a class="pagination__link" aria-current="step" href="{{ next_page_path | relative_url }}">
+          {{- next_page_title -}}
         </a>
       {%- else -%}
-        <span class="{{ class }} disabled">Next</span>
-      {%- endif -%}
-      {%- if include.page_title and next_page.title -%}
-        <span class="item-title">{{ next_page.title }}</span>
+        <a class="pagination__link disabled" href="#">{{ next_page_title }}</a>
       {%- endif -%}
     </li>
   </ol>

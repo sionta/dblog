@@ -5,8 +5,13 @@
     <header class="site-header">
       <div class="wrapper">
         <div class="site-header__inner">
-          {% include brand.html class='head-title' type='header' %}
-          {% include navbar.html %}
+          <h1 class="site-brand">
+            {%- assign site_brand = site.brand | default: site.title -%}
+            <a class="site-link" href="{{- '/' | absolute_url -}}" title="{{- site_brand -}}'s logo">
+              {{- site_brand -}}
+            </a>
+          </h1>
+          {% include navbar.html type='header' %}
         </div>
       </div>
     </header>
@@ -22,7 +27,19 @@
     <footer class="site-footer">
       <div class="wrapper">
         <div class="site-footer__inner">
-          {% include copyright.html %}
+          <div class="row">
+            <div class="col">
+              <h5 class="foot-title">Legal</h5>
+              {% include navbar.html type='footer' %}
+            </div>
+            <div class="col order-1-mb">
+              <h5 class="foot-brand">{{ site.title }}</h5>
+              <p class="foot-description">{{ site.description }}</p>
+            </div>
+            <div class="col col-12">
+              {% include copyright.html %}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

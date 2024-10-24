@@ -36,16 +36,17 @@ p.alert {
     line-height: 1;
 
     .alert-icon {
-      display: inline-flex;
-
       svg {
-        width: 1.25em;
         height: 1.25em;
+        width: 1.25em;
+        max-width: none;
       }
 
+      span,
       i {
-        font-weight: normal;
         font-size: 1.25em;
+        font-style: normal;
+        font-weight: normal;
       }
     }
   }

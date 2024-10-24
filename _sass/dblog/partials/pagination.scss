@@ -5,81 +5,69 @@
  * Pagination
  */
 .pagination {
-  display: flex;
-  justify-content: center;
   padding: clamp(1rem, 3vw, 1.5rem) 0;
 
   &__list {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: clamp(0.25rem, 2vw, 1rem);
 
     list-style: none;
     padding: 0;
     margin: 0;
+
+    &:has(.item-nums) {
+      justify-content: center;
+    }
   }
 
   &__item {
     &,
-    a,
-    span {
+    .item-nums {
       display: flex;
       align-items: center;
+      gap: 0.25rem;
     }
 
-    &.item-prev,
-    &.item-next {
-      .page-prev,
-      .page-next {
-        padding: 0.5rem 1rem;
+    &.item-nums {
+      .pagination__link {
+        display: inline-block;
+        padding: 0.2rem 0.7rem;
+        color: var(--color-primary);
+        border: 1px solid var(--color-border);
         border-radius: 4px;
-        text-decoration: none;
-        color: var(--color-light);
-        background-color: var(--color-accent);
-        border: 1px solid var(--color-primary);
-        transition: background-color 0.3s ease, color 0.3s ease;
 
-        &.disabled {
-          background-color: var(--color-glare);
-          border-color: var(--color-border);
-          color: var(--color-muted);
-          pointer-events: none;
-          cursor: default;
-          opacity: 0.75;
-          // visibility: hidden;
-        }
+        transition: background-color 0.3s ease;
 
-        &:not(.disabled):hover {
+        &:hover {
           background-color: var(--color-primary);
           color: var(--color-light);
+        }
+
+        &.disabled {
+          background-color: var(--color-disabled);
         }
       }
     }
 
-    &.item-totals {
-      display: flex;
-      gap: 0.25rem;
+    .pagination__link {
+      text-decoration: none;
 
-      a,
-      span {
-        padding: 0.5rem 0.75rem;
-        border-radius: 4px;
-        text-decoration: none;
-        background-color: var(--color-background);
-        border: 1px solid var(--color-border);
-        color: var(--color-text);
-        transition: background-color 0.3s ease, color 0.3s ease;
+      svg {
+        display: inline-block;
+        vertical-align: middle;
+      }
 
-        &.current {
-          background-color: var(--color-primary);
-          border-color: var(--color-primary);
-          box-shadow: 0 0 3px var(--color-primary);
-          color: var(--color-light);
-        }
+      &.current {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-light);
+      }
 
-        &:not(.current):hover {
-          background-color: var(--color-accent);
-          color: var(--color-light);
-        }
+      &.disabled {
+        color: var(--color-muted);
+        cursor: not-allowed;
       }
     }
   }

@@ -11,11 +11,17 @@ description: >-
 url: "https://sionta-dblog.vercel.app" # The full base URL of your site (e.g., https://example.com). Required for generating absolute links.
 baseurl: "" # If your site is hosted in a subfolder (e.g., /blog), define the subpath here. Otherwise, leave it empty.
 
-#brand: dblog
-#image: "/assets/img/logos/logo.svg"
+image: "/assets/img/logos/logo.svg"
+
+# Configuration for the hero section, often the main banner on the homepage.
+# If not defined by default use `site.title` and `site.description`.
+hero:
+  heading: Welcome to our Blog. # Main heading text for the hero section.
+  summary: >- # A short summary or description shown below the hero heading.
+    A clean and minimalist Jekyll theme tailored for blogger seeking simplicity.
 
 #copyright: >-
-#   &copy; :year: :title:. All Rights Reserved. Designed with love by
+#   &copy; :year :title. All Rights Reserved. Designed with love by
 #   <a href="https://github.com/sionta">Andre Attamimi</a>
 
 # For SEO and default post author
@@ -37,7 +43,7 @@ social_media:
 # Post comments
 # NB: giscus and utterances requirer on public repo.
 comments:
-  provider: "" # (e.g. disqus), The provider settings below:
+  provider: "giscus" # (e.g. disqus), The provider settings below:
   disqus: # What is `shortname` see https://help.disqus.com/en/articles/1717111-what-s-a-shortname
     shortname: ""
   giscus: # For more settings see https://giscus.app/
@@ -49,6 +55,24 @@ comments:
     repo: ""
     label: ""
     issue_term: ""
+
+# 1. The value [boolean | development | production]
+# 2. For self_host if `false` make sure already setup remote url on _data/origin.yml.
+# 3. If set to `true` will always be processed when jekyll is run.
+assets:
+  self_host:
+    enabled: development
+    paths:
+      - "assets/fonts/"
+      - "assets/lib/"
+  minification:
+    html: production
+    css: production
+    js: production
+    excludes:
+      - "vendor/"
+      - "lib/"
+      - "*.min.*"
 
 # PLEASE DONT MODIFY AFTER THIS LINE ********************************
 
@@ -91,7 +115,7 @@ kramdown:
 
 # Pagination configuration for listing posts.
 paginate: 8 # Number of posts displayed per page.
-paginate_path: "/blog/:num/" # URL structure for paginated pages (e.g., /blog/2/ for the second page).
+paginate_path: "/blog/page:num/" # URL structure for paginated pages (e.g., /blog/2/ for the second page).
 
 # Default values for posts. You can override these settings in individual post front matter.
 defaults:
@@ -115,9 +139,6 @@ theme: dblog # The theme used for the site.
 # SASS/SCSS settings for styling
 sass:
   style: compressed # Compress the compiled CSS to reduce file size.
-
-# Enforce stricter front matter rules to prevent errors in the site build.
-strict_front_matter: true # Ensures that all posts and pages have valid front matter.
 
 # Files and directories to exclude from the site build process.
 exclude:

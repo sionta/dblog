@@ -10,14 +10,22 @@
   --max-image: 100%;
   --width-image: var(--max-image);
   --height-image: var(--min-image);
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
 
+  background-color: var(--color-glare);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-
   position: relative;
   overflow: hidden;
+  transition: transform 0.5s ease-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  &.post-col {
+    height: max-content;
+  }
 
   &.post-row {
     --width-image: var(--min-image);
@@ -34,12 +42,38 @@
   .post-card__image {
     height: var(--height-image);
     width: var(--width-image);
+    aspect-ratio: 1 / 1;
     object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .post-card__block {
     flex: 1;
     padding: var(--space-unit);
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .post-card__metadata {
+    display: inline-block;
+
+    .author {
+      display: none;
+    }
+
+    > :not(:last-child) {
+      margin-right: 0.15rem;
+
+      &::after {
+        content: "-";
+        display: inline-block;
+        margin-left: 0.15rem;
+      }
+    }
   }
 
   .post-card__title {

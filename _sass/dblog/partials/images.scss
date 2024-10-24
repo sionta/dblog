@@ -14,28 +14,26 @@ p:has(.img) {
 
 .img {
   max-width: clamp(50%, 50vw, 100%);
-  display: inline-block;
-  vertical-align: inherit;
+  display: block;
 
   &.center,
   &.left,
   &.right {
-    margin-block: var(--space-unit-xxs);
+    margin-block: var(--space-unit-xs);
   }
 
+  /* TODO: https://stackoverflow.com/questions/20917632/how-to-align-an-image-at-middle-of-wrapped-text */
   &.center {
     margin-inline: auto;
   }
 
   &.left {
     float: left;
-    margin-left: auto;
-    margin-right: var(--space-unit);
+    margin-inline: auto var(--space-unit);
   }
 
   &.right {
     float: right;
-    margin-left: var(--space-unit-xs);
-    margin-right: auto;
+    margin-inline: var(--space-unit) auto;
   }
 }

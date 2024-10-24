@@ -1,0 +1,17 @@
+<aside class="sidebar-post">
+  <nav class="share-buttons">
+    {% assign share_name = page.title | url_encode %}
+    {% assign share_link = page.url | absolute_url | url_encode %}
+    <h3 class="share-title">Share</h3>
+    <!-- prettier-ignore -->
+    <ul class="share-list">
+      <li><a href="https://twitter.com/intent/tweet?url={{ share_link }}&text={{ share_name }}" target="_blank">Twitter</a></li>
+      <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ share_link }}" target="_blank">Facebook</a></li>
+      <li><a href="https://www.linkedin.com/shareArticle?mini=true&url={{ share_link }}&title={{ share_name }}" target="_blank">LinkedIn</a></li>
+      <li><a href="https://pinterest.com/pin/create/button/?url={{ share_link }}&description={{ share_name }}" target="_blank">Pinterest</a></li>
+      <li><a href="https://telegram.me/share/url?url={{ share_link }}&text={{ share_name }}" target="_blank">Telegram</a></li>
+      <li><a href="https://api.whatsapp.com/send?text={{ share_name }}%20{{ share_link }}" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:?subject={{ share_name }}&body=Check out this article: {{ share_link }}" target="_blank">Email</a></li>
+    </ul>
+  </nav>
+</aside>
