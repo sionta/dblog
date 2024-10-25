@@ -76,6 +76,45 @@
       display: flex;
       gap: clamp(5px, 1vw, 10px);
     }
+
+    .post-tags {
+      margin-bottom: var(--space-unit);
+
+      .badge {
+        background-color: inherit;
+        color: inherit;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1.15;
+        padding: 1px 6px;
+        border-radius: 3px;
+        border: 1px solid transparent;
+        margin-right: 10px;
+
+        @each $i,
+          $c
+            in (
+              1: #d33682,
+              2: #6c71c4,
+              3: #268bd2,
+              4: #2aa198,
+              5: #859900,
+              6: #b58900,
+              7: #cb4b16,
+              8: #dc322f
+            )
+        {
+          &:nth-child(#{$i}) {
+            border-color: #{$c};
+            color: #{$c};
+          }
+        }
+
+        &::before {
+          content: "#";
+        }
+      }
+    }
   }
 
   .post-content {
@@ -86,6 +125,13 @@
     h1,
     h2 {
       font-family: var(--font-title);
+
+      &::before {
+        content: "";
+        display: inline;
+        border-left: 5px solid var(--color-accent);
+        margin-inline-end: 12px;
+      }
     }
 
     h3,

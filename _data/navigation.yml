@@ -5,12 +5,12 @@ header:
   # - index.html
   - blog/index.html
   - pages/about.md
-  # - title: "Sub Head"
-  #   sub_menu:
-  #     - pages/code-of-conduct.md
-  #     - pages/terms-of-service.md
-  #     - pages/privacy-policy.md
-  #     - pages/contact.html
+  - title: Mores
+    sub_menu:
+      - pages/code-of-conduct.md
+      - pages/terms-of-service.md
+      - pages/privacy-policy.md
+      - pages/contact.html
 
 footer:
   - pages/code-of-conduct.md

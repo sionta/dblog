@@ -13,7 +13,7 @@ module Jekyll
   #
   # ```liquid
   # {% assign myid = 'sun' %}
-  # <span data-theme-value="light">{%- svg_sprite id=myid class='custom-class' -%}</span>
+  # <span data-theme-value="light">{% svg_sprite id=myid class='custom-class' %}</span>
   # ```
   #
   # ## Output

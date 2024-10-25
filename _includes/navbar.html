@@ -24,11 +24,23 @@
     {% endif %}
     <ul class="menu-list">
       {% for item in page_paths %}
-        <li class="menu-item{% if item.sub_menu and item.title %} has-submenu{% endif %}">
+        {% if item.sub_menu and item.title %}
+          {% assign item_has_submenu = ' has-submenu' %}
+        {% endif %}
+        <li class="menu-item{{ item_has_submenu }}">
           {% if item.sub_menu and item.title %}
             <input id="submenu-{{ path_type }}-{{ forloop.index }}" type="checkbox" name="toggle-submenu">
-            <label for="submenu-{{ path_type }}-{{ forloop.index }}">{{- item.title -}}</label>
+            <label for="submenu-{{ path_type }}-{{ forloop.index }}">
+              {{- item.title -}}
+              {% svg_sprite id='chevron-up' class='icon chevron-up' %}
+              {% svg_sprite id='chevron-down' class='icon chevron-down' %}
+            </label>
             <ul class="menu-sublist">
+              <label for="submenu-{{ path_type }}-{{ forloop.index }}" class="menu-label-on-mb">
+                {% svg_sprite id='chevron-left' class='icon chevron-left' %}
+                {{- 'Go ' -}}
+                {{- item.title -}}
+              </label>
               {% for sub_item in item.sub_menu %}
                 <li class="menu-subitem">
                   {% assign sub_nav_item = site.pages | where: 'path', sub_item | first %}
@@ -79,7 +91,7 @@
         <li class="menu-item has-action">
           {% include theme-toggle.html type='checkbox' %}
           <a class="feed-rss" href="{{ 'feed.xml' | absolute_url }}" title="Subscribe via RSS" rel="me">
-            {%- svg_sprite id='rss' class='icon' -%}
+            {% svg_sprite id='rss' class='icon' %}
           </a>
         </li>
       {% endif %}

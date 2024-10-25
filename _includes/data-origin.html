@@ -1,44 +1,44 @@
-{%- assign data_origin = site.data.origin -%}
-{%- assign self_host = site.assets.self_host.enabled -%}
+{% assign data_origin = site.data.origin %}
+{% assign self_host = site.assets.self_host.enabled %}
 
-{%- if self_host == true or self_host == jekyll.environment -%}
-  {%- assign type = 'local' -%}
-{%- else -%}
-  {%- assign type = 'remote' -%}
-{%- endif -%}
+{% if self_host == true or self_host == jekyll.environment %}
+  {% assign type = 'local' %}
+{% else %}
+  {% assign type = 'remote' %}
+{% endif %}
 
-{%- if include.map == 'fonts' -%}
-  {%- if type == 'remote' -%}
-    {%- for item in data_origin.resources -%}
-      {%- for link in item.links -%}
+{% if include.map == 'fonts' %}
+  {% if type == 'remote' %}
+    {% for item in data_origin.resources %}
+      {% for link in item.links %}
         <link rel="{{ link.rel }}" href="{{ item.url }}" {{ link.opts | join: ' ' }}>
-      {%- endfor -%}
-    {%- endfor -%}
-  {%- endif -%}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
 
-  {%- if data_origin.fonts.merge -%}
-    {%- assign fonts = data_origin.fonts.merge -%}
-  {%- elsif data_origin.fonts.split -%}
-    {%- assign fonts = data_origin.fonts.split -%}
-  {%- else -%}
-    {%- assign fonts = data_origin.fonts -%}
-  {%- endif -%}
+  {% if data_origin.fonts.merge %}
+    {% assign fonts = data_origin.fonts.merge %}
+  {% elsif data_origin.fonts.split %}
+    {% assign fonts = data_origin.fonts.split %}
+  {% else %}
+    {% assign fonts = data_origin.fonts %}
+  {% endif %}
 
-  {%- for font in fonts -%}
-    {%- if font[type].size > 0 -%}
+  {% for font in fonts %}
+    {% if font[type].size > 0 %}
       <link rel="stylesheet" href="{{- font[type] | relative_url -}}">
-    {%- endif -%}
-  {%- endfor -%}
-{%- endif -%}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
-{%- if include.map == 'scripts' -%}
-  {%- if page.search == true -%}
+{% if include.map == 'scripts' %}
+  {% if page.search == true %}
     <script src="{{ data_origin.scripts.search[type] | relative_url }}"></script>
-  {%- endif -%}
-  {%- if page.math == true -%}
+  {% endif %}
+  {% if page.math == true %}
     <script src="{{ data_origin.scripts.math[type] | relative_url }}" id="Mathjax-script" async></script>
-  {%- endif -%}
-  {%- if page.diagram == true -%}
+  {% endif %}
+  {% if page.diagram == true %}
     <script src="{{ data_origin.scripts.diagram[type] | relative_url }}"></script>
-  {%- endif -%}
-{%- endif -%}
+  {% endif %}
+{% endif %}

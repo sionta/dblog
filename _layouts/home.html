@@ -8,7 +8,7 @@ layout: base
       <h2><span>Featured</span></h2>
     </div>
     <div class="section-block column-2">
-      {%- include post-list.html grid='row' type='featured' desc=true -%}
+      {% include post-list.html grid='row' type='featured' desc=true %}
     </div>
   </section>
   <section class="random-posts">
@@ -17,7 +17,7 @@ layout: base
       <a href="{{ '/blog/' | relative_url }}">All posts</a>
     </div>
     <div class="section-block column-3">
-      {%- include post-list.html grid='col' max=3 type='random' desc=true -%}
+      {% include post-list.html grid='col' max=3 type='random' desc=true %}
     </div>
   </section>
 </div>

@@ -1,6 +1,5 @@
 {% assign date_format = site.date_format | default: '%b %d, %Y' %}
 {% assign site_posts = paginator.posts | default: site.posts %}
-{% assign post_limit = include.max | default: site_posts.size %}
 
 {% assign grid_type = 'row' %}
 {% if include.grid == 'col' %}
@@ -11,50 +10,53 @@
   {% when 'featured' %}
     {% assign site_posts = site_posts | where: 'featured', true %}
   {% when 'related' %}
-    {% assign site_posts = site_posts | where_exp: 'post', 'post.id != page.id' %}
+    {% assign site_posts = site_posts | where_exp: 'post', 'post.url != page.url' | uniq %}
   {% when 'random' %}
-    {% assign site_posts = site_posts | sample: post_limit %}
+    {% assign site_posts = site_posts | where_exp: 'post', 'post.featured != true' | sample: include.max %}
 {% endcase %}
 
-{% for post in site_posts limit: post_limit %}
-  {% assign post_url = post.url | relative_url %}
-  {% assign post_image = post.image.src | default: post.image %}
-  {% assign image_alt = post.image.alt | default: 'Post images' %}
-  {% assign image_src = post_image | relative_url %}
-  <article class="post-card post-{{ grid_type }}">
-    {% if post_image %}
-      <header>
-        <a href="{{ post_url }}" title="{{ post.title }}">
-          <img class="post-card__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
-        </a>
-      </header>
-    {% endif %}
-    <section class="post-card__block">
-      <h2 class="post-card__title" itemprop="headline">
-        <a href="{{ post_url }}" title="{{ post.title }}">{{- post.title -}}</a>
-      </h2>
-      {% if include.desc %}
-        <p class="post-card__description">{%- include summary.html data=post excerpt=true short=true -%}</p>
+{% if site_posts.size > 0 %}
+  {% for post in site_posts limit: include.max %}
+    {% assign post_url = post.url | relative_url %}
+    {% assign post_image = post.image.src | default: post.image %}
+    {% assign image_alt = post.image.alt | default: 'Post images' %}
+    {% assign image_src = post_image | relative_url %}
+
+    <article class="post-card post-{{ grid_type }}">
+      {% if post_image %}
+        <header>
+          <a href="{{ post_url }}" title="{{ post.title }}">
+            <img class="post-card__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
+          </a>
+        </header>
       {% endif %}
-      <p class="post-card__metadata">
-        {% if post.author %}
-          <span class="author">
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-              {% if post.author.name and post.author.url %}
-                <a itemprop="url" href="{{ post.author.url | relative_url }}">
-                  <span itemprop="name">{{ post.author.name }}</span>
-                </a>
-              {% else %}
-                <span itemprop="name">{{ post.author }}</span>
-              {% endif %}
-            </span>
-          </span>
+      <section class="post-card__block">
+        <h2 class="post-card__title" itemprop="headline">
+          <a href="{{ post_url }}" title="{{ post.title }}">{{- post.title -}}</a>
+        </h2>
+        {% if include.desc %}
+          <p class="post-card__description">{% include summary.html data=post excerpt=true short=true %}</p>
         {% endif %}
-        <time class="date" itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
-          {{- post.date | date: date_format -}}
-        </time>
-        <span>{% include read-time.html words=post.content %}</span>
-      </p>
-    </section>
-  </article>
-{% endfor %}
+        <p class="post-card__metadata">
+          {% if post.author %}
+            <span class="author">
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                {% if post.author.name and post.author.url %}
+                  <a itemprop="url" href="{{ post.author.url | relative_url }}">
+                    <span itemprop="name">{{ post.author.name }}</span>
+                  </a>
+                {% else %}
+                  <span itemprop="name">{{ post.author }}</span>
+                {% endif %}
+              </span>
+            </span>
+          {% endif %}
+          <time class="date" itemprop="datePublished" datetime="{{ post.date | date_to_xmlschema }}">
+            {{- post.date | date: date_format -}}
+          </time>
+          <span>{% include read-time.html words=post.content %}</span>
+        </p>
+      </section>
+    </article>
+  {% endfor %}
+{% endif %}

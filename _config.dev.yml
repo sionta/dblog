@@ -1,10 +1,10 @@
 sass:
   style: expanded
 
-paginate: 3 # Number of posts displayed per page.
+paginate: 2 # Number of posts displayed per page.
 
 # Enforce stricter front matter rules to prevent errors in the site build.
-# strict_front_matter: true # Ensures that all posts and pages have valid front matter.
+strict_front_matter: true # Ensures that all posts and pages have valid front matter.
 
 comments:
   provider: "giscus"

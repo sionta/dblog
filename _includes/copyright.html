@@ -1,7 +1,7 @@
-{%- assign year = site.time | date: '%Y' -%}
-{%- assign title = site.brand | default: site.title -%}
-{%- capture copyright -%}&copy; {{ year }} {{ title }}. All rights reserved.{%- endcapture -%}
-{%- if site.copyright -%}
-  {%- assign copyright = site.copyright | replace: ':year', year | replace: ':title', title -%}
-{%- endif -%}
+{% assign year = site.time | date: '%Y' %}
+{% assign title = site.brand | default: site.title %}
+{% capture copyright %}&copy; {{ year }} {{ title }}. All rights reserved.{% endcapture %}
+{% if site.copyright %}
+  {% assign copyright = site.copyright | replace: ':year', year | replace: ':title', title %}
+{% endif %}
 <p class="site-copyright">{{- copyright | strip | strip_newlines -}}</p>

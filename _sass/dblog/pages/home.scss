@@ -30,6 +30,8 @@
 
     .hero-lead {
       .read-more {
+        font-size: var(--font-size-c);
+        text-transform: uppercase;
         display: inline-block;
         color: var(--color-light);
         text-decoration: none;

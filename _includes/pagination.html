@@ -1,31 +1,31 @@
-{%- assign paginater = paginator | default: page -%}
-{%- assign prev_page_path = paginater.previous_page_path | default: paginater.previous -%}
-{%- assign next_page_path = paginater.next_page_path | default: paginater.next -%}
+{% assign paginater = paginator | default: page %}
+{% assign prev_page_path = paginater.previous_page_path | default: paginater.previous %}
+{% assign next_page_path = paginater.next_page_path | default: paginater.next %}
 
-{%- assign dump_path = '/' | append: page.layout | append: '/:num/' -%}
-{%- assign page_path = site.paginate_path | default: dump_path -%}
+{% assign dump_path = '/' | append: page.layout | append: '/:num/' %}
+{% assign page_path = site.paginate_path | default: dump_path %}
 
-{% capture prev_page_title %}{% svg_sprite id='chevron-left' class='icon icon-prev' %}{{ ' Prev' }}{% endcapture %}
-{% capture next_page_title %}{{ 'Next ' }}{% svg_sprite id='chevron-right' class='icon icon-next' %}{% endcapture %}
+{% capture prev_page_title %}{% svg_sprite id='chevron-left' class='icon' %}{{- ' Prev' -}}{% endcapture %}
+{% capture next_page_title %}{{- 'Next ' -}}{% svg_sprite id='chevron-right' class='icon' %}{% endcapture %}
 
 <nav class="pagination" aria-label="Pagination">
   <ol class="pagination__list">
-    {%- comment -%} Previous Page {%- endcomment -%}
+    {% comment %} Previous Page {% endcomment %}
     <li class="pagination__item item-prev">
-      {%- if prev_page_path -%}
+      {% if prev_page_path %}
         <a class="pagination__link" aria-current="step" href="{{ prev_page_path | relative_url }}">
           {{- prev_page_title -}}
         </a>
-      {%- else -%}
+      {% else %}
         <a class="pagination__link disabled" href="#">{{ prev_page_title }}</a>
-      {%- endif -%}
+      {% endif %}
     </li>
 
-    {%- comment -%} Total Pages {%- endcomment -%}
-    {%- if paginater.total_pages -%}
+    {% comment %} Total Pages {% endcomment %}
+    {% if paginater.total_pages %}
       <li class="pagination__item item-nums">
-        {%- for count in (1..paginater.total_pages) -%}
-          {%- if count == paginater.page -%}
+        {% for count in (1..paginater.total_pages) %}
+          {% if count == paginater.page %}
             <a
               class="pagination__link current"
               aria-current="page"
@@ -45,27 +45,27 @@
             </a>
           {% else %}
             <a
-              aria-label="page {{ count }}"
               class="pagination__link"
               aria-current="step"
+              aria-label="page {{ count }}"
               href="{{ page_path | replace: ':num', count | relative_url }}"
             >
               {{- count -}}
             </a>
           {% endif %}
-        {%- endfor -%}
+        {% endfor %}
       </li>
-    {%- endif -%}
+    {% endif %}
 
-    {%- comment -%} Next Page {%- endcomment -%}
+    {% comment %} Next Page {% endcomment %}
     <li class="pagination__item item-next">
-      {%- if next_page_path -%}
+      {% if next_page_path %}
         <a class="pagination__link" aria-current="step" href="{{ next_page_path | relative_url }}">
           {{- next_page_title -}}
         </a>
-      {%- else -%}
+      {% else %}
         <a class="pagination__link disabled" href="#">{{ next_page_title }}</a>
-      {%- endif -%}
+      {% endif %}
     </li>
   </ol>
 </nav>

@@ -1,19 +1,19 @@
 <div class="theme-toggle">
-  {%- if include.type == 'checkbox' -%}
+  {% if include.type == 'checkbox' %}
     <input id="mode-theme" type="checkbox" name="theme" aria-label="Toggle dark/light theme" aria-checked="false">
     <label for="mode-theme">
-      <span data-theme-value="light">{%- svg_sprite id='sun' class='icon' -%}</span>
-      <span data-theme-value="dark">{%- svg_sprite id='moon' class='icon' -%}</span>
+      <span data-theme-value="light">{% svg_sprite id='sun' class='icon' %}</span>
+      <span data-theme-value="dark">{% svg_sprite id='moon' class='icon' %}</span>
     </label>
-  {%- else -%}
+  {% else %}
     <button data-theme-value="auto" aria-label="System mode" type="button" aria-pressed="true" class="active">
-      {%- svg_sprite id='brightness-auto' class='icon' -%}
+      {% svg_sprite id='brightness-auto' class='icon' %}
     </button>
     <button data-theme-value="light" aria-label="Light mode" type="button" aria-pressed="false">
-      {%- svg_sprite id='sun' class='icon' -%}
+      {% svg_sprite id='sun' class='icon' %}
     </button>
     <button data-theme-value="dark" aria-label="Dark mode" type="button" aria-pressed="false">
-      {%- svg_sprite id='moon' class='icon' -%}
+      {% svg_sprite id='moon' class='icon' %}
     </button>
-  {%- endif -%}
+  {% endif %}
 </div>

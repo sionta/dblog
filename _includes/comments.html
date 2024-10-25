@@ -1,11 +1,11 @@
-{%- assign PROVIDER_NAME = site.comments.provider | downcase -%}
-{%- assign PROVIDER_DATA = site.comments[PROVIDER_NAME] -%}
-{%- if PROVIDER_NAME == 'disqus' -%}
-  {%- assign PROVIDER_ID = 'disqus_thread' -%}
-{%- else -%}
-  {%- assign PROVIDER_ID = 'post-comments' -%}
-{%- endif -%}
-{%- if page.comments == true and PROVIDER_NAME.size > 0 -%}
+{% assign PROVIDER_NAME = site.comments.provider | downcase %}
+{% assign PROVIDER_DATA = site.comments[PROVIDER_NAME] %}
+{% if PROVIDER_NAME == 'disqus' %}
+  {% assign PROVIDER_ID = 'disqus_thread' %}
+{% else %}
+  {% assign PROVIDER_ID = 'post-comments' %}
+{% endif %}
+{% if page.comments == true and PROVIDER_NAME.size > 0 %}
   <div
     id="{{ PROVIDER_ID }}"
     class="{{ PROVIDER_NAME }} post-comments"
@@ -13,8 +13,8 @@
     itemscope
     itemtype="https://schema.org/Comment"
   ></div>
-  {%- case PROVIDER_NAME -%}
-    {%- when 'disqus' -%}
+  {% case PROVIDER_NAME %}
+    {% when 'disqus' %}
       <script>
         var disqus_config = function () {
           this.page.url = '{{ page.url | absolute_url }}';
@@ -41,7 +41,7 @@
         >Please enable JavaScript to view the
         <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript
       >
-    {%- when 'giscus' -%}
+    {% when 'giscus' %}
       <script>
         (() => {
           let giscusTheme =
@@ -82,7 +82,7 @@
           }
         });
       </script>
-    {%- when 'utterances' -%}
+    {% when 'utterances' %}
       <script>
         (() => {
 
@@ -117,5 +117,5 @@
           }
         });
       </script>
-  {%- endcase -%}
-{%- endif -%}
+  {% endcase %}
+{% endif %}

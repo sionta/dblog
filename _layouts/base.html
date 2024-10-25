@@ -6,7 +6,7 @@
       <div class="wrapper">
         <div class="site-header__inner">
           <h1 class="site-brand">
-            {%- assign site_brand = site.brand | default: site.title -%}
+            {% assign site_brand = site.brand | default: site.title %}
             <a class="site-link" href="{{- '/' | absolute_url -}}" title="{{- site_brand -}}'s logo">
               {{- site_brand -}}
             </a>

@@ -28,14 +28,6 @@
     margin: 0;
   }
 
-  .has-action {
-    background-color: var(--color-glare);
-    border-radius: 2rem;
-    border: 1px solid var(--color-border);
-    gap: 10px;
-    padding: 5px 10px;
-  }
-
   .menu-link {
     text-decoration: none;
   }
@@ -44,24 +36,56 @@
     list-style: none;
     position: relative;
 
+    &.has-action {
+      background-color: var(--color-glare);
+      border-radius: 2rem;
+      border: 1px solid var(--color-border);
+      gap: 10px;
+      padding: 5px 10px;
+    }
+
     &.has-submenu {
       label {
         cursor: pointer;
+
+        .chevron-up,
+        .chevron-down {
+          margin-left: 0.25rem;
+        }
+
+        .chevron-down {
+          display: inline;
+        }
+
+        .chevron-up {
+          display: none;
+        }
       }
 
+      .menu-label-on-mb,
       .menu-sublist,
       input[type="checkbox"] {
         display: none;
       }
 
-      /* Show sub-menu when checkbox is checked */
-      input:checked + label + .menu-sublist {
-        display: block;
+      // Show sub-menu when checkbox is checked
+      input:checked + label {
+        .chevron-up {
+          display: inline;
+        }
+
+        .chevron-down {
+          display: none;
+        }
+
+        + .menu-sublist {
+          display: block;
+        }
       }
 
       .menu-sublist {
+        @extend %menu-sublist;
         list-style: none;
-        padding: 0;
         margin: 0;
 
         background-color: var(--color-background);
@@ -71,12 +95,16 @@
         top: 100%;
         left: 0;
         z-index: 3;
-        width: 200px;
+        width: var(--width-card);
         height: auto;
         transform: none;
 
         .menu-subitem {
-          margin: 0;
+          margin-bottom: var(--space-unit-xs);
+        }
+
+        .menu-sublink {
+          text-decoration: none;
         }
       }
     }
@@ -107,6 +135,19 @@
 
 @include media-query("md", "max") {
   .site-navbar.main-menu {
+    %menu-sublist {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(var(--color-background-rgb), 0.95);
+
+      .menu-label-on-mb {
+        display: block;
+        margin-bottom: var(--space-unit);
+      }
+    }
+
     .menu-burger {
       display: block;
     }

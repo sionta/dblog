@@ -1,6 +1,6 @@
 <div class="search-post">
   <input id="search-input" type="text" placeholder="What are you looking for today?">
-  {%- comment -%} if deploy on github-pages 'baseurl' is always needed then using 'relative_url' is better {%- endcomment -%}
+  {% comment %} if deploy on github-pages 'baseurl' is always needed then using 'relative_url' is better {% endcomment %}
   <label for="search-input" data-search="{{ '/assets/search.json' | relative_url }}" hidden></label>
   <ul id="search-results"></ul>
 </div>
