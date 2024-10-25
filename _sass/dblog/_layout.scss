@@ -3,8 +3,6 @@
 @use "helpers" as *;
 @use "variables" as *;
 
-$vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
-
 .emoji,
 .icon,
 [class*="icon-"] {
@@ -49,10 +47,22 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 }
 
 .wrapper {
+  position: relative;
   max-width: var(--width-content);
   margin: 0 auto;
   padding: 0 var(--space-unit);
-  position: relative;
+
+  &.mx-md {
+    max-width: var(--width-medium);
+  }
+
+  &.mx-sm {
+    max-width: var(--width-small);
+  }
+
+  &-fluid {
+    width: 100%;
+  }
 
   @media (max-width: 992px) {
     max-width: 960px;
@@ -64,14 +74,6 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
 
   @media (max-width: 576px) {
     max-width: 100%;
-  }
-
-  &-fluid {
-    width: 100%;
-
-    @media (max-width: 576px) {
-      max-width: 100%;
-    }
   }
 }
 
@@ -171,13 +173,15 @@ $vars: ("xxs", "xs", "sm", "md", "lg", "xl", "xxl", "xxxl", "huge", "enormous");
       font-weight: 900;
     }
 
+    @include media-query("md", "min") {
+      .order-1-lg {
+        order: -1;
+      }
+    }
+
     @include media-query("md", "max") {
       .row {
         flex-direction: column;
-      }
-
-      .order-1-mb {
-        order: -1;
       }
     }
   }

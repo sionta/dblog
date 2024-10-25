@@ -29,7 +29,11 @@
   }
 
   .has-action {
-    gap: var(--space-unit);
+    background-color: var(--color-glare);
+    border-radius: 2rem;
+    border: 1px solid var(--color-border);
+    gap: 10px;
+    padding: 5px 10px;
   }
 
   .menu-link {
@@ -110,17 +114,8 @@
     .menu-item {
       font-size: var(--font-size-xl);
 
-      &:first-child {
-        margin-top: auto;
-      }
-
       &.has-action {
-        background-color: var(--color-glare);
-        border-radius: 2rem;
-        font-size: var(--font-size-xl);
-        margin-right: auto;
-        margin-top: auto;
-        padding: 5px 10px;
+        font-size: var(--font-size-lg);
       }
     }
 

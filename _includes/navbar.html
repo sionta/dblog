@@ -14,32 +14,20 @@
 
 {% if page_paths %}
   <nav class="{{ nav_classes }}" aria-label="{{ nav_aria_label }} Navigation">
-    {% assign first_list_attr = '' %}
     {% if path_type == 'header' %}
-      {% assign first_list_attr = ' id="menu"' %}
       <input id="menu-toggle" type="checkbox" name="toggle-menu" aria-checked="false">
-      <label for="menu-toggle" class="menu-burger" aria-controls="menu" aria-expanded="false">
+      <label for="menu-toggle" class="menu-burger">
         <span class="line"></span>
         <span class="line"></span>
         <span class="line"></span>
       </label>
     {% endif %}
-    <ul class="menu-list" {{ first_list_attr | strip }}>
+    <ul class="menu-list">
       {% for item in page_paths %}
         <li class="menu-item{% if item.sub_menu and item.title %} has-submenu{% endif %}">
           {% if item.sub_menu and item.title %}
-            <input
-              id="submenu-{{ path_type }}-{{ forloop.index }}"
-              type="checkbox"
-              name="toggle-submenu"
-              aria-checked="false"
-            >
-            <label
-              for="submenu-{{ path_type }}-{{ forloop.index }}"
-              aria-expanded="false"
-            >
-              {{- item.title -}}
-            </label>
+            <input id="submenu-{{ path_type }}-{{ forloop.index }}" type="checkbox" name="toggle-submenu">
+            <label for="submenu-{{ path_type }}-{{ forloop.index }}">{{- item.title -}}</label>
             <ul class="menu-sublist">
               {% for sub_item in item.sub_menu %}
                 <li class="menu-subitem">
@@ -90,8 +78,8 @@
       {% if path_type == 'header' %}
         <li class="menu-item has-action">
           {% include theme-toggle.html type='checkbox' %}
-          <a rel="me" class="feed-rss" href="{{ 'feed.xml' | absolute_url }}">
-            {%- include svg_symbol.html id='rss' -%}
+          <a class="feed-rss" href="{{ 'feed.xml' | absolute_url }}" title="Subscribe via RSS" rel="me">
+            {%- svg_sprite id='rss' class='icon' -%}
           </a>
         </li>
       {% endif %}

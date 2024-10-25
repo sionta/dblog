@@ -6,10 +6,8 @@
  */
 
 .post-card {
-  --min-image: 200px;
-  --max-image: 100%;
-  --width-image: var(--max-image);
-  --height-image: var(--min-image);
+  --height-image: var(--width-card);
+  --width-image: var(--width-fluid);
 
   background-color: var(--color-glare);
   border: 1px solid var(--color-border);
@@ -18,6 +16,16 @@
   position: relative;
   overflow: hidden;
   transition: transform 0.5s ease-out;
+
+  .post-card__image {
+    height: var(--height-image);
+    width: var(--width-image);
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -28,25 +36,15 @@
   }
 
   &.post-row {
-    --width-image: var(--min-image);
-    --height-image: var(--max-image);
+    --width-image: var(--width-card);
+    --height-image: var(--width-fluid);
     flex-direction: row;
 
     @include media-query("md", "max") {
-      --width-image: var(--max-image);
-      --height-image: var(--min-image);
+      --width-image: var(--width-fluid);
+      --height-image: var(--width-card);
       flex-direction: column;
     }
-  }
-
-  .post-card__image {
-    height: var(--height-image);
-    width: var(--width-image);
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
   }
 
   .post-card__block {

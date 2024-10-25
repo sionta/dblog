@@ -4,30 +4,47 @@
 .section-home {
   .heropage {
     background-color: var(--color-glare);
-    margin-bottom: calc(var(--space-unit) * 2);
-    padding: var(--space-unit);
+    margin: calc(var(--gutter-unit) * -1) calc(50% - 50vw) var(--gutter-unit);
+    padding: var(--space-unit) 0;
+    text-align: center;
 
-    @include media-query("md", "min") {
-      text-align: center;
+    .hero-head,
+    .hero-desc,
+    .hero-lead {
+      margin-top: var(--space-unit-clg);
+      margin-bottom: var(--space-unit-clg);
     }
 
-    .hero-heading,
-    .hero-summary {
-      max-width: var(--width-medium);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .hero-heading {
+    .hero-head {
       font-family: var(--font-title);
       font-size: var(--font-size-cxxxl);
       font-weight: 900;
+      line-height: 1.15;
     }
 
-    .hero-summary {
+    .hero-desc {
       font-family: var(--font-serif);
       font-size: var(--font-size-cmd);
       font-weight: 400;
+    }
+
+    .hero-lead {
+      .read-more {
+        display: inline-block;
+        color: var(--color-light);
+        text-decoration: none;
+        padding: 12px 15px;
+        border-radius: 4px;
+        background-color: var(--color-primary);
+
+        &:hover {
+          background-color: var(--color-secondary);
+        }
+      }
+    }
+
+    @include media-query("md", "max") {
+      text-align: left;
     }
   }
 

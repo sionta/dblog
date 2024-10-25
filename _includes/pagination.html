@@ -2,11 +2,11 @@
 {%- assign prev_page_path = paginater.previous_page_path | default: paginater.previous -%}
 {%- assign next_page_path = paginater.next_page_path | default: paginater.next -%}
 
-{%- assign dump_page_path = '/' | append: page.layout | append: '/:num/' -%}
-{%- assign page_path = site.paginate_path | default: dump_page_path -%}
+{%- assign dump_path = '/' | append: page.layout | append: '/:num/' -%}
+{%- assign page_path = site.paginate_path | default: dump_path -%}
 
-{% capture prev_page_title %}{% include svg_symbol.html id='chevron-left' class='icon-prev' %} {{ ' Prev' }}{% endcapture %}
-{% capture next_page_title %}{{ 'Next ' }}{% include svg_symbol.html id='chevron-right' class='icon-next' %}{% endcapture %}
+{% capture prev_page_title %}{% svg_sprite id='chevron-left' class='icon icon-prev' %}{{ ' Prev' }}{% endcapture %}
+{% capture next_page_title %}{{ 'Next ' }}{% svg_sprite id='chevron-right' class='icon icon-next' %}{% endcapture %}
 
 <nav class="pagination" aria-label="Pagination">
   <ol class="pagination__list">

@@ -3,7 +3,7 @@
 require 'nokogiri'
 
 module Jekyll
-  module PageModified
+  module RebaseContent
     def page_modified(input)
       metadata = @context.registers[:site].data['metadata'] || {}
       fragment = fragment_element(input)
@@ -193,9 +193,7 @@ module Jekyll
 
         icon_name = checkbox['checked'] ? 'circle-check' : 'circle'
         icon_class = checkbox['class'] + (checkbox['checked'] ? ' checked' : ' disabled').to_s
-        icon_elem = create_element('i', doc)
-        icon_elem['class'] = "ti ti-#{icon_name} #{icon_class}"
-        checkbox.replace(icon_elem)
+        checkbox.replace(svg_symbol(icon_name, icon_class))
       end
       doc
     end
@@ -245,4 +243,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_filter(Jekyll::PageModified)
+Liquid::Template.register_filter(Jekyll::RebaseContent)

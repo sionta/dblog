@@ -47,10 +47,10 @@ comments:
   disqus: # What is `shortname` see https://help.disqus.com/en/articles/1717111-what-s-a-shortname
     shortname: ""
   giscus: # For more settings see https://giscus.app/
-    repo: ""
-    repo_id: ""
-    category: ""
-    category_id: ""
+    repo: "sionta/dblog"
+    repo_id: "R_kgDOMG6U4A"
+    category: "Q&A"
+    category_id: "DIC_kwDOMG6U4M4CjkyH"
   utterances: # For more setting see to https://utteranc.es/
     repo: ""
     label: ""

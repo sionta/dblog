@@ -1,11 +1,11 @@
 comments:
+  requiredFields: ["name", "email", "comment"]
   allowedFields: ["name", "email", "comment"]
   branch: "master"
   commitMessage: "New comment from {{ fields.name }} on {{ fields.slug }}"
   path: "_data/comments"
   filename: "comment-:date"
   moderation: false
-  requiredFields: ["name", "email", "comment"]
   generatedFields:
     date:
       type: "date"

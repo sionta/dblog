@@ -1,29 +1,49 @@
 (() => {
   "use strict";
 
-  const getTheme = () =>
+  const getTheme = () => {
     localStorage.getItem("theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
+      (window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light");
+  };
+
+  const zoomImages = () => {
+    // document.querySelectorAll("img").forEach((img) => {
+    //   img.classList.add("zoomable");
+    // });
+
+    const images = document.querySelectorAll(".zoomable");
+
+    images.forEach((image) => {
+      let isZoomed = false;
+
+      // Function to toggle zoom
+      function toggleZoom() {
+        isZoomed = !isZoomed;
+        image.classList.toggle("zoomed", isZoomed);
+      }
+
+      // Handle image click
+      image.addEventListener("click", toggleZoom);
+
+      // Handle scroll event to revert zoom
+      window.addEventListener("scroll", function () {
+        if (isZoomed) {
+          toggleZoom(); // Revert zoom on scroll
+        }
+      });
+    });
+  };
 
   const activeNavbar = () => {
     const menuToggle = document.querySelector("#menu-toggle");
     const menuBurger = document.querySelector(".menu-burger");
-    const menuSubInput = document.querySelector(".menu-sublist input");
-    const menuSubLabel = document.querySelector(".menu-sublist label");
 
     if (menuToggle && menuBurger) {
       menuToggle.addEventListener("change", (event) => {
         menuToggle.setAttribute("aria-checked", event.target.checked);
-        menuBurger.setAttribute("aria-expanded", event.target.checked);
-      });
-    }
-
-    if (menuSubInput && menuSubLabel) {
-      menuSubInput.addEventListener("change", (event) => {
-        menuSubInput.setAttribute("aria-checked", event.target.checked);
-        menuSubLabel.setAttribute("aria-expanded", event.target.checked);
+        // menuBurger.setAttribute("aria-expanded", event.target.checked);
       });
     }
   };
@@ -189,8 +209,9 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     activeNavbar();
-    copyClipboard();
     searchPost();
+    copyClipboard();
     mermaidDiagram();
+    // zoomImages();
   });
 })();

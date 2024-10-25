@@ -1,5 +1,0 @@
-{%- assign svg_name = include.name | default: include.id | strip | downcase -%}
-{%- assign svg_path = '/assets/icons.svg#' | append: svg_name | relative_url -%}
-{%- assign svg_attrs = include.attr | default: include.attrs -%}
-{%- capture svg_symbol -%}<svg class="{{ 'icon ' | append: include.class | strip }}" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" {{ svg_attrs | strip }}><use href="{{ svg_path }}"></use></svg>{%- endcapture -%}
-{%- if svg_name -%}{{- svg_symbol -}}{%- endif -%}

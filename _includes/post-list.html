@@ -1,19 +1,20 @@
 {% assign date_format = site.date_format | default: '%b %d, %Y' %}
 {% assign site_posts = paginator.posts | default: site.posts %}
-{% assign post_limit = include.limit | default: site_posts.size %}
+{% assign post_limit = include.max | default: site_posts.size %}
 
 {% assign grid_type = 'row' %}
 {% if include.grid == 'col' %}
   {% assign grid_type = 'col' %}
 {% endif %}
 
-{% if include.featured == true %}
-  {% assign site_posts = site_posts | where: 'featured', true %}
-{% endif %}
-
-{% if include.random == true %}
-  {% assign site_posts = site_posts | sample: post_limit %}
-{% endif %}
+{% case include.type %}
+  {% when 'featured' %}
+    {% assign site_posts = site_posts | where: 'featured', true %}
+  {% when 'related' %}
+    {% assign site_posts = site_posts | where_exp: 'post', 'post.id != page.id' %}
+  {% when 'random' %}
+    {% assign site_posts = site_posts | sample: post_limit %}
+{% endcase %}
 
 {% for post in site_posts limit: post_limit %}
   {% assign post_url = post.url | relative_url %}
@@ -32,7 +33,7 @@
       <h2 class="post-card__title" itemprop="headline">
         <a href="{{ post_url }}" title="{{ post.title }}">{{- post.title -}}</a>
       </h2>
-      {% if include.summary %}
+      {% if include.desc %}
         <p class="post-card__description">{%- include summary.html data=post excerpt=true short=true -%}</p>
       {% endif %}
       <p class="post-card__metadata">

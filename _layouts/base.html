@@ -29,12 +29,12 @@
         <div class="site-footer__inner">
           <div class="row">
             <div class="col">
+              <h4 class="foot-brand">{{ site.title }}</h4>
+              <p class="foot-description">{{ site.description }}</p>
+            </div>
+            <div class="col order-1-lg">
               <h5 class="foot-title">Legal</h5>
               {% include navbar.html type='footer' %}
-            </div>
-            <div class="col order-1-mb">
-              <h5 class="foot-brand">{{ site.title }}</h5>
-              <p class="foot-description">{{ site.description }}</p>
             </div>
             <div class="col col-12">
               {% include copyright.html %}
