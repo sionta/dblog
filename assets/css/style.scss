@@ -2,9 +2,9 @@
 # Only the main Sass file needs front matter (the dashes are enough)
 ---
 
-@use "{{ site.theme }}/variables" as *;
+@use "dblog/variables" as *;
 
-// Prefix for CSS variables
-$css-var-prefix: "{{ site.theme }}-"; // e.g., "dblog-"
+// Force variables after this line:
+//$color-purple: #6f42c1;
 
-@use "{{ site.theme }}/index";
+@use "dblog/index";

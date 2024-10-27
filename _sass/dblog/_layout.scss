@@ -187,6 +187,11 @@
   }
 }
 
+.section-title,
+.section-block {
+  margin-bottom: var(--space-unit);
+}
+
 .section-title {
   --color-border-rgb: var(--color-dark-rgb);
   position: relative;

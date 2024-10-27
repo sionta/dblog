@@ -31,10 +31,6 @@
     transform: translateY(-5px);
   }
 
-  &.post-col {
-    height: max-content;
-  }
-
   &.post-row {
     --width-image: var(--width-card);
     --height-image: var(--width-fluid);

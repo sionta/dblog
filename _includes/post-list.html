@@ -24,7 +24,7 @@
 
     <article class="post-card post-{{ grid_type }}">
       {% if post_image %}
-        <header>
+        <header class="post_card__header">
           <a href="{{ post_url }}" title="{{ post.title }}">
             <img class="post-card__image" src="{{ image_src }}" alt="{{ image_alt }}" loading="lazy">
           </a>

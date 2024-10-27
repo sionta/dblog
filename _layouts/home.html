@@ -1,23 +1,37 @@
 ---
 layout: base
 ---
-<div class="section-home">
-  {% include hero.html %}
-  <section class="featured-posts">
-    <div class="section-title">
-      <h2><span>Featured</span></h2>
-    </div>
-    <div class="section-block column-2">
-      {% include post-list.html grid='row' type='featured' desc=true %}
-    </div>
-  </section>
-  <section class="random-posts">
-    <div class="section-title">
-      <h2><span>Random</span></h2>
-      <a href="{{ '/blog/' | relative_url }}">All posts</a>
-    </div>
-    <div class="section-block column-3">
-      {% include post-list.html grid='col' max=3 type='random' desc=true %}
-    </div>
-  </section>
+{% capture featured_posts %}{% include post-list.html grid='row' type='featured' desc=true %}{% endcapture %}
+{% capture article_posts %}{% include post-list.html grid='col' max=site.paginate desc=true %}{% endcapture %}
+
+<div class="homepage">
+  {% if site.hero.enabled == true %}
+    <section class="section-hero">
+      <div class="wrapper mx-md">
+        <h1 class="hero-head">{{- site.hero.heading | default: site.title -}}</h1>
+        <p class="hero-desc">{{- site.hero.summary | default: site.description -}}</p>
+      </div>
+    </section>
+  {% endif %}
+  {% if page.url == '/' and featured_posts %}
+    <section class="featured-posts">
+      <div class="section-title">
+        <h2><span>Featured</span></h2>
+      </div>
+      <div class="section-block column-2">
+        {{ featured_posts }}
+      </div>
+    </section>
+  {% endif %}
+  {% if article_posts %}
+    <section id="article-posts" class="article-posts">
+      <div class="section-title">
+        <h2><span>Articles</span></h2>
+      </div>
+      <div class="section-block column-3">
+        {% include post-list.html grid='col' max=site.paginate desc=true %}
+      </div>
+      {% include pagination.html %}
+    </section>
+  {% endif %}
 </div>

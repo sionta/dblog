@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mermaid.js: Build Complex Diagrams with Simple Text Descriptions"
-categories: test
+categories: [test]
 tags: [mermaid]
 author: Andre Attamimi
 image: /assets/img/posts/mermaid-diagram.png

@@ -24,7 +24,7 @@
         (function () {
           var d = document,
             s = d.createElement('script');
-          s.src = '//' + '{{ PROVIDER_DATA.shortname }}' + '.disqus.com/embed.js';
+          s.src = '//{{ PROVIDER_DATA.shortname }}.disqus.com/embed.js';
           s.setAttribute('data-timestamp', +new Date());
           (d.head || d.body).appendChild(s);
         })();
@@ -32,8 +32,7 @@
         // Event listener for theme changes
         window.addEventListener('message', (event) => {
           if (event.data.themeChange && typeof DISQUS !== 'undefined') {
-            // Reset Disqus comments to reflect theme change
-            DISQUS.reset({ reload: true, config: disqus_config });
+            DISQUS.reset({ reload: true });
           }
         });
       </script>

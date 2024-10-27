@@ -1,16 +1,15 @@
 @use "../helpers" as *;
 @use "../variables" as *;
 
-.section-home {
-  .heropage {
+.homepage {
+  .section-hero {
     background-color: var(--color-glare);
     margin: calc(var(--gutter-unit) * -1) calc(50% - 50vw) var(--gutter-unit);
     padding: var(--space-unit) 0;
     text-align: center;
 
     .hero-head,
-    .hero-desc,
-    .hero-lead {
+    .hero-desc {
       margin-top: var(--space-unit-clg);
       margin-bottom: var(--space-unit-clg);
     }
@@ -19,30 +18,13 @@
       font-family: var(--font-title);
       font-size: var(--font-size-cxxxl);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.3;
     }
 
     .hero-desc {
       font-family: var(--font-serif);
       font-size: var(--font-size-cmd);
       font-weight: 400;
-    }
-
-    .hero-lead {
-      .read-more {
-        font-size: var(--font-size-c);
-        text-transform: uppercase;
-        display: inline-block;
-        color: var(--color-light);
-        text-decoration: none;
-        padding: 12px 15px;
-        border-radius: 4px;
-        background-color: var(--color-primary);
-
-        &:hover {
-          background-color: var(--color-secondary);
-        }
-      }
     }
 
     @include media-query("md", "max") {

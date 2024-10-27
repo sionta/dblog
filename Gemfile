@@ -12,8 +12,12 @@ group :jekyll_plugins do
   gem 'jekyll-paginate', '~> 1.1'
   gem 'jekyll-redirect-from', '~> 0.16'
   gem 'jekyll-toc', '~> 0.19'
-  gem 'jemoji', '~> 0.13'
+  gem 'jemoji', '~> 0.13' # Enable Emoji
 end
+
+# group :development do
+#   gem 'jekyll-admin'
+# end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.

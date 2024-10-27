@@ -1,6 +1,6 @@
 *.min.*
 *.svg
-_posts/
-**/lib/
+*.md
 **/fonts/
+**/lib/
 **/vendor/

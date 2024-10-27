@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dblog (0.1.0)
+    jekyll-theme-dblog (0.1.0)
       jekyll (~> 4.3)
       jekyll-feed (~> 0.17)
       jekyll-seo-tag (~> 2.8)
@@ -155,13 +155,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  dblog!
   jekyll-archives (~> 2.2)
   jekyll-gist (~> 1.5)
   jekyll-include-cache (~> 0.2)
   jekyll-last-modified-at (~> 1.3)
   jekyll-paginate (~> 1.1)
   jekyll-redirect-from (~> 0.16)
+  jekyll-theme-dblog!
   jekyll-toc (~> 0.19)
   jemoji (~> 0.13)
   tzinfo (>= 1, < 3)

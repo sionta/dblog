@@ -16,15 +16,7 @@
     {% endfor %}
   {% endif %}
 
-  {% if data_origin.fonts.merge %}
-    {% assign fonts = data_origin.fonts.merge %}
-  {% elsif data_origin.fonts.split %}
-    {% assign fonts = data_origin.fonts.split %}
-  {% else %}
-    {% assign fonts = data_origin.fonts %}
-  {% endif %}
-
-  {% for font in fonts %}
+  {% for font in data_origin.fonts %}
     {% if font[type].size > 0 %}
       <link rel="stylesheet" href="{{- font[type] | relative_url -}}">
     {% endif %}

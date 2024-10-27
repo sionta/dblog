@@ -1,8 +1,0 @@
-@use "../helpers" as *;
-@use "../variables" as *;
-
-.section-blog {
-  .post-card {
-    margin-bottom: var(--space-unit);
-  }
-}

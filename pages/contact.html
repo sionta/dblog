@@ -3,21 +3,20 @@ layout: page
 title: Contact Us
 permalink: /contact/
 ---
-{% assign author = site.author %}
-{% if author %}
+{% if site.author %}
   <section class="contact">
     <ul>
       <li>
         <span>Author:</span>
-        <a href="{{ author.url }}">{{ author.name }}</a>
+        <a href="{{ site.author.url }}">{{ site.author.name }}</a>
       </li>
       <li>
         <span>Twitter:</span>
-        <a href="https://twitter.com/{{- author.twitter -}}">@{{ author.twitter }}</a>
+        <a href="https://twitter.com/{{- site.author.twitter -}}">@{{ site.author.twitter }}</a>
       </li>
       <li>
         <span>Email:</span>
-        <a href="mailto:{{- author.email -}}">{{ author.email }}</a>
+        <a href="mailto:{{- site.author.email -}}">{{ site.author.email }}</a>
       </li>
     </ul>
   </section>

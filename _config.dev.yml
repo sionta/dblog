@@ -1,39 +1,26 @@
 sass:
   style: expanded
 
-paginate: 2 # Number of posts displayed per page.
-
-# Enforce stricter front matter rules to prevent errors in the site build.
-strict_front_matter: true # Ensures that all posts and pages have valid front matter.
-
-comments:
-  provider: "giscus"
-  giscus:
-    repo: "sionta/dblog"
-    repo_id: "R_kgDOMG6U4A"
-    category: "Q&A"
-    category_id: "DIC_kwDOMG6U4M4CjkyH"
-
 markdown: kramdown
-kramdown:
-  input: GFM
-  # auto_ids: true
-  # toc_levels: 1..3
-  # # https://kramdown.gettalong.org/syntax_highlighter/rouge.html
-  # # https://github.com/rouge-ruby/rouge#full-options
-  # syntax_highlighter: rouge
-  # syntax_highlighter_opts:
-  #   css_class: highlight # CSS classes for code blocks
-  #   #formatter: MyFormatter
-  #   #default_lang: console
-  #   #guess_lang: unknown
-  #   #disable: false
-  #   span:
-  #     line_numbers: false
-  #   block:
-  #     line_numbers: true # Displays the line number in the code block
-  #     start_line: 1 # Displays the line number in the code block
-  #     line_class: lineno
-  #     table_class: rouge-table # - CSS class of table block, default: rouge-table
-  #     gutter_class: rouge-line # - CSS class of line number, default: rouge-gutter
-  #     code_class: rouge-code # - CSS class of code content,  default: rouge-code
+# kramdown:
+#   input: GFM
+#   auto_ids: true
+#   toc_levels: 1..3
+#   # https://kramdown.gettalong.org/syntax_highlighter/rouge.html
+#   # https://github.com/rouge-ruby/rouge#full-options
+#   syntax_highlighter: rouge
+#   syntax_highlighter_opts:
+#     css_class: highlight # CSS classes for code blocks
+#     #formatter: MyFormatter
+#     #default_lang: console
+#     #guess_lang: unknown
+#     #disable: false
+#     span:
+#       line_numbers: false
+#     block:
+#       line_numbers: true # Displays the line number in the code block
+#       start_line: 1 # Displays the line number in the code block
+#       line_class: lineno
+#       table_class: rouge-table # - CSS class of table block, default: rouge-table
+#       gutter_class: rouge-line # - CSS class of line number, default: rouge-gutter
+#       code_class: rouge-code # - CSS class of code content,  default: rouge-code

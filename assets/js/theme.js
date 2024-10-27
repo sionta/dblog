@@ -6,6 +6,17 @@
     buttons: ".theme-toggle button", // Button selector
   };
 
+  // Debounce utility to avoid executing function too often
+  const debounce = (func, wait) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func.apply(this, args);
+      }, wait);
+    };
+  };
+
   const getStoredTheme = () => localStorage.getItem("theme");
   const setStoredTheme = (theme) => localStorage.setItem("theme", theme);
 
@@ -60,29 +71,15 @@
     }
   };
 
-  // Debounce utility to avoid executing function too often
-  const debounce = (func, wait) => {
-    let timeout;
-    return (...args) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        func.apply(this, args);
-      }, wait);
-    };
-  };
-
   // Listen for system dark mode changes if theme is "auto"
-  const handleSystemThemeChange = debounce(() => {
-    const storedTheme = getStoredTheme();
-    if (!["light", "dark"].includes(storedTheme)) {
-      setTheme(getPreferredTheme());
-      setActiveTheme(getPreferredTheme());
-    }
-  }, 200); // Debounced with 200ms delay
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", handleSystemThemeChange);
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener(
+    "change",
+    debounce(() => {
+      if (!["light", "dark"].includes(getStoredTheme())) {
+        setTheme(getPreferredTheme());
+      }
+    }, 200) // Debounced with 200ms delay
+  );
 
   // Set initial theme and prevent FOUC (Flash of Unstyled Content)
   setTheme(getPreferredTheme());

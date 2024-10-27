@@ -29,14 +29,14 @@
         {% endif %}
         <li class="menu-item{{ item_has_submenu }}">
           {% if item.sub_menu and item.title %}
-            <input id="submenu-{{ path_type }}-{{ forloop.index }}" type="checkbox" name="toggle-submenu">
-            <label for="submenu-{{ path_type }}-{{ forloop.index }}">
+            <input id="submenu-{{ path_type }}{{ forloop.index }}" type="checkbox" name="toggle-submenu">
+            <label for="submenu-{{ path_type }}{{ forloop.index }}">
               {{- item.title -}}
               {% svg_sprite id='chevron-up' class='icon chevron-up' %}
               {% svg_sprite id='chevron-down' class='icon chevron-down' %}
             </label>
             <ul class="menu-sublist">
-              <label for="submenu-{{ path_type }}-{{ forloop.index }}" class="menu-label-on-mb">
+              <label for="submenu-{{ path_type }}{{ forloop.index }}" class="menu-label-on-mb">
                 {% svg_sprite id='chevron-left' class='icon chevron-left' %}
                 {{- 'Go ' -}}
                 {{- item.title -}}

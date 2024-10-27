@@ -2,16 +2,16 @@
 layout: post
 title: "Complete Guide to Markdown Test Rendering"
 description: A quick overview of all the Markdown syntax elements
-categories: test
-tags: [jekyll, markdown, cheatsheet]
+categories: [test]
+tags: [jekyll, markdown]
 image:
     src: /assets/img/posts/markdown-thumb.png
     alt: Image by https://culturedcode.com
+featured: true
 comments: true
 diagram: true
 math: true
 toc: true
-featured: true
 ---
 
 This Markdown cheat sheet provides a quick overview of all the Markdown syntax elements. It can’t cover every edge case, so if you need more information about any of these elements, refer to the reference guides for [basic syntax](https://www.markdownguide.org/basic-syntax/) and [extended syntax](https://www.markdownguide.org/extended-syntax/).
@@ -19,8 +19,7 @@ This Markdown cheat sheet provides a quick overview of all the Markdown syntax e
 > 1. For generated `page.excerpt`, include the first paragraphs and/or avoid using comments after the front matter.
 >
 > 2. If using the inline attribute list `{: ... }` and it doesn't work as expected, see further [Attribute List Definitions](https://kramdown.gettalong.org/syntax.html#attribute-list-definitions).
->
-{: .alert.alert-note .no-title }
+{:.alert.alert-note .no-title}
 
 <!-- markdownlint-disable MD022 MD025 MD033 MD036 -->
 
@@ -92,8 +91,7 @@ Second Term
 #### Task/Todo List
 
 - [x] Write the press release
-  - [ ] Update the website
-  - [x] Update commits
+- [x] Update the website
 - [ ] Contact the media
 
 ### Links
@@ -242,37 +240,31 @@ Alerts or admonitions are frequently used in documentation to draw attention to 
 Default:
 
 > General information or also for Blockquote alternatives.
->
 {:.alert}
 
 Note:
 
 > Highlights information that users should consider, even when skimming.
->
 {:.alert.alert-note}
 
 Tip:
 
 > Optional information to help a user be more successful.
->
 {:.alert.alert-tip}
 
 Important:
 
 > Crucial information necessary for users to succeed.
->
 {:.alert.alert-important}
 
 Warning:
 
 > Critical content requiring immediate user attention due to potential risks.
->
 {:.alert.alert-warning}
 
 Caution:
 
 > Potential negative consequences of an action.
->
 {:.alert.alert-caution}
 
 ### Diagramming
@@ -308,7 +300,7 @@ $$
 
 ### Other elements
 
-<!-- **Abbreviation**: *[HTML]: Hyper Text Markup Language The HTML specification is maintained by the W3C. -->
+**Abbreviation**: *[HTML]: Hyper Text Markup Language The HTML specification is maintained by the W3C.
 
 **Marked**: <mark>very important words</mark>.
 
@@ -332,7 +324,8 @@ bundle exec jekyll serve --watch
 ```
 
 In most cases, you can simply copy an emoji from a source like [Emojipedia](https://emojipedia.org/) or [EmojiCopy](https://emojicopy.com/) then paste it into your document.
-{: .alert.alert-tip }
+{:.alert.alert-tip }
 
 <!-- *This is the result of footnotes* -->
+
 <!-- A footnote will be displayed automatically after this line. -->

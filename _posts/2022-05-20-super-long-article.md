@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Some articles are just so long they deserve a really long title to see if things will break well
-categories: test
+categories: [test]
 ---
 
 Labore mollit elit enim aliqua occaecat ea veniam do elit. Anim id cupidatat Lorem ex. Ullamco ullamco minim deserunt aliqua. Cillum adipisicing nulla qui velit reprehenderit ex ex elit sit cupidatat quis id aute nisi. Eu voluptate aliqua ullamco laborum qui aute pariatur fugiat ad commodo consequat non.

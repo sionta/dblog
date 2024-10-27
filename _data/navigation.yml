@@ -3,7 +3,6 @@
 
 header:
   # - index.html
-  - blog/index.html
   - pages/about.md
   - title: Mores
     sub_menu:

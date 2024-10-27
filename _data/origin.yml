@@ -15,18 +15,14 @@ resources:
       - rel: dns-prefetch
 
 fonts:
-  split:
-    - local: /assets/fonts/fira-code.css?v=22
-      remote: https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap
-    - local: /assets/fonts/lato.css?v=24
-      remote: https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap
-    - local: /assets/fonts/merriweather.css?v=30
-      remote: https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap
-    - local: /assets/fonts/playfair-display.css?v=37
-      remote: https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap
-  # merge:
-  #   - local: /assets/fonts/fonts.css
-  #     remote: https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fira+Code:wght@300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap
+  - local: /assets/fonts/fira-code.css?v=22
+    remote: https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap
+  - local: /assets/fonts/lato.css?v=24
+    remote: https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap
+  - local: /assets/fonts/merriweather.css?v=30
+    remote: https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap
+  - local: /assets/fonts/playfair-display.css?v=37
+    remote: https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap
 
 scripts:
   search:
